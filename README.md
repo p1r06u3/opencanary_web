@@ -243,3 +243,54 @@ Linux服务服我选择Centos7.1，选7的原因是系统自带的python环境�
 
 ## 客户端部署方法
 详情见：https://github.com/p1r06u3/opencanary
+
+## web后台的一些使用方法
+
+### 配置告警邮件
+
+vi /usr/local/src/opencanary_web/application.py
+
+smtp服务器默认配置中使用的是163，改成自己的
+
+```
+# smtp邮件服务器配置
+mail_host="smtp.163.com"            #使用的邮箱的smtp服务器地址，这里是163的smtp地址
+mail_user="qyfllyj"                           #用户名
+mail_pass="opencanary123"                             #密码
+mail_postfix="163.com"                  #邮箱的后缀，网易就是163.com
+```
+
+告警邮箱写在/usr/local/src/opencanary_web/util/conf/email.ini，可通过后台进行修改告警邮箱。
+
+但是邮箱默认开关关闭；需要开启告警邮件的，需要修改源码email.ini中的off为on。
+
+```
+[email]
+user = p1r06u3@gmail.com;980555216@qq.com
+switch = off
+```
+
+### 后台暂时无法删除攻击日志和添加白名单列表
+
+如需要删除日志请登录服务器mysql，手工删除和添加。
+
+举例:
+增加白名单sql
+```
+use honeypot;
+insert into Whiteip values('172.18.88.76');
+```
+
+如果往后攻击请求来源ip是白名单表内的ip，攻击日志将会在后台的过滤列表中出现。
+
+### 后台可统计的攻击信息
+
+1. ftp登录尝试；
+2. http访问请求；
+3. http登录请求；
+4. ssh建立连接；
+5. ssh远程版本发送；
+6. ssh登录尝试；
+7. telnet登录尝试；
+8. mysql登录尝试；
+9. 全端口扫描
