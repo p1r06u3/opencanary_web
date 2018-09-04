@@ -63,7 +63,7 @@ Linux服务服我选择Centos7.1，选7的原因是系统自带的python环境�
     ```
     python server.py --port=8081
     ```
-    若输出"Development server is running at http://0.0.0.0:8081/ "，且访问主机的ip能够显示出登录后台地址，则web单实例后台启动成功。
+    若输出"Development server is running at http://0.0.0.0:8081/ "，且访问主机的ip能够显示出登录后台地址，则web单实例后台启动成功。
 
 ### 安装supervisor
 
@@ -111,6 +111,7 @@ Linux服务服我选择Centos7.1，选7的原因是系统自带的python环境�
     ```
 
 2. 启动supervisor服务
+
     ```
     service supervisord start
     ```
@@ -120,7 +121,7 @@ Linux服务服我选择Centos7.1，选7的原因是系统自带的python环境�
     ```
     supervisorctl start tornadoes:*
     ```
-    关于supervisor更多的使用方法，可以搜一下；如果你修改了supervisor配置，可能需要重启supervisor服务，然后再启动实例。
+    关于supervisor更多的使用方法，可以搜一下；如果你修改了supervisor配置，可能需要重启supervisor服务，然后再启动实例。
 
 4. 查看应用web是否启动成功
 
@@ -136,6 +137,7 @@ Linux服务服我选择Centos7.1，选7的原因是系统自带的python环境�
 ### 安装nginx反向代理tornado
 
 1. 安装nginx请自行Baidu or Google.
+
 2. nginx反向代理tornado配置
 
     nginx主配置文件：
@@ -176,6 +178,7 @@ Linux服务服我选择Centos7.1，选7的原因是系统自带的python环境�
     ```
 
     nginx反向代理tornado配置:
+
     vi /etc/nginx/conf.d/hp.conf
 
     ```
@@ -211,13 +214,20 @@ Linux服务服我选择Centos7.1，选7的原因是系统自带的python环境�
     ```
 
 3. 启动或重启nginx
-    已经启动了，就重启nginx；若没有启动，就启动nginx：为了使配置生效。
+
+    已经启动了，就重启nginx；
+
+    若没有启动，就启动nginx;
+
+    为了使配置生效。
+
     ```
     systemctl start nginx.service
     systemctl restart nginx.service
     ```
 
 4. 查看nginx是否启动成功
+
     ps aux|grep nginx
     ```
     root      1144  0.0  0.0  56704  1192 ?        Ss   16:45   0:00 nginx: master process /usr/sbin/nginx
