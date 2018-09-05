@@ -10,12 +10,7 @@ Linux服务器我选择Centos7.1，选7的原因是系统自带的python环境�
 1. 安装依赖
 
     ```
-    pip install tornado
-    pip install PyJWT
-    pip install python-jwt
-    pip install sqlalchemy
-    pip install pymysql
-    pip install configparser
+    pip install -r requirements.txt
     ```
 
 2. 下载web源码

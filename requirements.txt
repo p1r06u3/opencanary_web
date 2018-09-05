@@ -1,0 +1,6 @@
+tornado
+PyJWT
+python-jwt
+sqlalchemy
+pymysql
+configparser
