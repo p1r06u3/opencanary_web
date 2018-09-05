@@ -7,18 +7,13 @@ Linux服务器我选择Centos7.1，选7的原因是系统自带的python环境�
 
 ### tornado安装
 
-1. 安装依赖
-
-    ```
-    pip install -r requirements.txt
-    ```
-
-2. 下载web源码
+1. 下载web源码和安装依赖
 
     ```
     cd /usr/local/src/
     git clone https://github.com/p1r06u3/opencanary_web.git
     cd opencanary_web/
+    pip install -r requirements.txt
     ```
 
 3. 安装mysql
