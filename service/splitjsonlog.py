@@ -213,7 +213,7 @@ def parserlog(jsonlog):
                     prec, proto, res, syn, tos, ttl, urgp, window, logtype, node_id, src_host, src_port, white)
                 if logbool:
                     # 发送邮件功能
-                    if switches =='on':
+                    if switches() =='on':
                         if str(logtype) =='2000':
                             logtype = 'ftp登录尝试'
                         elif str(logtype) == '3000':
