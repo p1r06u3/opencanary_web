@@ -5,6 +5,14 @@ tornado+supervisor+nginx+mysql
 
 Linux服务器我选择Centos7.1，选7的原因是系统自带的python环境为2.7.x，不用麻烦着去折腾python 2.6和其他一些依赖问题。
 
+首先应该关闭SELINUX:
+
+vi /etc/selinux/config
+```
+SELINUX=disabled
+```
+然后重启服务器，使关闭SELINUX永久生效。
+
 ### tornado安装
 
 1. 下载web源码和安装依赖
@@ -18,7 +26,46 @@ Linux服务器我选择Centos7.1，选7的原因是系统自带的python环境�
 
 3. 安装mysql
 
-    自行Baidu OR Google
+    在MySQL官网中下载YUM源rpm安装包：http://dev.mysql.com/downloads/repo/yum/
+    **下载mysql5.7源安装包**
+    ```
+    wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
+    ```
+
+    **安装mysql源**
+
+    ```
+    yum localinstall mysql57-community-release-el7-8.noarch.rpm
+    或者
+    rpm -ivh mysql57-community-release-el7-8.noarch.rpm
+    ```
+    **检查mysql源是否安装成功**
+    ```
+    yum repolist enabled|grep "mysql.*-community.*"
+    ```
+    **安装mysql**
+    ```
+    yum install mysql-server
+    ```
+    **启动mysql并设置开机启动**
+    ```
+    systemctl start mysqld
+    systemctl enable mysqld
+    systemctl daemon-reload
+    ```
+    **修改root本地登录密码**
+
+    mysql安装完成之后，在/var/log/mysqld.log文件中给root生成了一个默认密码。
+
+    通过下面的方式找到root默认密码，然后登录mysql进行修改：
+    ```
+    grep 'temporary password' /var/log/mysqld.log
+    root@localhost: 后面就是默认初始密码
+    M%+#bC>1l%EX
+    登录mysql：mysql -u root -p
+    执行修改密码语句：alter user root@localhost identified by 'Nidemima';
+    identified by 后面单引号内的是你的新密码
+    ```
 
 4. 创建mysql数据库和表结构
 
@@ -51,17 +98,32 @@ Linux服务器我选择Centos7.1，选7的原因是系统自带的python环境�
 6. 单tornado实例启动测试
 
     ```
-    python server.py --port=8081
+    python server.py --port=80
     ```
-    若输出"Development server is running at http://0.0.0.0:8081/ "，且访问主机的ip能够显示出登录后台地址，则web单实例后台启动成功。
+    若输出"Development server is running at http://0.0.0.0:80/ "，且访问主机的ip能够显示出登录后台地址，则web单实例后台启动成功。
 
-### 安装supervisor
+### 安装配置 supervisor
 
-1. 自行Baidu or Google，安装好后请使用我的配置。
+>  Supervisor（ http://supervisord.org/ ）是用Python开发的一个client/server服务，是Linux/Unix系统下的一个进程管理工具，不支持Windows系统。它可以很方便的监听、启动、停止、重启一个或多个进程。用Supervisor管理的进程，当一个进程意外被杀死，supervisort监听到进程死后，会自动将它重新拉起，很方便的做到进程自动恢复的功能，不再需要自己写shell脚本来控制。
 
-    这里给出我的supervisor配置：
+1. 安装supervisor
+    ```
+    yum install supervisor
+    ```
+2. 设置开机启动
+    ```
+    systemctl enable supervisord.service
+    ```
 
-    vi /etc/supervisor/conf.d/tornado.conf
+3. 配置文件
+
+    supervisord 的配置 文件是 /etc/supervisord.conf 
+
+    自定义配置文件目录是/etc/supervisord.d/,该目录下文件以.ini为后缀
+
+    这里给出我的supervisor子配置：
+
+    vi /etc/supervisord.d/tornado.ini
 
     ```
     [group:tornadoes]
@@ -103,7 +165,12 @@ Linux服务器我选择Centos7.1，选7的原因是系统自带的python环境�
 2. 启动supervisor服务
 
     ```
-    service supervisord start
+    systemctl start supervisord.service
+    ```
+    其他常用命令
+    ```
+    systemctl stop supervisord.service      # 停止supervisord
+    systemctl restart supervisord.service   # 重启supervisord
     ```
 
 3. 启动多tornado实例
@@ -111,7 +178,16 @@ Linux服务器我选择Centos7.1，选7的原因是系统自带的python环境�
     ```
     supervisorctl start tornadoes:*
     ```
-    关于supervisor更多的使用方法，可以搜一下；如果你修改了supervisor配置，可能需要重启supervisor服务，然后再启动实例。
+    
+    其他更多supervisord 客户端管理命令
+    ```
+    supervisorctl status                    # 状态
+    supervisorctl stop nginx                #关闭 nginx
+    supervisorctl start nginx               #启动 nginx
+    supervisorctl restart nginx             #重启 nginx
+    supervisorctl reread
+    supervisorctl update                    #更新新的配置
+    ```
 
 4. 查看应用web是否启动成功
 
@@ -126,7 +202,10 @@ Linux服务器我选择Centos7.1，选7的原因是系统自带的python环境�
 
 ### 安装nginx反向代理tornado
 
-1. 安装nginx请自行Baidu or Google.
+1. 安装nginx
+    ```
+    yum install nginx
+    ```
 
 2. nginx反向代理tornado配置
 
@@ -242,6 +321,8 @@ vi /usr/local/src/opencanary_web/application.py
 
 smtp服务器默认配置中使用的是163，改成自己的
 
+> 注意，163的smtp的密码不是你的邮箱登录密码，而是163邮箱的客户端授权密码，需单独开启。
+
 ```
 # smtp邮件服务器配置
 mail_host="smtp.163.com"            #使用的邮箱的smtp服务器地址，这里是163的smtp地址
@@ -273,6 +354,16 @@ insert into Whiteip values('172.18.88.76');
 
 如果往后攻击请求来源ip是白名单表内的ip，攻击日志将会在后台的过滤列表中出现。
 
+### 查看web日志进行排错
+
+```
+tailf /usr/local/src/opencanary_web/logs/app.log
+```
+
+### 清空数据库表内数据
+
+你需要先停止所有的tornado进程，然后进入数据库删数据。
+
 ### 后台可统计的攻击信息
 
 1. ftp登录尝试；
@@ -284,3 +375,7 @@ insert into Whiteip values('172.18.88.76');
 7. telnet登录尝试；
 8. mysql登录尝试；
 9. 全端口扫描
+
+
+## 致谢
+@Pa5sw0rd @Weiho
