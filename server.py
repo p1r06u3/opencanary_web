@@ -12,6 +12,7 @@ import tornado.httpserver
 import tornado.ioloop
 import tornado.web
 import tornado.autoreload
+from util.task import sched
 
 from application import settings
 from url import url
@@ -20,6 +21,7 @@ define("port", default=80, help="run on the given port", type=int)
 
 
 if __name__ == '__main__':
+  sched.start()
   tornado.options.parse_command_line()
   app = tornado.web.Application(handlers=url, **settings)
   http_server = tornado.httpserver.HTTPServer(app)

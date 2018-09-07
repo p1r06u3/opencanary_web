@@ -11,6 +11,11 @@ from dbs.dal.LogOperate import LogOp
 import datetime
 from service.emailservice import send_mail,switches
 from service.whiteipservice import whiteips
+from util.task import sched
+from datetime import datetime
+import datetime as datetimes
+import uuid
+
 
 loginst = LogOp()
 
@@ -233,7 +238,9 @@ def parserlog(jsonlog):
                         elif str(logtype) == '8001':
                             logtype = 'mysql登录尝试'
                         content = "攻击主机："+src_host+"--"+"被攻击主机："+dst_host+"--"+"攻击时间："+local_time
-                        send_mail("蜜罐告警："+logtype,content)
+                        # 将发送邮件丢到任务队列
+                        sched.add_job(send_mail, 'date', run_date=(datetime.now() + datetimes.timedelta(seconds=1)), args=["蜜罐告警："+logtype, content], id=str(uuid.uuid1()))
+                        # send_mail("蜜罐告警："+logtype,content)
                         return True
             else:
                 return False
