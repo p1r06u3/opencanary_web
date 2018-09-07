@@ -27,6 +27,7 @@ SELINUX=disabled
 3. 安装mysql
 
     在MySQL官网中下载YUM源rpm安装包：http://dev.mysql.com/downloads/repo/yum/
+    
     **下载mysql5.7源安装包**
     ```
     wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
