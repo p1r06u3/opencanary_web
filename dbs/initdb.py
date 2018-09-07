@@ -26,7 +26,7 @@ Base = declarative_base()
 engine = create_engine('mysql+pymysql://%s:%s@%s/%s?charset=utf8' %
                        (DB_USER, DB_PWD, DB_HOST, DB_NAME),
                    encoding='utf-8', echo=True,
-                 pool_size=100, pool_recycle=10)
+                 pool_size=100, pool_pre_ping=True, pool_recycle=3600)
 
 # 创建DBsession类型
 Session = sessionmaker(bind=engine)
