@@ -376,6 +376,29 @@ tailf /usr/local/src/opencanary_web/logs/app.log
 8. mysql登录尝试；
 9. 全端口扫描
 
+### 更新方法
+
+1. 停止tornado和下载最新源码
+    ```
+    supervisorctl stop tornadoes:
+    rm -rf opencanary_web/
+    git clone https://github.com/p1r06u3/opencanary_web.git
+    cd opencanary_web/
+    ```
+2. 修改配置文件
+    重要的是修改数据库连接密码，修改正确：
+
+    vi dbs/initdb.py
+
+3. 安装依赖
+    ```
+    pip install -r requirements.txt
+    ```
+4. 启动实例
+    ```
+    supervisorctl start tornadoes:
+    ```
+
 
 ## 致谢
-@Pa5sw0rd @Weiho
+@Pa5sw0rd @Weiho @冷白开 @kafka
