@@ -211,7 +211,7 @@ def parserlog(jsonlog):
                 logbool = loginst.insert(dst_host, dst_port, honeycred, local_time, hostname, password, path, skin,\
                     useragent, username, session, localversion, remoteversion, df, idid, inin, lenlen, mac, outout,\
                     prec, proto, res, syn, tos, ttl, urgp, window, logtype, node_id, src_host, src_port, white)
-                if logbool:
+                if logbool and white == 2:
                     # 发送邮件功能
                     if switches() =='on':
                         if str(logtype) =='2000':
