@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 """
   Author: pirogue 
-  Purpose: 白名单过滤
+  Purpose: 白名单端口过滤
   Site: http://pirogue.org 
   Created: 2018-08-17 16:15:08
 """

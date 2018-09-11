@@ -8,7 +8,7 @@
 """
 
 from handlers import login
-from handlers import logcollection, paginationlog, login, hello, email, index, chart, whiteiplist
+from handlers import logcollection, paginationlog, login, hello, email, index, chart, whiteiplist, whiteport
 import unittest
 
 
@@ -21,6 +21,7 @@ url = [
     (r"/mail/*", email.EmailModifyHandler),
     (r"/chart/*", chart.ChartHandler),
     (r"/whiteiplist/", whiteiplist.WhiteiplistHandler),
+    (r"/whiteport/", whiteport.WhiteportHandler),
     (r".*", index.IndexHandler)
 
     # (r"/logout", login.LogoutHandler),

@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 """
   Author: pirogue 
-  Purpose: 获取白名单ip
+  Purpose: 获取白名单port
   Site: http://pirogue.org 
   Created: 2018-08-27 15:35:43
 """
@@ -19,9 +19,10 @@ import json
 
 @jwtauth
 class WhiteportHandler(BaseHandler):
-    """ 获取白名单ip列表 """
+    """ 获取白名单port列表 """
 
     def get(self):
+        # res = ''
         res = ','.join('%s' % p for p in whiteports())
         # json.dumps(line_res)
         self.write(res)
