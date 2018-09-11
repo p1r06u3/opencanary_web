@@ -11,6 +11,7 @@ from dbs.dal.LogOperate import LogOp
 import datetime
 from service.emailservice import send_mail,switches
 from service.whiteipservice import whiteips
+from service.whiteportservice import whiteports
 from util.task import sched
 from datetime import datetime
 import datetime as datetimes
@@ -212,36 +213,40 @@ def parserlog(jsonlog):
                 else:
                     # 不存在将white字段设置为2
                     white = 2
-                # 将客户端post过来的数据插入数据库
-                logbool = loginst.insert(dst_host, dst_port, honeycred, local_time, hostname, password, path, skin,\
-                    useragent, username, session, localversion, remoteversion, df, idid, inin, lenlen, mac, outout,\
-                    prec, proto, res, syn, tos, ttl, urgp, window, logtype, node_id, src_host, src_port, white)
-                if logbool and white == 2:
-                    # 发送邮件功能
-                    if switches() =='on':
-                        if str(logtype) =='2000':
-                            logtype = 'ftp登录尝试'
-                        elif str(logtype) == '3000':
-                            logtype = 'web蜜罐被访问'
-                        elif str(logtype) == '3001':
-                            logtype = 'web蜜罐被登录'
-                        elif str(logtype) == '4000':
-                            logtype = 'ssh建立连接'
-                        elif str(logtype) == '4001':
-                            logtype = 'ssh远程版本发送'
-                        elif str(logtype) == '4002':
-                            logtype = 'ssh登录尝试'
-                        elif str(logtype) == '6001':
-                            logtype = 'telnet登录尝试'
-                        elif str(logtype) == '5001':
-                            logtype = '端口扫描行为'
-                        elif str(logtype) == '8001':
-                            logtype = 'mysql登录尝试'
-                        content = "攻击主机："+src_host+"--"+"被攻击主机："+dst_host+"--"+"攻击时间："+local_time
-                        # 将发送邮件丢到任务队列
-                        sched.add_job(send_mail, 'date', run_date=(datetime.now() + datetimes.timedelta(seconds=1)), args=["蜜罐告警："+logtype, content], id=str(uuid.uuid1()))
-                        # send_mail("蜜罐告警："+logtype,content)
-                        return True
+
+                if int(dst_port) in whiteports():
+                    return True
+                else:
+                    # 将客户端post过来的数据插入数据库
+                    logbool = loginst.insert(dst_host, dst_port, honeycred, local_time, hostname, password, path, skin,\
+                        useragent, username, session, localversion, remoteversion, df, idid, inin, lenlen, mac, outout,\
+                        prec, proto, res, syn, tos, ttl, urgp, window, logtype, node_id, src_host, src_port, white)
+                    if logbool and white == 2:
+                        # 发送邮件功能
+                        if switches() =='on':
+                            if str(logtype) =='2000':
+                                logtype = 'ftp登录尝试'
+                            elif str(logtype) == '3000':
+                                logtype = 'web蜜罐被访问'
+                            elif str(logtype) == '3001':
+                                logtype = 'web蜜罐被登录'
+                            elif str(logtype) == '4000':
+                                logtype = 'ssh建立连接'
+                            elif str(logtype) == '4001':
+                                logtype = 'ssh远程版本发送'
+                            elif str(logtype) == '4002':
+                                logtype = 'ssh登录尝试'
+                            elif str(logtype) == '6001':
+                                logtype = 'telnet登录尝试'
+                            elif str(logtype) == '5001':
+                                logtype = '端口扫描行为'
+                            elif str(logtype) == '8001':
+                                logtype = 'mysql登录尝试'
+                            content = "攻击主机："+src_host+"--"+"被攻击主机："+dst_host+"--"+"攻击时间："+local_time
+                            # 将发送邮件丢到任务队列
+                            sched.add_job(send_mail, 'date', run_date=(datetime.now() + datetimes.timedelta(seconds=1)), args=["蜜罐告警："+logtype, content], id=str(uuid.uuid1()))
+                            # send_mail("蜜罐告警："+logtype,content)
+                            return True
             else:
                 return False
         else:
