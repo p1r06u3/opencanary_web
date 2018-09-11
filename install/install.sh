@@ -26,11 +26,6 @@ getip=`ip add | grep -w inet | grep -v "127.0.0.1"| awk -F '[ /]+' '{print $3}'`
 shopt -s expand_aliases
 
 echo "服务端IP地址:$getip"
-read -p "IP是否正确(y/n):" choice
-if [ $choice = n ];then
-	echo "######请手动配置IP######"
-	exit 0
-fi
 
 echo "#########安装依赖包############"
 a=`cat /etc/redhat-release |awk '{print $4}'`
