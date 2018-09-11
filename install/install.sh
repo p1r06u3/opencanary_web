@@ -71,7 +71,7 @@ if [ ! -f "$pip_file"]; then
 fi
 
 opencanary_web_folder="/usr/local/src/opencanary_web"
-if [ ! -d "$opencanary_web_folder"]; then
+if [ ! -d $opencanary_web_folder]; then
     echo "############正在同步最新版本opencary_web,并且安装第三方依赖包##########"
     git clone https://github.com/p1r06u3/opencanary_web.git /usr/local/src/opencanary_web
     cd /usr/local/src/opencanary_web/
@@ -103,12 +103,26 @@ else
         exit 0
 fi
 #Configure mysql PassWord:Weiho@2018,Import honeypot.sql
-mysql -u root -e "
-SET password for 'root'@'localhost'=password('Weiho@2018');  
-create database honeypot;
-use honeypot;
-source /usr/local/src/opencanary_web/honeypot.sql"
-sed -i "s/huanchengzijidemima/Weiho@2018/g" /usr/local/src/opencanary_web/dbs/initdb.py
+function Import_mysql(){
+opencanary_web_mysql_passwd=`sed -n '19p' /usr/local/src/opencanary_web/dbs/initdb.py |awk '{print $3}'`
+if [ "$opencanary_web_mysql_passwd" = 'huanchengzijidemima' ]; then
+    mysql -u root -e "
+    SET password for 'root'@'localhost'=password('Weiho@2018');
+    create database honeypot;
+    use honeypot;
+    source /usr/local/src/opencanary_web/honeypot.sql"
+    sed -i "s/huanchengzijidemima/'Weiho@2018'/g" /usr/local/src/opencanary_web/dbs/initdb.py
+    echo "已修改mysql root密码Weiho@2018"
+    echo “初始化导入数据库honeypot.sql”
+else
+    mysql -u root -pWeiho@2018 -e "
+    use honeypot;
+    source /usr/local/src/opencanary_web/honeypot.sql"
+    sed -i "s/$opencanary_web_mysql_passwd/'Weiho@2018'/g" /usr/local/src/opencanary_web/dbs/initdb.py
+    echo “初始化导入数据库honeypot.sql”
+    fi
+}
+Import_mysql
 
 function NGINX() {
 #rpm -qa|grep nginx > /dev/null
