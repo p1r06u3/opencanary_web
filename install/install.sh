@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 #Author: Weiho@破晓团队
 #Blog  : www.weiho.xyz 
 #Email : H4x0er@SecBug.Org 
