@@ -3,15 +3,17 @@
 #Blog  : www.weiho.xyz 
 #Email : H4x0er@SecBug.Org 
 #Github: https://github.com/zhaoweiho
-#Date  : 2018-09-10
+#Date  : 2018-09-11
 #Environment: CentOS7.2
-#Gratitude: k4n5ha0/Sven/Null/c00lman/kafka
+#Gratitude: k4n5ha0/p1r06u3/Sven/Null/c00lman/kafka/JK
 #deploy single opencanary_web_server
 #
 # This script is meant for quick & easy install via:
-#   'curl -sSL https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install.sh | sh'
-# or:
-#   'wget -qO- https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install.sh | sh'
+#   'curl https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install.sh'
+#    or
+#   'wget -qO- https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install.sh'
+#    chmod o+x install.sh
+#    ./install.sh
 #
 
 
