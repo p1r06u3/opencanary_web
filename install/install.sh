@@ -9,9 +9,10 @@
 #deploy single opencanary_web_server
 #
 # This script is meant for quick & easy install via:
-#   'curl -ssl https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install.sh | sh'
+#   'curl -O https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install.sh'
 #    or
-#   'wget -qO- https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install.sh | sh'
+#   'wget --no-check-certificate https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install.sh'
+#
 #    chmod o+x install.sh
 #    ./install.sh
 #
@@ -25,6 +26,11 @@ getip=`ip add | grep -w inet | grep -v "127.0.0.1"| awk -F '[ /]+' '{print $3}'`
 shopt -s expand_aliases
 
 echo "服务端IP地址:$getip"
+read -p "IP是否正确(y/n):" choice
+if [ $choice = n ];then
+	echo "######请手动配置IP######"
+	exit 0
+fi
 
 echo "#########安装依赖包############"
 a=`cat /etc/redhat-release |awk '{print $4}'`
@@ -33,7 +39,7 @@ if [ "$a" \< "7.0" ];then
 	exit 0
 fi
 
-yum install -y -q ntpdate epel-release python-devel git libtool
+yum install -y -q ntpdate epel-release python-devel git 
 
 echo "#############正在关闭SELINUX#########"
 setenforce 0
@@ -271,6 +277,10 @@ clear
 
 #配置蜜罐告警邮件收发
 echo "############ 是否配置Opencanary_Web蜜罐邮件收发,输入yes/no?Enter.默认no. ############"
+typeset -l select
+read select
+case $select in
+y*)
 get_mail_host=`sed -n '30p' /usr/local/src/opencanary_web/application.py |cut -d ' ' -f1`
 get_mail_user=`sed -n '31p' /usr/local/src/opencanary_web/application.py |cut -d ' ' -f1`
 get_mail_pass=`sed -n '32p' /usr/local/src/opencanary_web/application.py |cut -d ' ' -f1`
@@ -331,13 +341,10 @@ systemctl restart supervisord.service
 systemctl restart nginx.service
 
 #回显已完成
-echo "已同步cn.pool.ntp.org时间"
-echo "已关闭SELINUX"
-echo "已安装pip"
+echo "已同步cn.pool.ntp.org时间,已关闭SELINUX和防火墙"
+echo "已安装pip,及安装并配置supervisor"
 echo "已安装mysql,并配置Root密码Weiho@2018,可以通过mysql -u root -pWeiho@2018 进行管理"
-echo "已经安装并配置supervisor"
 echo "已经安装并配置nginx并把原nginx配置文件备份到/etc/nginx/nginx.conf.bak"
-echo "已经关闭防火墙"
 echo "已成功安装opencanary_web,文件路径:/usr/local/src/opencanary_web"
 echo "可以打开http://$getip,输入账号admin密码admin进行访问操作"
 echo "如要修改opencanary_web管理密码,可以通过mysql进行更改,请执行sql语句password的值换成自己的32位md5."
@@ -346,4 +353,35 @@ echo "以及修改/usr/local/src/opencanary_web/dbs/initdb.py,DB_PWD字段"
 echo "已经配置成功蜜罐告警邮件,具体配置浏览/usr/local/src/opencanary_web/application.py"
 echo "收件人邮件配置(以及告警开关):/usr/local/src/opencanary_web/util/conf/email.ini"
 echo "更多信息请参考https://github.com/p1r06u3/opencanary_web"
+;;
+n*)
+echo "已同步cn.pool.ntp.org时间,已关闭SELINUX和防火墙"
+echo "已安装pip以及安装并配置supervisor"
+echo "已安装mysql,并配置Root密码Weiho@2018,可以通过mysql -u root -pWeiho@2018 进行管理"
+echo "已经安装并配置nginx并把原nginx配置文件备份到/etc/nginx/nginx.conf.bak"
+echo "已成功安装opencanary_web,文件路径:/usr/local/src/opencanary_web"
+echo "可以打开http://$getip,输入账号admin密码admin进行访问操作"
+echo "如要修改opencanary_web管理密码,可以通过mysql进行更改,请执行sql语句password的值换成自己的32位md5."
+echo "UPDATE User SET password='900150983cd24fb0d6963f7d28e17f72' WHERE id=1;"
+echo "以及修改/usr/local/src/opencanary_web/dbs/initdb.py,DB_PWD字段"
+echo "蜜罐告警邮件没有配置成功,请自行决定是否需要配置."
+echo "蜜罐告警具体配置(发件人)浏览/usr/local/src/opencanary_web/application.py"
+echo "收件人邮件配置(以及告警开关):/usr/local/src/opencanary_web/util/conf/email.ini"
+echo "更多信息请参考https://github.com/p1r06u3/opencanary_web"
+;;
+*)
+echo "已同步cn.pool.ntp.org时间,已关闭SELINUX和防火墙"
+echo "已安装pip以及安装并配置supervisor"
+echo "已安装mysql,并配置Root密码Weiho@2018,可以通过mysql -u root -pWeiho@2018 进行管理"
+echo "已经安装并配置nginx并把原nginx配置文件备份到/etc/nginx/nginx.conf.bak"
+echo "已成功安装opencanary_web,文件路径:/usr/local/src/opencanary_web"
+echo "可以打开http://$getip,输入账号admin密码admin进行访问操作"
+echo "如要修改opencanary_web管理密码,可以通过mysql进行更改,请执行sql语句password的值换成自己的32位md5."
+echo "UPDATE User SET password='900150983cd24fb0d6963f7d28e17f72' WHERE id=1;"
+echo "以及修改/usr/local/src/opencanary_web/dbs/initdb.py,DB_PWD字段"
+echo "蜜罐告警邮件没有配置成功,请自行决定是否需要配置."
+echo "蜜罐告警具体配置(发件人)浏览/usr/local/src/opencanary_web/application.py"
+echo "收件人邮件配置(以及告警开关):/usr/local/src/opencanary_web/util/conf/email.ini"
+echo "更多信息请参考https://github.com/p1r06u3/opencanary_web"
+esac
 exit 0
