@@ -116,6 +116,28 @@ LOCK TABLES `Whiteip` WRITE;
 /*!40000 ALTER TABLE `Whiteip` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Whiteip` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `Whiteport`
+--
+
+DROP TABLE IF EXISTS `Whiteport`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Whiteport` (
+  `dst_port` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`dst_port`)
+) ENGINE=InnoDB AUTO_INCREMENT=5289 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Whiteport`
+--
+
+LOCK TABLES `Whiteport` WRITE;
+/*!40000 ALTER TABLE `Whiteport` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Whiteport` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -126,4 +148,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-04  5:16:56
+-- Dump completed on 2018-09-11 10:01:29
