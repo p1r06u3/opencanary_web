@@ -16,7 +16,14 @@
 
 
 echo "###########正在初始化环境#########"
-yum -y -q install net-tools
+rpm -qa | grep net-tools > /dev/null
+if [ $? = '1' ]; then
+	echo "######install net-tools########"
+    yum -y -q install net-tools
+    else
+	echo "######net-tools is installed########"
+fi
+
 #getip=192.168.1.100
 getip=`ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v inet6|awk '{print $2}'|tr -d "addr:"`
 
@@ -61,17 +68,18 @@ else
 	sed -i "/127.0.0.1/s/$/\ $host_name/" /etc/hosts
 fi
 
-pip_file="/usr/bin/pip"
-if [ ! -f "$pip_file"]; then
-    echo "################pip install error############"
-    else
+
+PIP_FILE=/usr/bin/pip
+if [ ! -s $PIP_FILE ]; then
     curl https://bootstrap.pypa.io/get-pip.py | python
     python -m pip install --upgrade pip
     echo "################pip is installed############"
+    else
+    echo "################pip install error############"
 fi
 
 opencanary_web_folder="/usr/local/src/opencanary_web"
-if [ ! -d $opencanary_web_folder]; then
+if [ ! -d $opencanary_web_folder ]; then
     echo "############正在同步最新版本opencary_web,并且安装第三方依赖包##########"
     git clone https://github.com/p1r06u3/opencanary_web.git /usr/local/src/opencanary_web
     cd /usr/local/src/opencanary_web/
@@ -105,21 +113,18 @@ fi
 #Configure mysql PassWord:Weiho@2018,Import honeypot.sql
 function Import_mysql(){
 opencanary_web_mysql_passwd=`sed -n '19p' /usr/local/src/opencanary_web/dbs/initdb.py |awk '{print $3}'`
-if [ "$opencanary_web_mysql_passwd" = 'huanchengzijidemima' ]; then
+huanchengzijidemima="'huanchengzijidemima'"
+if [ "$opencanary_web_mysql_passwd" = "$huanchengzijidemima" ]; then
     mysql -u root -e "
-    SET password for 'root'@'localhost'=password('Weiho@2018');
-    create database honeypot;
-    use honeypot;
-    source /usr/local/src/opencanary_web/honeypot.sql"
-    sed -i "s/huanchengzijidemima/'Weiho@2018'/g" /usr/local/src/opencanary_web/dbs/initdb.py
-    echo "已修改mysql root密码Weiho@2018"
-    echo “初始化导入数据库honeypot.sql”
-else
-    mysql -u root -pWeiho@2018 -e "
-    use honeypot;
-    source /usr/local/src/opencanary_web/honeypot.sql"
+     create database honeypot;
+     use honeypot;
+     source /usr/local/src/opencanary_web/honeypot.sql;
+     SET password for 'root'@'localhost'=password('Weiho@2018');"
     sed -i "s/$opencanary_web_mysql_passwd/'Weiho@2018'/g" /usr/local/src/opencanary_web/dbs/initdb.py
-    echo “初始化导入数据库honeypot.sql”
+    echo “######## 已修改mysql root密码Weiho@2018 #########”
+    echo “######## 初始化导入数据库honeypot.sql #########”
+else
+    echo “已经修改并导入数据库honeypot.sql”
     fi
 }
 Import_mysql
@@ -151,7 +156,7 @@ SUPERVISOR
 function SUPERVISOR_CONFIGURE() {
 SUPERVISOR_CONFIGURE_DOTORNADO_FILE=/etc/supervisord.d/conf.dtornado.ini
 if [ ! -s $SUPERVISOR_CONFIGURE_DOTORNADO_FILE ]; then
-    echo "################正在写入supervisord配置.############"
+    echo "################正在写入supervisord配置conf.dtornado.ini############"
     cat > /etc/supervisord.d/conf.dtornado.ini<<EOF
 [group:tornadoes]
 programs=tornado-8000,tornado-8001,tornado-8002,tornado-8003
@@ -189,7 +194,7 @@ stdout_logfile=/var/log/tornado.log
 loglevel=debug
 EOF
     else
-    echo "################supervisord配置文件已存在.############"
+    echo "################supervisord配置文件conf.dtornado.ini已存在.############"
 fi
 }
 SUPERVISOR_CONFIGURE
@@ -273,6 +278,7 @@ echo "##############重新启动NGINX完成###############"
 echo "##############正在关闭防火墙#############"
 systemctl stop firewalld.service
 systemctl disable firewalld
+clear
 
 #配置蜜罐告警邮件收发
 echo "############ 是否配置Opencanary_Web蜜罐邮件收发,输入yes/no?Enter.默认no. ############"
@@ -392,4 +398,3 @@ echo "蜜罐告警具体配置(发件人)浏览/usr/local/src/opencanary_web/app
 echo "收件人邮件配置(以及告警开关):/usr/local/src/opencanary_web/util/conf/email.ini"
 echo "更多信息请参考https://github.com/p1r06u3/opencanary_web"
 esac
-
