@@ -18,16 +18,9 @@
 
 
 echo "###########正在初始化环境#########"
-rpm -qa | grep net-tools > /dev/null
-if [ $? = '1' ]; then
-	echo "######install net-tools########"
-    yum -y -q install net-tools
-    else
-	echo "######net-tools is installed########"
-fi
 
 #getip=192.168.1.100
-getip=`ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v inet6|awk '{print $2}'|tr -d "addr:"`
+getip=`ip add | grep -w inet | grep -v "127.0.0.1"| awk -F '[ /]+' '{print $3}'`
 
 #开启alias功能
 shopt -s expand_aliases
