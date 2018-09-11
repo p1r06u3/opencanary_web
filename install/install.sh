@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 #Author: Weiho@破晓团队
 #Blog  : www.weiho.xyz 
 #Email : H4x0er@SecBug.Org 
@@ -8,6 +9,13 @@
 #Gratitude: k4n5ha0/Sven/Null/c00lman/kafka
 #deploy single opencanary_web_server
 #
+# This script is meant for quick & easy install via:
+#   'curl -sSL https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install.sh | sh'
+# or:
+#   'wget -qO- https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install.sh | sh'
+#
+
+
 echo "###########正在初始化环境#########"
 yum -y -q install net-tools
 #getip=192.168.1.100
