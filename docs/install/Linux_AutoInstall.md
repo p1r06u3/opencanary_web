@@ -58,7 +58,7 @@ systemctl status supervisord.service
 | 发件人邮件配置 | /usr/local/src/opencanary_web/application.py | - |
 | 收件人邮件配置(以及告警开关)| /usr/local/src/opencanary_web/util/conf/email.ini | - |
 
-###安装服务端Agent
+### 安装服务端Agent
 另外开一台服务器作为Agent.
 
 ```
