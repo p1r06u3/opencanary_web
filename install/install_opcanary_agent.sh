@@ -54,9 +54,9 @@ echo "###########正在安装opencanary_agent#########"
 a=`cat /etc/redhat-release |awk '{print $4}'`
 if [ "$a" \< "7.0" ];then
     echo "#############配置并启动rsyslog#############"
+    sed -i '50i kern.*                                              /var/log/kern.log' /etc/rsyslog.conf
     /etc/init.d/rsyslog restart
     chkconfig --level 2345 rsyslog on
-    sed -i '50i kern.*                                              /var/log/kern.log' /etc/rsyslog.conf
     else
     echo "#############配置并启动rsyslog#############"
     sed -i '50i kern.*                                              /var/log/kern.log' /etc/rsyslog.conf
