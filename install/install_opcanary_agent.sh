@@ -30,15 +30,6 @@ echo "###########正在安装系统依赖#########"
 yum -y -q install epel-release
 yum -y -q install libpcap-devel openssl-devel libffi-devel python-devel gcc python-pip gcc-c++ ntpdate git iptables-services
 
-PIP_FILE=/usr/bin/pip
-if [ ! -s $PIP_FILE ]; then
-    curl https://bootstrap.pypa.io/get-pip.py | python
-    python -m pip install --upgrade pip
-    echo "################pip is installed############"
-    else
-    echo "################pip install error############"
-fi
-
 echo "##################正在更新系统时间##################"
 ntpdate cn.pool.ntp.org
 
@@ -54,24 +45,33 @@ if [ ! -d $opencanary_folder ]; then
 fi
 
 echo "###########正在安装opencanary_agent#########"
-opencanary_sdist_folder="/usr/local/src/opencanary/sdist"
-if [ ! -d $opencanary_folder ]; then
     cd /usr/local/src/opencanary/
     python setup.py sdist
     cd /usr/local/src/opencanary/dist
     pip install opencanary-0.3.2.tar.gz
+
+
+a=`cat /etc/redhat-release |awk '{print $4}'`
+if [ "$a" \< "7.0" ];then
+    echo "#############配置并启动rsyslog#############"
+    /etc/init.d/rsyslog restart
+    sed -i '50i kern.*                                              /var/log/kern.log' /etc/rsyslog.conf
     else
-    cd /usr/local/src/opencanary/dist
-    pip install opencanary-0.3.2.tar.gz
+    echo "#############配置并启动rsyslog#############"
+    sed -i '50i kern.*                                              /var/log/kern.log' /etc/rsyslog.conf
+    systemctl restart rsyslog.service
 fi
 
-echo "#############配置并启动rsyslog#############"
-sed -i '50i kern.*                                              /var/log/kern.log' /etc/rsyslog.conf
-systemctl restart rsyslog.service
+if [ "$a" \< "7.0" ];then
+    echo "##############正在关闭iptables防火墙#############"
+    /etc/init.d/iptables stop
+    chkconfig iptables off
+    else 
+    echo "##############正在关闭firewalld防火墙#############"
+    systemctl stop firewalld.service
+    systemctl disable firewalld.service
+fi
 
-echo "##############正在关闭firewalld防火墙#############"
-systemctl stop firewalld.service
-systemctl disable firewalld.service
 
 OPENCANARY_CONF_FILE=/root/.opencanary.conf
 if [ ! -s $OPENCANARY_CONF_FILE ]; then
