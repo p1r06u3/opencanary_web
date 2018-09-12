@@ -47,13 +47,15 @@ systemctl restart supervisord.service
 systemctl status supervisord.service
 ```
 ### 安装后信息
-访问URL:http://ip
+访问URL:http://ip<br />
+
 |类型 | 用户名 | 密码 |
 |----- |----- |-----| 
 | Web账号 | admin | admin |
 | mongodb 数据库 | root | Weiho@2018 |
 | mongodb 端口 | 3306| - |
 | OpenCanary_Web物理路径 | /usr/src/local/opencanary_web | - |
+
 ## 报告问题
 
 安装脚本在使用过程当中出现任何问题，请点击[这里](https://github.com/p1r06u3/opencanary_web/issues/new)反馈
