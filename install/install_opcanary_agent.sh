@@ -55,11 +55,13 @@ a=`cat /etc/redhat-release |awk '{print $4}'`
 if [ "$a" \< "7.0" ];then
     echo "#############配置并启动rsyslog#############"
     /etc/init.d/rsyslog restart
+    chkconfig --level 2345 rsyslog on
     sed -i '50i kern.*                                              /var/log/kern.log' /etc/rsyslog.conf
     else
     echo "#############配置并启动rsyslog#############"
     sed -i '50i kern.*                                              /var/log/kern.log' /etc/rsyslog.conf
     systemctl restart rsyslog.service
+    systemctl enable rsyslog.service
 fi
 
 if [ "$a" \< "7.0" ];then
