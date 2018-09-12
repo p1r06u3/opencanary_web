@@ -47,7 +47,7 @@ systemctl restart supervisord.service
 systemctl status supervisord.service
 ```
 ### 安装后信息
-访问URL:http://ip<br />
+访问URL:http://$ip<br />
 
 |类型 | 用户名 | 密码 |
 |----- |----- |-----| 
@@ -55,6 +55,27 @@ systemctl status supervisord.service
 | mysql 数据库 | root | Weiho@2018 |
 | mysql 端口 | 3306| - |
 | OpenCanary_Web物理路径 | /usr/src/local/opencanary_web | - |
+| 发件人邮件配置 | /usr/local/src/opencanary_web/application.py | - |
+| 收件人邮件配置(以及告警开关)| /usr/local/src/opencanary_web/util/conf/email.ini | - |
+
+###安装服务端Agent
+另外开一台服务器作为Agent.
+
+```
+   $ curl -O https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install_opcanary_agent.sh
+```
+或者输入输入以下命令：
+```
+   $ wget --no-check-certificate https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install_opcanary_agent.sh
+```
+下载后输入
+```
+    chmod o+x install_opcanary_agent.sh
+    ./install_opcanary_agent.sh
+```
+输入上面Web服务端的IP.等待脚本执行完毕,即可.
+
+到服务端的Web页面进行管理http://$ip.
 
 ## 报告问题
 
