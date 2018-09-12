@@ -71,7 +71,7 @@ systemctl status supervisord.service
 下载后输入
 ```
    $ chmod o+x install_opcanary_agent.sh
-   $ /install_opcanary_agent.sh
+   $ ./install_opcanary_agent.sh
 ```
 输入上面Web服务端的IP.等待脚本执行完毕,即可.
 
