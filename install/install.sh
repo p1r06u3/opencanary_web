@@ -119,7 +119,7 @@ if [ "$opencanary_web_mysql_passwd" = "$huanchengzijidemima" ]; then
     echo “######## 已修改mysql root密码Weiho@2018 #########”
     echo “######## 初始化导入数据库honeypot.sql #########”
 else
-    echo “已经修改并导入数据库honeypot.sql”
+    echo ”########已经修改并导入数据库honeypot.sql#########“
     fi
 }
 Import_mysql
