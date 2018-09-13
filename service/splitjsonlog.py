@@ -213,8 +213,11 @@ def parserlog(jsonlog):
                 else:
                     # 不存在将white字段设置为2
                     white = 2
-
+                # 判断目的端口是否存在于白名单端口中
                 if int(dst_port) in whiteports():
+                    return True
+                # 判断目的ip等于来源ip
+                elif dst_host == src_host:
                     return True
                 else:
                     # 将客户端post过来的数据插入数据库
