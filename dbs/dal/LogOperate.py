@@ -11,6 +11,7 @@ from dbs.initdb import DBSession
 from dbs.models.HoneypotLog import OpencanaryLog
 from dbs.models.Whiteip import Whiteip
 from sqlalchemy import desc,asc,extract,func,distinct
+from sqlalchemy.exc import InvalidRequestError
 
 
 class LogOp:
@@ -30,44 +31,79 @@ class LogOp:
             urgp=urgp, window=window, logtype=logtype, node_id=node_id, src_host=src_host, src_port=src_port, white=white)
             
         if loginsert:
-
-            self.session.add(loginsert)
-            self.session.commit()
-            self.session.close()
-            return True
+            try:
+                self.session.add(loginsert)
+                self.session.commit()
+                return True
+            except InvalidRequestError:
+                self.session.rollback()
+            except Exception as e:
+                print (e)
+            finally:
+                self.session.close()
         else:
             return False
 
     # 查询日志表攻击列表数据
     def page_select_attack(self, page_index):
-        page_size = 10
-        # num = 10*int(page) - 10
-        logselect = self.session.query(OpencanaryLog).filter(OpencanaryLog.white==2).order_by(desc(OpencanaryLog.local_time),OpencanaryLog.id).limit(page_size).offset((page_index-1)*page_size)
-        self.session.close()
-        return logselect
+        try:
+            page_size = 10
+            # num = 10*int(page) - 10
+            logselect = self.session.query(OpencanaryLog).filter(OpencanaryLog.white==2).order_by(desc(OpencanaryLog.local_time),OpencanaryLog.id).limit(page_size).offset((page_index-1)*page_size)
+            return logselect
+        except InvalidRequestError:
+            self.session.rollback()
+        except Exception as e:
+            print (e)
+        finally:
+            self.session.close()
 
     # 查询日志表白名单数据
     def page_select_white(self, page_index):
-        page_size = 10
-        # num = 10*int(page) - 10
-        logselect = self.session.query(OpencanaryLog).filter(OpencanaryLog.white==1).order_by(desc(OpencanaryLog.local_time),OpencanaryLog.id).limit(page_size).offset((page_index-1)*page_size)
-        self.session.close()
-        return logselect
+        try:
+            page_size = 10
+            # num = 10*int(page) - 10
+            logselect = self.session.query(OpencanaryLog).filter(OpencanaryLog.white==1).order_by(desc(OpencanaryLog.local_time),OpencanaryLog.id).limit(page_size).offset((page_index-1)*page_size)
+            return logselect
+        except InvalidRequestError:
+            self.session.rollback()
+        except Exception as e:
+            print (e)
+        finally:
+            self.session.close()
 
     # 查询当年每月攻击数量
     def attack_select_num(self, months):
-        attack_num = self.session.query(extract('month', OpencanaryLog.local_time).label('month'), func.count('*').label('count')).filter(extract('year', OpencanaryLog.local_time) == months, OpencanaryLog.white==2).group_by('month').all()
-        self.session.close()
-        return attack_num
+        try:
+            attack_num = self.session.query(extract('month', OpencanaryLog.local_time).label('month'), func.count('*').label('count')).filter(extract('year', OpencanaryLog.local_time) == months, OpencanaryLog.white==2).group_by('month').all()
+            return attack_num
+        except InvalidRequestError:
+            self.session.rollback()
+        except Exception as e:
+            print (e)
+        finally:
+            self.session.close()
 
     # 查询当年每月白名单内攻击数量
     def white_select_num(self, months):
-        white_num = self.session.query(extract('month', OpencanaryLog.local_time).label('month'), func.count('*').label('count')).filter(extract('year', OpencanaryLog.local_time) == months, OpencanaryLog.white==1).group_by('month').all()
-        self.session.close()
-        return white_num
+        try:
+            white_num = self.session.query(extract('month', OpencanaryLog.local_time).label('month'), func.count('*').label('count')).filter(extract('year', OpencanaryLog.local_time) == months, OpencanaryLog.white==1).group_by('month').all()
+            return white_num
+        except InvalidRequestError:
+            self.session.rollback()
+        except Exception as e:
+            print (e)
+        finally:
+            self.session.close()
     
     # 查询各类攻击数量
     def pie_select_num(self, years):
-        pie_num = self.session.query(func.count(OpencanaryLog.logtype),OpencanaryLog.logtype).group_by(OpencanaryLog.logtype).filter(extract('year', OpencanaryLog.local_time) == years, OpencanaryLog.white==2).all()
-        self.session.close()
-        return pie_num
+        try:
+            pie_num = self.session.query(func.count(OpencanaryLog.logtype),OpencanaryLog.logtype).group_by(OpencanaryLog.logtype).filter(extract('year', OpencanaryLog.local_time) == years, OpencanaryLog.white==2).all()
+            return pie_num
+        except InvalidRequestError:
+            self.session.rollback()
+        except Exception as e:
+            print (e)
+        finally:
+            self.session.close()
