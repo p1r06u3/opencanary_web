@@ -34,6 +34,15 @@ CREATE TABLE `Host` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `Host`
+--
+
+LOCK TABLES `Host` WRITE;
+/*!40000 ALTER TABLE `Host` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Host` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `OpencanaryLog`
 --
 
@@ -79,6 +88,15 @@ CREATE TABLE `OpencanaryLog` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `OpencanaryLog`
+--
+
+LOCK TABLES `OpencanaryLog` WRITE;
+/*!40000 ALTER TABLE `OpencanaryLog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `OpencanaryLog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `User`
 --
 
@@ -95,6 +113,16 @@ CREATE TABLE `User` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `User`
+--
+
+LOCK TABLES `User` WRITE;
+/*!40000 ALTER TABLE `User` DISABLE KEYS */;
+INSERT INTO `User` VALUES (1,'admin','21232f297a57a5a743894a0e4a801fc3','2018-08-07 08:52:45');
+/*!40000 ALTER TABLE `User` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Whiteip`
 --
 
@@ -108,6 +136,15 @@ CREATE TABLE `Whiteip` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `Whiteip`
+--
+
+LOCK TABLES `Whiteip` WRITE;
+/*!40000 ALTER TABLE `Whiteip` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Whiteip` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Whiteport`
 --
 
@@ -119,6 +156,15 @@ CREATE TABLE `Whiteport` (
   PRIMARY KEY (`dst_port`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Whiteport`
+--
+
+LOCK TABLES `Whiteport` WRITE;
+/*!40000 ALTER TABLE `Whiteport` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Whiteport` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -129,4 +175,4 @@ CREATE TABLE `Whiteport` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-24 19:59:00
+-- Dump completed on 2018-12-24 20:05:45
