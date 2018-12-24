@@ -75,7 +75,7 @@ CREATE TABLE `OpencanaryLog` (
   `src_port` int(11) NOT NULL,
   `white` int(2) NOT NULL DEFAULT '2',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,4 +129,4 @@ CREATE TABLE `Whiteport` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-24 19:05:20
+-- Dump completed on 2018-12-24 19:59:00
