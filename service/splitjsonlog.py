@@ -9,7 +9,7 @@
 
 from dbs.dal.LogOperate import LogOp
 import datetime
-from service.emailservice import send_mail,switches
+from service.emailservice import send_mail, switches
 from service.whiteipservice import whiteips
 from service.whiteportservice import whiteports
 from util.task import sched
@@ -17,8 +17,8 @@ from datetime import datetime
 import datetime as datetimes
 import uuid
 
-
 loginst = LogOp()
+
 
 def parserlog(jsonlog):
     # 接收客户端post过来的数据格式化
@@ -94,7 +94,7 @@ def parserlog(jsonlog):
             if jsonlog["logdata"].has_key("DF"):
                 df = jsonlog["logdata"]["DF"]
             else:
-                df = '' 
+                df = ''
 
             if jsonlog["logdata"].has_key("ID"):
                 idid = jsonlog["logdata"]["ID"]
@@ -161,29 +161,29 @@ def parserlog(jsonlog):
             else:
                 window = ''
         else:
-                hostname = ''
-                password = ''
-                path = ''
-                skin = ''
-                useragent = ''
-                username = ''
-                session = ''
-                localversion = ''
-                remoteversion = ''
-                df = '' 
-                idid = ''
-                inin = ''
-                lenlen = ''
-                mac = ''
-                outout = ''
-                prec = ''
-                proto = ''
-                res = ''
-                syn = ''
-                tos = ''
-                ttl = ''
-                urgp = ''
-                window = ''
+            hostname = ''
+            password = ''
+            path = ''
+            skin = ''
+            useragent = ''
+            username = ''
+            session = ''
+            localversion = ''
+            remoteversion = ''
+            df = ''
+            idid = ''
+            inin = ''
+            lenlen = ''
+            mac = ''
+            outout = ''
+            prec = ''
+            proto = ''
+            res = ''
+            syn = ''
+            tos = ''
+            ttl = ''
+            urgp = ''
+            window = ''
 
         if jsonlog.has_key("logtype"):
             logtype = jsonlog["logtype"]
@@ -226,8 +226,8 @@ def parserlog(jsonlog):
                         prec, proto, res, syn, tos, ttl, urgp, window, logtype, node_id, src_host, src_port, white)
                     if logbool and white == 2:
                         # 发送邮件功能
-                        if switches() =='on':
-                            if str(logtype) =='2000':
+                        if switches() == 'on':
+                            if str(logtype) == '2000':
                                 logtype = 'ftp登录尝试'
                             elif str(logtype) == '3000':
                                 logtype = 'web蜜罐被访问'
@@ -245,9 +245,15 @@ def parserlog(jsonlog):
                                 logtype = '端口扫描行为'
                             elif str(logtype) == '8001':
                                 logtype = 'mysql登录尝试'
-                            content = "攻击主机："+src_host+"--"+"被攻击主机："+dst_host+"--"+"攻击时间："+local_time
+                            content = "攻击主机：" + src_host + "--" + "被攻击主机：" + dst_host + "--" + "攻击时间：" + local_time
                             # 将发送邮件丢到任务队列
-                            sched.add_job(send_mail, 'date', run_date=(datetime.now() + datetimes.timedelta(seconds=1)), args=["蜜罐告警："+logtype, content], id=str(uuid.uuid1()))
+                            sched.add_job(
+                                send_mail,
+                                'date',
+                                run_date=(datetime.now() +
+                                          datetimes.timedelta(seconds=1)),
+                                args=["蜜罐告警：" + logtype, content],
+                                id=str(uuid.uuid1()))
                             # send_mail("蜜罐告警："+logtype,content)
                             return True
             else:

@@ -7,6 +7,29 @@
   Created: 2018-02-08 11:18:10
 """
 
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
+from service.hostservice import hostonline
+#jobstores = {
+#    'default': SQLAlchemyJobStore(url='sqlite:///jobs.sqlite')
+#}
 
-from apscheduler.schedulers.tornado import TornadoScheduler
-sched = TornadoScheduler()
+sched = BackgroundScheduler()
+
+# sched.add_listener(my_listener, EVENT_JOB_EXECUTED | EVENT_JOB_ERROR)
+
+
+def check_scheduler():
+    try:
+        sched.start()
+        if sched.get_job('check_host'):
+            pass
+        else:
+            host_scheduler()
+    except (KeyboardInterrupt, SystemExit):
+        sched.remove_job()
+
+
+def host_scheduler():
+    sched.add_job(hostonline, 'interval', seconds=30, id='check_host')
+    return True

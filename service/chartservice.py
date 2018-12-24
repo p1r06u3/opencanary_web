@@ -7,19 +7,16 @@
   Created: 2018-08-27 18:29:06
 """
 
-
 from dbs.dal.LogOperate import LogOp
 import datetime
 import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
 
-
 nums = LogOp()
 
 # 当前的年份
 now = datetime.datetime.now().year
-
 
 # sourceDataz = [
 # { "month": 'Jan', "attack": 0, "white": 0 },
@@ -36,82 +33,82 @@ now = datetime.datetime.now().year
 # { "month": 'Dec', "attack": 0, "white": 0 },
 # ]
 
-def attack_num(sourceDataz):
-  """ 每月攻击数量统计 """
 
-  attack_res =  nums.attack_select_num(now)
-  # [(5, 1), (7, 2), (8, 258), (9, 3)]
-  if attack_res:
-    for at in attack_res:
-      if at[0]==1:
-        sourceDataz[0]["attack"] = at[1]
-      elif at[0]==2:
-        sourceDataz[1]["attack"] = at[1]
-      elif at[0]==3:
-        sourceDataz[2]["attack"] = at[1]
-      elif at[0]==4:
-        sourceDataz[3]["attack"] = at[1]
-      elif at[0]==5:
-        sourceDataz[4]["attack"] = at[1]
-      elif at[0]==6:
-        sourceDataz[5]["attack"] = at[1]
-      elif at[0]==7:
-        sourceDataz[6]["attack"] = at[1]
-      elif at[0]==8:
-        sourceDataz[7]["attack"] = at[1]
-      elif at[0]==9:
-        sourceDataz[8]["attack"] = at[1]
-      elif at[0]==10:
-        sourceDataz[9]["attack"] = at[1]
-      elif at[0]==11:
-        sourceDataz[10]["attack"] = at[1]
-      elif at[0]==12:
-        sourceDataz[11]["attack"] = at[1]
-    # print sourceDataz
-  return sourceDataz
+def attack_num(sourceDataz):
+    """ 每月攻击数量统计 """
+
+    attack_res = nums.attack_select_num(now)
+    # [(5, 1), (7, 2), (8, 258), (9, 3)]
+    if attack_res:
+        for at in attack_res:
+            if at[0] == 1:
+                sourceDataz[0]["attack"] = at[1]
+            elif at[0] == 2:
+                sourceDataz[1]["attack"] = at[1]
+            elif at[0] == 3:
+                sourceDataz[2]["attack"] = at[1]
+            elif at[0] == 4:
+                sourceDataz[3]["attack"] = at[1]
+            elif at[0] == 5:
+                sourceDataz[4]["attack"] = at[1]
+            elif at[0] == 6:
+                sourceDataz[5]["attack"] = at[1]
+            elif at[0] == 7:
+                sourceDataz[6]["attack"] = at[1]
+            elif at[0] == 8:
+                sourceDataz[7]["attack"] = at[1]
+            elif at[0] == 9:
+                sourceDataz[8]["attack"] = at[1]
+            elif at[0] == 10:
+                sourceDataz[9]["attack"] = at[1]
+            elif at[0] == 11:
+                sourceDataz[10]["attack"] = at[1]
+            elif at[0] == 12:
+                sourceDataz[11]["attack"] = at[1]
+        # print sourceDataz
+    return sourceDataz
 
 
 def white_num(sourceDataz):
-  """ 每月白名单攻击数量统计 """
+    """ 每月白名单攻击数量统计 """
 
-  white_res =  nums.white_select_num(now)
-  # [(5, 1), (7, 2), (8, 258), (9, 3)]
-  if white_res:
-    for at in white_res:
-      if at[0]==1:
-        sourceDataz[0]["white"] = at[1]
-      elif at[0]==2:
-        sourceDataz[1]["white"] = at[1]
-      elif at[0]==3:
-        sourceDataz[2]["white"] = at[1]
-      elif at[0]==4:
-        sourceDataz[3]["white"] = at[1]
-      elif at[0]==5:
-        sourceDataz[4]["white"] = at[1]
-      elif at[0]==6:
-        sourceDataz[5]["white"] = at[1]
-      elif at[0]==7:
-        sourceDataz[6]["white"] = at[1]
-      elif at[0]==8:
-        sourceDataz[7]["white"] = at[1]
-      elif at[0]==9:
-        sourceDataz[8]["white"] = at[1]
-      elif at[0]==10:
-        sourceDataz[9]["white"] = at[1]
-      elif at[0]==11:
-        sourceDataz[10]["white"] = at[1]
-      elif at[0]==12:
-        sourceDataz[11]["white"] = at[1]
-  return sourceDataz
+    white_res = nums.white_select_num(now)
+    # [(5, 1), (7, 2), (8, 258), (9, 3)]
+    if white_res:
+        for at in white_res:
+            if at[0] == 1:
+                sourceDataz[0]["white"] = at[1]
+            elif at[0] == 2:
+                sourceDataz[1]["white"] = at[1]
+            elif at[0] == 3:
+                sourceDataz[2]["white"] = at[1]
+            elif at[0] == 4:
+                sourceDataz[3]["white"] = at[1]
+            elif at[0] == 5:
+                sourceDataz[4]["white"] = at[1]
+            elif at[0] == 6:
+                sourceDataz[5]["white"] = at[1]
+            elif at[0] == 7:
+                sourceDataz[6]["white"] = at[1]
+            elif at[0] == 8:
+                sourceDataz[7]["white"] = at[1]
+            elif at[0] == 9:
+                sourceDataz[8]["white"] = at[1]
+            elif at[0] == 10:
+                sourceDataz[9]["white"] = at[1]
+            elif at[0] == 11:
+                sourceDataz[10]["white"] = at[1]
+            elif at[0] == 12:
+                sourceDataz[11]["white"] = at[1]
+    return sourceDataz
+
 
 def line_total_num(sdataz):
-  data_attack = attack_num(sdataz)
-  # print data_attack
-  data_attack_white = white_num(data_attack)
-  # print data_attack_white
-  return data_attack_white
-
-
+    data_attack = attack_num(sdataz)
+    # print data_attack
+    data_attack_white = white_num(data_attack)
+    # print data_attack_white
+    return data_attack_white
 
 
 # this.sourceData = [
@@ -123,21 +120,22 @@ def line_total_num(sdataz):
 #   { item: 'mysql', count: 0 }
 # ];
 
+
 def pie_num(piesoureData):
-  """ 饼图数据 """
-  data_pie = nums.pie_select_num(now)
-  if data_pie:
-    for p in data_pie:
-      if p[1] == '2000':
-        piesoureData[0]["count"] = int(p[0])
-      elif p[1] == '3000' or p[1] == '3001':
-        piesoureData[1]["count"] = piesoureData[1]["count"] + int(p[0])
-      elif p[1] == '4000' or p[1] == '4001' or p[1] == '4002':
-        piesoureData[2]["count"] = piesoureData[2]["count"] + int(p[0])
-      elif p[1] == '6001':
-        piesoureData[3]["count"] = int(p[0])
-      elif p[1] == '5001':
-        piesoureData[4]["count"] = int(p[0])
-      elif p[1] == '8001':
-        piesoureData[5]["count"] = int(p[0])
-  return piesoureData
+    """ 饼图数据 """
+    data_pie = nums.pie_select_num(now)
+    if data_pie:
+        for p in data_pie:
+            if p[1] == '2000':
+                piesoureData[0]["count"] = int(p[0])
+            elif p[1] == '3000' or p[1] == '3001':
+                piesoureData[1]["count"] = piesoureData[1]["count"] + int(p[0])
+            elif p[1] == '4000' or p[1] == '4001' or p[1] == '4002':
+                piesoureData[2]["count"] = piesoureData[2]["count"] + int(p[0])
+            elif p[1] == '6001':
+                piesoureData[3]["count"] = int(p[0])
+            elif p[1] == '5001':
+                piesoureData[4]["count"] = int(p[0])
+            elif p[1] == '8001':
+                piesoureData[5]["count"] = int(p[0])
+    return piesoureData

@@ -7,10 +7,9 @@
   Site:    http://pirogue.org
 """
 
-from handlers import login
-from handlers import logcollection, paginationlog, login, hello, email, index, chart, whiteiplist, whiteport
+from handlers import login, hello
+from handlers import logcollection, paginationlog, hello, email, index, chart, whiteiplist, whiteport, host
 import unittest
-
 
 url = [
     # LoginHandler url
@@ -22,12 +21,13 @@ url = [
     (r"/chart/*", chart.ChartHandler),
     (r"/whiteiplist/", whiteiplist.WhiteiplistHandler),
     (r"/whiteport/", whiteport.WhiteportHandler),
+    (r"/host/*", host.HostHandler),
+    (r"/gethost/*", host.GetHostHandler),
+    (r"/hello/*", hello.HelloHandler),
     (r".*", index.IndexHandler)
 
     # (r"/logout", login.LogoutHandler),
 ]
-
-
 
 if __name__ == '__main__':
     unittest.main()

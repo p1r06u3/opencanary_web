@@ -4,11 +4,14 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 export default new Router({
+    mode: 'history',
+    base: 'v1',
     routes: [
         {
             path: '/',
             // redirect: '/dashboard'
             redirect: '/dashboard'
+
         },
         {
             path: '/',
@@ -19,6 +22,11 @@ export default new Router({
                     path: '/dashboard',
                     component: resolve => require(['../components/page/Dashboard.vue'], resolve),
                     meta: { title: '系统首页' }
+                },
+                {
+                    path: '/hoststatus',
+                    component: resolve => require(['../components/page/HostStatus.vue'], resolve),
+                    meta: { title: '主机状态' }
                 },
                 {
                     path: '/attacklist',

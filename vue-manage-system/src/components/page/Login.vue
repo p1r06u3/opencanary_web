@@ -22,7 +22,7 @@
     export default {
         data: function(){
             return {
-                url: './auth/',
+                url: '/auth/',
                 restoken: '',
                 role: '',
                 loginres: '',
@@ -66,7 +66,7 @@
                             })
 
                         } else{
-                                this.url = './auth/';
+                                this.url = '/auth/';
                                 this.$axios.post(this.url, {
                                     username: this.ruleForm.username,
                                     password: this.ruleForm.password

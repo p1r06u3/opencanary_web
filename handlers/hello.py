@@ -10,10 +10,15 @@
 import tornado
 from util.auth import jwtauth
 from handlers.base import BaseHandler
+from service.hostservice import hostonline
 
-@jwtauth
+# @jwtauth
 class HelloHandler(BaseHandler):
     def get(self):
+        print hostonline()
+        # self.write(str(hostonline()))
+        self.write("ok")
+
         # Contains user found in previous auth
-        if self.request.headers.get('Authorization'):
-            self.write('ok')
+        # if self.request.headers.get('Authorization'):
+        #     self.write('ok')

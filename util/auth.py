@@ -7,7 +7,6 @@
   Created: 2018-08-07 16:04:42
 """
 
-
 import jwt
 
 secret_key = "opencanary123456789zdsfjoqfjladfs"
@@ -22,6 +21,7 @@ options = {
 
 def jwtauth(handler_class):
     ''' Handle Tornado JWT Auth '''
+
     def wrap_execute(handler_execute):
         def require_auth(handler, kwargs):
 
@@ -47,11 +47,7 @@ def jwtauth(handler_class):
 
                 token = parts[1]
                 try:
-                    jwt.decode(
-                        token,
-                        secret_key,
-                        options=options
-                    )
+                    jwt.decode(token, secret_key, options=options)
 
                 except Exception, e:
                     handler._transforms = []

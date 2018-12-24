@@ -173,7 +173,7 @@
         name: 'basetable',
         data() {
             return {
-                url: './log/list/',
+                url: '/log/list/',
                 tableData: [],
                 cur_page: 1,
                 multipleSelection: [],

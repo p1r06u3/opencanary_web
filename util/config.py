@@ -7,7 +7,6 @@
   Created: 2018-08-08 14:59:54
 """
 
-
 import configparser
 import sys
 sys.path.append("..")
@@ -15,7 +14,6 @@ from application import emailfile
 
 
 class ini_info(object):
-
     def __init__(self, recordfile):
         self.logfile = recordfile
         self.cfg = configparser.ConfigParser()
@@ -32,10 +30,11 @@ class ini_info(object):
             # print 'b'
             # print(self.cfg.items(se))
             # self.cfg.items(se)
-        # print('='*30)
+            # print('='*30)
             return self.cfg.items(se)
+
     def cfg_get(self, section, option):
-        v = self.cfg.get(section, option) 
+        v = self.cfg.get(section, option)
         print v
         return v
 
@@ -55,6 +54,8 @@ class ini_info(object):
         fp = open(self.logfile, 'w')
         self.cfg.write(fp)
         fp.close()
+
+
 if __name__ == '__main__':
     ini = ini_info(emailfile)
     ini.cfg_load()

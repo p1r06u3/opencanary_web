@@ -7,13 +7,12 @@
   Created: 2018-08-17 16:15:08
 """
 
-
 from dbs.dal.Whiteport import WhitePort
 # import sys
 # sys.path.append("..")
 
-
 White_res = WhitePort()
+
 
 def whiteports():
     list_port = []
@@ -27,6 +26,7 @@ def insertports(list_port):
         if p:
             White_res.insert_white_port(int(p))
     return True
+
 
 def deleteports():
     White_res.delete_white_port()

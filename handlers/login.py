@@ -42,9 +42,9 @@ class AuthHandler(BaseHandler):
         if self.request.headers["Content-Type"].startswith("application/json"):
             # self.set_header("Authorization","")
             if self.request.body:
-                print self.request.body
+                # print self.request.body
                 data = json.loads(self.request.body.decode('utf-8'))
-                print data
+                # print data
                 try:
                     username = data["username"]
                     password = data["password"]

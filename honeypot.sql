@@ -16,6 +16,24 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `Host`
+--
+
+DROP TABLE IF EXISTS `Host`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Host` (
+  `id` varchar(50) NOT NULL,
+  `last_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `hostname` varchar(50) NOT NULL,
+  `ip` varchar(50) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uix_hostname_ip` (`hostname`,`ip`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `OpencanaryLog`
 --
 
@@ -57,17 +75,8 @@ CREATE TABLE `OpencanaryLog` (
   `src_port` int(11) NOT NULL,
   `white` int(2) NOT NULL DEFAULT '2',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `OpencanaryLog`
---
-
-LOCK TABLES `OpencanaryLog` WRITE;
-/*!40000 ALTER TABLE `OpencanaryLog` DISABLE KEYS */;
-/*!40000 ALTER TABLE `OpencanaryLog` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `User`
@@ -86,16 +95,6 @@ CREATE TABLE `User` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `User`
---
-
-LOCK TABLES `User` WRITE;
-/*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (1,'admin','21232f297a57a5a743894a0e4a801fc3','2018-08-07 08:52:45');
-/*!40000 ALTER TABLE `User` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Whiteip`
 --
 
@@ -109,15 +108,6 @@ CREATE TABLE `Whiteip` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Whiteip`
---
-
-LOCK TABLES `Whiteip` WRITE;
-/*!40000 ALTER TABLE `Whiteip` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Whiteip` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Whiteport`
 --
 
@@ -127,17 +117,8 @@ DROP TABLE IF EXISTS `Whiteport`;
 CREATE TABLE `Whiteport` (
   `dst_port` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`dst_port`)
-) ENGINE=InnoDB AUTO_INCREMENT=5289 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Whiteport`
---
-
-LOCK TABLES `Whiteport` WRITE;
-/*!40000 ALTER TABLE `Whiteport` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Whiteport` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -148,4 +129,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-11 10:01:29
+-- Dump completed on 2018-12-24 19:05:20

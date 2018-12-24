@@ -54,8 +54,8 @@
     export default {
         data() {
             return {
-                url: './whiteiplist/',
-                porturl: './whiteport/',
+                url: '/whiteiplist/',
+                porturl: '/whiteport/',
                 whiteips: '',
                 whiteports: '',
                 port: '',
