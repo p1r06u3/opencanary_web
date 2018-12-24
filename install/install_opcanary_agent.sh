@@ -3,7 +3,7 @@
 #Blog  : www.weiho.xyz 
 #Email : H4x0er@SecBug.Org 
 #Github: https://github.com/zhaoweiho
-#Date  : 2018-09-11
+#Date  : 2018-09-23
 #Environment: CentOS7.2
 #Gratitude: k4n5ha0/p1r06u3/Sven/Null/c00lman/kafka/JK
 #deploy single opencanary_web_server
@@ -16,6 +16,9 @@
 #    chmod o+x install_opcanary_agent.sh
 #    ./install_opcanary_agent.sh
 #
+#
+#ip=192.168.1.100
+ip=`ip add | grep -w inet | grep -v "127.0.0.1"| awk -F '[ /]+' '{print $3}'`
 
 echo "###############请确认已经安装Web服务端##############"
 read -p "请确认是否已经安装OpenCanary_Web服务端(y/n)" choice
@@ -23,8 +26,16 @@ if [ $choice = n ];then
 	echo "######请安装完服务端后再配置agent######"
 	exit 0
 fi
+
+read -p "请确认本机IP:$ip是否正确?(y/n)" ipd
+if [ $ipd = n ];then
+	echo "######请手工设置本机IP地址######"
+	exit 0
+fi
 read -p "请输入Web服务端IP:" opencanary_web_server_ip
-echo $opencanary_web_server_ip
+read -p "请输入本机节点名称:" opencanary_agent_name
+echo Web服务端IP:$opencanary_web_server_ip
+echo 本机节点名称:$opencanary_agent_name
 
 echo "###########正在安装系统依赖#########"
 yum -y -q install epel-release
@@ -37,11 +48,19 @@ echo "###########正在下载opencanary_agent#########"
 opencanary_folder="/usr/local/src/opencanary"
 if [ ! -d $opencanary_folder ]; then
     git clone https://github.com/p1r06u3/opencanary.git /usr/local/src/opencanary
+	configure_agent_name=`sed -n "2p"  /usr/local/src/opencanary/opencanary/data/settings.json | awk -F '["]+' '{print $4}'`
     configure_server_ip=`sed -n "69p"  /usr/local/src/opencanary/opencanary/data/settings.json | awk -F '["]+' '{print $4}'`
+	configure_ip=`sed -n "70p"  /usr/local/src/opencanary/opencanary/data/settings.json | awk -F '["]+' '{print $4}'`
+	sed -i "s/$configure_agent_name/$opencanary_agent_name/g" /usr/local/src/opencanary/opencanary/data/settings.json
     sed -i "s/$configure_server_ip/$opencanary_web_server_ip/g" /usr/local/src/opencanary/opencanary/data/settings.json
+	sed -i "s/$configure_ip/$ip/g" /usr/local/src/opencanary/opencanary/data/settings.json
     else
+	configure_agent_name=`sed -n "2p"  /usr/local/src/opencanary/opencanary/data/settings.json | awk -F '["]+' '{print $4}'`
     configure_server_ip=`sed -n "69p"  /usr/local/src/opencanary/opencanary/data/settings.json | awk -F '["]+' '{print $4}'`
+	configure_ip=`sed -n "70p"  /usr/local/src/opencanary/opencanary/data/settings.json | awk -F '["]+' '{print $4}'`
+	sed -i "s/$configure_agent_name/$opencanary_agent_name/g" /usr/local/src/opencanary/opencanary/data/settings.json
     sed -i "s/$configure_server_ip/$opencanary_web_server_ip/g" /usr/local/src/opencanary/opencanary/data/settings.json
+	sed -i "s/$configure_ip/$ip/g" /usr/local/src/opencanary/opencanary/data/settings.json
 fi
 
 echo "###########正在安装opencanary_agent#########"
