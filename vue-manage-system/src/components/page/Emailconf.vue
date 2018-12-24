@@ -31,7 +31,7 @@
         name: 'baseform',
         data() {
             return {
-                url: './mail/',
+                url: '/mail/',
                 email: '',
                 form: {
                     name: '',

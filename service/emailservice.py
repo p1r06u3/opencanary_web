@@ -19,14 +19,14 @@ sys.setdefaultencoding("utf-8")
 def maillists():
     ini = ini_info(emailfile)
     ini.cfg_load()
-    # [(u'user', u'quyifei@meituan.com;980555216@qq.com;a@qq.com')]
+    # [(u'user', u'p1r06u3@gmail.com;980555216@qq.com;a@qq.com')]
     # convert to down
-    # [u'quyifei@meituan.com', u'980555216@qq.com', u'a@qq.com']
+    # [u'p1r06u3@gmail.com', u'980555216@qq.com', u'a@qq.com']
     return ini.cfg_dump()[0][1].split(';')
 
 
 def send_mail(sub, content):
-    # mailto_list=['quyifei@meituan.com', '980555216@qq.com']           #收件人(列表)
+    # mailto_list=['p1r06u3@gmail.com', '980555216@qq.com']           #收件人(列表)
 
     # mailto_list = maillists()  #收件人(列表)
     to_list = maillists()
