@@ -3,7 +3,7 @@
 #Blog  : www.weiho.xyz 
 #Email : H4x0er@SecBug.Org 
 #Github: https://github.com/zhaoweiho
-#Date  : 2018-09-11
+#Date  : 2018-12-25
 #Environment: CentOS7.2
 #Gratitude: k4n5ha0/p1r06u3/Sven/Null/c00lman/kafka/JK
 #deploy single opencanary_web_server
@@ -38,7 +38,9 @@ if [ "$a" \< "7.0" ];then
 	echo "系统版本太低，无法使用"
 	exit 0
 fi
-
+wget -O /etc/yum.repos.d/CentOS-7.repo http://mirrors.aliyun.com/repo/Centos-7.repo &> /dev/null
+yum clean all
+yum makecache
 yum install -y -q ntpdate epel-release python-devel git 
 
 echo "#############正在关闭SELINUX#########"
