@@ -178,6 +178,7 @@
         data() {
             return {
                 url: '/log/list/',
+                purl: '/log/list?type=2',
                 tableData: [],
                 totalData: 0,
                 cur_page: 1,
@@ -249,7 +250,7 @@
                         this.totalData = res.data;
                     })
                 }else{
-                    this.$axios.get(this.url)
+                    this.$axios.get(this.purl)
                     .then((res) => {
                         // console.log(res.data);
                         this.totalData = res.data;
