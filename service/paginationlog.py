@@ -105,3 +105,12 @@ def listpage(param):
             page_res = {"list": second_page_list}
             # print page_res
             return page_res
+
+def total_atk_page():
+    # 查询攻击列表数量
+    return logselect.select_attack_total()
+
+
+def total_wit_page():
+    # 查询过滤列表数量
+    return logselect.select_filter_total()

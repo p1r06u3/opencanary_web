@@ -131,7 +131,7 @@
   </el-table>
 
             <div class="pagination">
-                <el-pagination @current-change="handleCurrentChange" layout="prev, pager, next" :total="1000">
+                <el-pagination @current-change="handleCurrentChange" layout="prev, pager, next" :total="totalData">
                 </el-pagination>
             </div>
         </div>
@@ -175,6 +175,7 @@
             return {
                 url: '/log/list/',
                 tableData: [],
+                totalData: 0,
                 cur_page: 1,
                 multipleSelection: [],
                 select_cate: '',
@@ -193,6 +194,7 @@
         },
         created() {
             this.getData();
+            this.getTotal();
         },
         computed: {
             data() {
@@ -234,6 +236,25 @@
                     this.tableData = res.data.list;
                 })
             },
+            getTotal() {
+                // 开发环境使用 easy-mock 数据，正式环境使用 json 文件
+                if (process.env.NODE_ENV === 'development') {
+                    this.url = process.env.API_HOST+'/log/list?type=1';
+                    this.$axios.get(this.url)
+                    .then((res) => {
+                        // console.log(res.data);
+                        this.totalData = res.data;
+                    })
+                }else{
+                    this.$axios.get(this.url)
+                    .then((res) => {
+                        // console.log(res.data);
+                        this.totalData = res.data;
+                    })
+                }
+
+            },
+
             search() {
                 this.is_search = true;
             },

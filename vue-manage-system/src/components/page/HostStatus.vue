@@ -69,7 +69,7 @@
                     this.url = process.env.API_HOST+'/gethost/';
                     this.$axios.get(this.url)
                     .then((res) => {
-                        console.log(res.data.list);
+                        // console.log(res.data.list);
                         this.tableData = res.data.list;
                     })
                 }else{
