@@ -3,7 +3,7 @@
 #Blog  : www.weiho.xyz 
 #Email : H4x0er@SecBug.Org 
 #Github: https://github.com/zhaoweiho
-#Date  : 2018-09-23
+#Date  : 2018-12-25
 #Environment: CentOS7.2
 #Gratitude: k4n5ha0/p1r06u3/Sven/Null/c00lman/kafka/JK
 #deploy single opencanary_web_server
@@ -18,7 +18,9 @@
 #
 #
 #ip=192.168.1.100
-ip=`ip add | grep -w inet | grep -v "127.0.0.1"| awk -F '[ /]+' '{print $3}'`
+#ip=`ip add | grep -w inet | grep -v "127.0.0.1"| awk -F '[ /]+' '{print $3}'`
+netcard_num=`ls /sys/class/net/ | grep -v lo | wc -l`
+
 
 echo "###############请确认已经安装Web服务端##############"
 read -p "请确认是否已经安装OpenCanary_Web服务端(y/n)" choice
@@ -26,18 +28,69 @@ if [ $choice = n ];then
 	echo "######请安装完服务端后再配置agent######"
 	exit 0
 fi
+if [ $netcard_num -lt 2 ];then
+    ip=`ip add | grep -w inet | grep -v "127.0.0.1"| awk -F '[ /]+' '{print $3}'`
+    else
+    #ls /sys/class/net/ | grep -v lo | awk '{print $1}' > /tmp/netcard_ip.txt
+    ip add | grep -w inet | grep -v "127.0.0.1"| awk -F '[ /]+' '{print $3}' > /tmp/netcard_ip.txt
+    ip1=`sed -n '1p' /tmp/netcard_ip.txt`
+    ip2=`sed -n '2p' /tmp/netcard_ip.txt`
+    echo "
+    请选择本机IP?(1-3) 
+    1.$ip1  
+    2.$ip2 
+    3.其他
+    "
+    read -p "请输入指令(1-3):" ip
+    n2=`echo $ip | sed 's/[0-9]//g'`
+        if [ -n "$n2" ];then
+         echo "The input content is not a number."
+         exit
+        fi
+        case $ip in
+        1)
+         echo "本机IP地址:$ip1"
+         ip=$ip1
+        ;;
+        2)
+        echo "本机IP地址:$ip2"
+        ip=$ip2
+        ;;
+        3)
+    	echo "######请手工设置本机IP地址######"
+        read -p "请输入本机IP:" ip
+        ;;
+        *)
+        echo "请输入数字:1-3"  
+        ;;
+        esac
+fi
 
 read -p "请确认本机IP:$ip是否正确?(y/n)" ipd
 if [ $ipd = n ];then
 	echo "######请手工设置本机IP地址######"
-	exit 0
+    read -p "请输入本机IP:" ip
 fi
+
+
 read -p "请输入Web服务端IP:" opencanary_web_server_ip
 read -p "请输入本机节点名称:" opencanary_agent_name
+echo "###################################"
 echo Web服务端IP:$opencanary_web_server_ip
+echo 本机IP地址:$ip
 echo 本机节点名称:$opencanary_agent_name
 
 echo "###########正在安装系统依赖#########"
+a=`cat /etc/redhat-release |awk '{print $4}'`
+if [ "$a" \< "7.0" ];then
+    wget -O /etc/yum.repos.d/CentOS-6.repo http://mirrors.aliyun.com/repo/Centos-6.repo &> /dev/null
+    yum clean all
+    yum makecache
+else
+    wget -O /etc/yum.repos.d/CentOS-7.repo http://mirrors.aliyun.com/repo/Centos-7.repo &> /dev/null
+    yum clean all
+    yum makecache
+fi
 yum -y -q install epel-release
 yum -y -q install libpcap-devel openssl-devel libffi-devel python-devel gcc python-pip gcc-c++ ntpdate git iptables-services
 
