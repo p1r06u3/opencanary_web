@@ -29,7 +29,7 @@ echo "服务端IP地址:$getip"
 read -p "IP是否正确(y/n):" choice
 if [ $choice = n ];then
 	echo "######请手动配置IP######"
-	exit 0
+	read -p "请输入本机IP:" getip
 fi
 
 echo "#########安装依赖包############"
