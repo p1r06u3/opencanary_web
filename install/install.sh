@@ -21,9 +21,6 @@ echo "###########正在初始化环境#########"
 #getip=192.168.1.100
 getip=`ip add | grep -w inet | grep -v "127.0.0.1"| awk -F '[ /]+' '{print $3}'`
 
-set_env() {
-    export LC_ALL="C.UTF-8"
-}
 
 #开启alias功能
 shopt -s expand_aliases
