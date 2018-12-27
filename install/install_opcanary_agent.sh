@@ -21,6 +21,9 @@
 #ip=`ip add | grep -w inet | grep -v "127.0.0.1"| awk -F '[ /]+' '{print $3}'`
 netcard_num=`ls /sys/class/net/ | grep -v lo | wc -l`
 
+set_env() {
+    export LC_ALL="C.UTF-8"
+}
 
 echo "###############请确认已经安装Web服务端##############"
 read -p "请确认是否已经安装OpenCanary_Web服务端(y/n)" choice
