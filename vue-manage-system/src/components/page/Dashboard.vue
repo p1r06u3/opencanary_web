@@ -17,7 +17,7 @@
                             <!-- <div class="user-info-list">上次登录地点：<span>东莞</span></div> -->
                         </el-card>
                         <!-- 饼图 -->
-                        <div style="background:white; height: 300px;">
+                        <div style="background:white; height: 325px;">
                             <v-chart :forceFit="true" :height="height" :data="data" :scale="scale">
                             <v-tooltip :showTitle="false" dataKey="item*percent" />
                             <v-axis />
@@ -71,7 +71,7 @@ export default {
             dvz:'',
             dataz:'',
             scalez:'',
-            heightz: 521,
+            heightz: 544,
 
         // 饼图数据部分
             sourceData:'',
@@ -158,6 +158,8 @@ export default {
 
                     // 饼图
                     this.sourceData = res.data;
+                    // this.sourceData = [{"count": 1, "item": "snmp"}, {"count": 6, "item": "sip"},{"count": 6, "item": "rdp"},{"count": 3, "item": "vnc"},{"count": 6, "item": "tcpbanner"},{"count": 3, "item": "redis"},{"count": 3, "item": "ntp"},{"count": 2, "item": "git"},{"count": 1, "item": "ftp"}, {"count": 0, "item": "http"}, {"count": 0, "item": "ssh"}, {"count": 0, "item": "telnet"}, {"count": 0, "item": "portscan"}, {"count": 0, "item": "mysql"}];
+                    // console.log(this.sourceData);
                     this.scale = [{
                       dataKey: 'percent',
                       min: 0,
@@ -171,6 +173,7 @@ export default {
                       as: 'percent'
                     });
                     this.data = this.dv.rows;
+                    // console.log(this.data);
                 })
             }else{
                 this.$axios.get(this.urlpie)

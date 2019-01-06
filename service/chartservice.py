@@ -15,8 +15,7 @@ sys.setdefaultencoding('utf8')
 
 nums = LogOp()
 
-# 当前的年份
-now = datetime.datetime.now().year
+
 
 # sourceDataz = [
 # { "month": 'Jan', "attack": 0, "white": 0 },
@@ -36,7 +35,8 @@ now = datetime.datetime.now().year
 
 def attack_num(sourceDataz):
     """ 每月攻击数量统计 """
-
+    # 当前的年份
+    now = datetime.datetime.now().year
     attack_res = nums.attack_select_num(now)
     # [(5, 1), (7, 2), (8, 258), (9, 3)]
     if attack_res:
@@ -71,7 +71,8 @@ def attack_num(sourceDataz):
 
 def white_num(sourceDataz):
     """ 每月白名单攻击数量统计 """
-
+    # 当前的年份
+    now = datetime.datetime.now().year
     white_res = nums.white_select_num(now)
     # [(5, 1), (7, 2), (8, 258), (9, 3)]
     if white_res:
@@ -122,8 +123,11 @@ def line_total_num(sdataz):
 
 
 def pie_num(piesoureData):
+    # 当前的年份
+    now = datetime.datetime.now().year
     """ 饼图数据 """
     data_pie = nums.pie_select_num(now)
+    print data_pie
     if data_pie:
         for p in data_pie:
             if p[1] == '2000':
@@ -138,4 +142,20 @@ def pie_num(piesoureData):
                 piesoureData[4]["count"] = int(p[0])
             elif p[1] == '8001':
                 piesoureData[5]["count"] = int(p[0])
+            elif p[1] == '16001':
+                piesoureData[6]["count"] = int(p[0])
+            elif p[1] == '11001':
+                piesoureData[7]["count"] = int(p[0])
+            elif p[1] == '17001':
+                piesoureData[8]["count"] = int(p[0])
+            elif p[1] == '18001' or p[1] == '18002' or p[1] == '18003' or p[1] == '18004' or p[1] == '18005':
+                piesoureData[9]["count"] = piesoureData[9]["count"] + int(p[0])
+            elif p[1] == '12001':
+                piesoureData[10]["count"] = int(p[0])
+            elif p[1] == '14001':
+                piesoureData[11]["count"] = int(p[0])
+            elif p[1] == '13001':
+                piesoureData[12]["count"] = int(p[0])
+            elif p[1] == '15001':
+                piesoureData[13]["count"] = int(p[0])
     return piesoureData

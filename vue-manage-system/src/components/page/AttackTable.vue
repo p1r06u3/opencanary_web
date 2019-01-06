@@ -82,6 +82,63 @@
           <el-form-item v-if="props.row.window" label="WINDOW: ">
             <span>{{ props.row.window }}</span>
           </el-form-item>
+          <el-form-item v-if="props.row.repo" label="REPO: ">
+            <span>{{ props.row.repo }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.ntp_cmd" label="NTP CMD: ">
+            <span>{{ props.row.ntp_cmd }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.args" label="ARGS: ">
+            <span>{{ props.row.args }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.cmd" label="CMD: ">
+            <span>{{ props.row.cmd }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.banner_id" label="BANNER_ID: ">
+            <span>{{ props.row.banner_id }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.function" label="FUNCTION: ">
+            <span>{{ props.row.function }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.vnc_client_response" label="VNC Client Response: ">
+            <span>{{ props.row.vnc_client_response }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.vnc_password" label="VNC Password: ">
+            <span>{{ props.row.vnc_password }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.vnc_server_challenge" label="VNC Server Challenge: ">
+            <span>{{ props.row.vnc_server_challenge }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.inputs" label="INPUT: ">
+            <span>{{ props.row.inputs }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.domain" label="DOMAIN: ">
+            <span>{{ props.row.domain }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.headers_call_id" label="call-id: ">
+            <span>{{ props.row.headers_call_id }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.headers_content_length" label="content-length: ">
+            <span>{{ props.row.headers_content_length }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.headers_cseq" label="cseq: ">
+            <span>{{ props.row.headers_cseq }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.headers_from" label="from: ">
+            <span>{{ props.row.headers_from }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.headers_to" label="to: ">
+            <span>{{ props.row.headers_to }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.headers_via" label="via: ">
+            <span>{{ props.row.headers_via }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.community_string" label="COMMUNITY_STRING: ">
+            <span>{{ props.row.community_string }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.requests" label="REQUESTS: ">
+            <span>{{ props.row.requests }}</span>
+          </el-form-item>
         </el-form>
       </template>
     </el-table-column>

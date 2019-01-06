@@ -10,8 +10,8 @@
 
 from sqlalchemy import Column, String, Integer, Unicode, TIMESTAMP, Boolean
 from sqlalchemy.orm import relationship, backref
-# import sys
-# sys.path.append("..")
+import sys
+sys.path.append("..")
 from dbs.initdb import Base, engine, DBSession
 
 
@@ -27,7 +27,7 @@ class OpencanaryLog(Base):
     password = Column(String(50), nullable=True)
     path = Column(Unicode(50), nullable=True)
     skin = Column(String(50), nullable=True)
-    useragent = Column(Unicode(150), nullable=True)
+    useragent = Column(Unicode(250), nullable=True)
     username = Column(String(50), nullable=True)
     session = Column(String(50), nullable=True)
     localversion = Column(String(50), nullable=True)
@@ -51,6 +51,28 @@ class OpencanaryLog(Base):
     src_host = Column(String(50), nullable=True)
     src_port = Column(Integer, nullable=False)
     white = Column(Integer, nullable=False)
+    ## 扩表
+    repo = Column(String(150), nullable=True)
+    ntp_cmd = Column(String(150), nullable=True)
+    args = Column(String(150), nullable=True)
+    cmd = Column(String(150), nullable=True)
+    banner_id = Column(String(30), nullable=True)
+    data = Column(String(150), nullable=True)
+    function = Column(String(150), nullable=True)
+    vnc_client_response = Column(String(150), nullable=True)
+    vnc_password = Column(String(50), nullable=True)
+    vnc_server_challenge = Column(String(150), nullable=True)
+    inputs = Column(String(150), nullable=True)
+    domain = Column(String(150), nullable=True)
+    headers_call_id = Column(String(150), nullable=True)
+    headers_content_length = Column(String(150), nullable=True)
+    headers_cseq = Column(String(150), nullable=True)
+    headers_from = Column(String(150), nullable=True)
+    headers_to = Column(String(150), nullable=True)
+    headers_via = Column(String(150), nullable=True)
+    community_string = Column(String(50), nullable=True)
+    requests = Column(String(50), nullable=True)
+
 
 def init_db():
     Base.metadata.create_all(engine)
@@ -62,6 +84,8 @@ if __name__=="__main__":
     init_db()
     print('create OpencanaryLog table')
 
+    # drop_db()
+    # print('Drop OpencanaryLog table')
 """
 CREATE TABLE `OpencanaryLog` (
 	id INTEGER NOT NULL AUTO_INCREMENT,
@@ -73,7 +97,7 @@ CREATE TABLE `OpencanaryLog` (
 	password VARCHAR(50),
 	path VARCHAR(50),
 	skin VARCHAR(50),
-	useragent VARCHAR(150),
+	useragent VARCHAR(250),
 	username VARCHAR(50),
 	session VARCHAR(50),
 	localversion VARCHAR(50),
@@ -91,13 +115,35 @@ CREATE TABLE `OpencanaryLog` (
 	tos VARCHAR(20),
 	ttl VARCHAR(20),
 	urgp VARCHAR(5),
-	window VARCHAR(50),
+	`window` VARCHAR(50),
 	logtype VARCHAR(50),
 	node_id VARCHAR(30) NOT NULL,
 	src_host VARCHAR(50),
 	src_port INTEGER NOT NULL,
+	white INTEGER NOT NULL,
+	repo VARCHAR(150),
+	ntp_cmd VARCHAR(150),
+	args VARCHAR(150),
+	cmd VARCHAR(150),
+	banner_id VARCHAR(30),
+	data VARCHAR(150),
+	function VARCHAR(150),
+	vnc_client_response VARCHAR(150),
+	vnc_password VARCHAR(50),
+	vnc_server_challenge VARCHAR(150),
+	inputs VARCHAR(150),
+	domain VARCHAR(150),
+	headers_call_id VARCHAR(150),
+	headers_content_length VARCHAR(150),
+	headers_cseq VARCHAR(150),
+	headers_from VARCHAR(150),
+	headers_to VARCHAR(150),
+	headers_via VARCHAR(150),
+	community_string VARCHAR(50),
+	requests VARCHAR(50),
 	PRIMARY KEY (id),
 	CHECK (honeycred IN (0, 1))
 )
+
 
 """

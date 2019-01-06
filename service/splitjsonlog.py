@@ -41,7 +41,7 @@ def parserlog(jsonlog):
 
         if jsonlog.has_key("local_time"):
             local_time = jsonlog["local_time"]
-            print local_time
+            # print local_time
         else:
             local_time = datetime.datetime.now()
 
@@ -160,6 +160,115 @@ def parserlog(jsonlog):
                 window = jsonlog["logdata"]["WINDOW"]
             else:
                 window = ''
+
+            # 扩表后的新加解析日志请求格式化
+            if jsonlog["logdata"].has_key("REPO"):
+                repo = jsonlog["logdata"]["REPO"]
+            else:
+                repo = ''
+            
+            if jsonlog["logdata"].has_key("NTP CMD"):
+                ntp_cmd = jsonlog["logdata"]["NTP CMD"]
+            else:
+                ntp_cmd = ''
+
+            if jsonlog["logdata"].has_key("ARGS"):
+                args = jsonlog["logdata"]["ARGS"]
+            else:
+                args = ''
+
+            if jsonlog["logdata"].has_key("CMD"):
+                cmd = jsonlog["logdata"]["CMD"]
+            else:
+                cmd = ''
+
+            if jsonlog["logdata"].has_key("BANNER_ID"):
+                banner_id = jsonlog["logdata"]["BANNER_ID"]
+            else:
+                banner_id = ''
+
+            if jsonlog["logdata"].has_key("DATA"):
+                data = jsonlog["logdata"]["DATA"]
+            else:
+                data = ''      
+
+            if jsonlog["logdata"].has_key("FUNCTION"):
+                function = jsonlog["logdata"]["FUNCTION"]
+            else:
+                function = ''           
+
+            if jsonlog["logdata"].has_key("VNC Client Response"):
+                vnc_client_response = jsonlog["logdata"]["VNC Client Response"]
+            else:
+                vnc_client_response = '' 
+
+            if jsonlog["logdata"].has_key("VNC Password"):
+                vnc_password = jsonlog["logdata"]["VNC Password"]
+            else:
+                vnc_password = '' 
+
+            if jsonlog["logdata"].has_key("VNC Server Challenge"):
+                vnc_server_challenge = jsonlog["logdata"]["VNC Server Challenge"]
+            else:
+                vnc_server_challenge = '' 
+
+            if jsonlog["logdata"].has_key("INPUT"):
+                inputs = jsonlog["logdata"]["INPUT"]
+            else:
+                inputs = '' 
+
+            if jsonlog["logdata"].has_key("DOMAIN"):
+                domain = jsonlog["logdata"]["DOMAIN"]
+            else:
+                domain = '' 
+
+            if jsonlog["logdata"].has_key("HEADERS"):
+                if jsonlog["logdata"]["HEADERS"].has_key("call-id"):
+                    headers_call_id = jsonlog["logdata"]["HEADERS"]["call-id"][0]
+                else:
+                    headers_call_id = ''
+
+                if jsonlog["logdata"]["HEADERS"].has_key("content_length"):
+                    headers_content_length = jsonlog["logdata"]["HEADERS"]["content_length"][0]
+                else:
+                    headers_content_length = ''
+
+                if jsonlog["logdata"]["HEADERS"].has_key("cseq"):
+                    headers_cseq = jsonlog["logdata"]["HEADERS"]["cseq"][0]
+                else:
+                    headers_cseq = ''
+
+                if jsonlog["logdata"]["HEADERS"].has_key("from"):
+                    headers_from = jsonlog["logdata"]["HEADERS"]["from"][0]
+                else:
+                    headers_from = ''
+
+                if jsonlog["logdata"]["HEADERS"].has_key("to"):
+                    headers_to = jsonlog["logdata"]["HEADERS"]["to"][0]
+                else:
+                    headers_to = ''
+
+                if jsonlog["logdata"]["HEADERS"].has_key("via"):
+                    headers_via = jsonlog["logdata"]["HEADERS"]["via"][0]
+                else:
+                    headers_via = ''
+            else:
+                headers_call_id = ''
+                headers_content_length = ''
+                headers_cseq = ''
+                headers_from = ''
+                headers_to = ''
+                headers_via = ''
+
+            if jsonlog["logdata"].has_key("COMMUNITY_STRING"):
+                community_string = jsonlog["logdata"]["COMMUNITY_STRING"]
+            else:
+                community_string = '' 
+
+            if jsonlog["logdata"].has_key("REQUESTS"):
+                requests = jsonlog["logdata"]["REQUESTS"][0]
+            else:
+                requests = '' 
         else:
             hostname = ''
             password = ''
@@ -184,6 +293,22 @@ def parserlog(jsonlog):
             ttl = ''
             urgp = ''
             window = ''
+            # 二次开发日志格式增加字段
+            repo = ''
+            ntp_cmd = ''
+            args = ''
+            cmd = ''
+            banner_id = ''
+            data = ''
+            function = ''
+            vnc_client_response = ''
+            vnc_password = ''
+            vnc_server_challenge = ''
+            inputs = ''
+            domain = ''
+
+            community_string = ''
+            requests = ''
 
         if jsonlog.has_key("logtype"):
             logtype = jsonlog["logtype"]
@@ -223,7 +348,12 @@ def parserlog(jsonlog):
                     # 将客户端post过来的数据插入数据库
                     logbool = loginst.insert(dst_host, dst_port, honeycred, local_time, hostname, password, path, skin,\
                         useragent, username, session, localversion, remoteversion, df, idid, inin, lenlen, mac, outout,\
-                        prec, proto, res, syn, tos, ttl, urgp, window, logtype, node_id, src_host, src_port, white)
+                        prec, proto, res, syn, tos, ttl, urgp, window, logtype, node_id, src_host, src_port, white,\
+                        # 扩表新增
+                        repo, ntp_cmd, args, cmd, banner_id, data, function, vnc_client_response, vnc_password, \
+                        vnc_server_challenge, inputs, domain, headers_call_id, headers_content_length,headers_cseq, \
+                        headers_from, headers_to, headers_via, community_string, requests)
+
                     if logbool and white == 2:
                         # 发送邮件功能
                         if switches() == 'on':
@@ -245,6 +375,24 @@ def parserlog(jsonlog):
                                 logtype = '端口扫描行为'
                             elif str(logtype) == '8001':
                                 logtype = 'mysql登录尝试'
+                            # 扩表新增
+                            elif str(logtype) == '9418':
+                                logtype = 'git clone请求'
+                            elif str(logtype) == '11001':
+                                logtype = 'ntp monlist请求'
+                            elif str(logtype) == '17001':
+                                logtype = 'redis命令'
+                            elif (str(logtype) == '18001' or str(logtype) == '18002' or \
+                            str(logtype) == '18003' or str(logtype) == '18004' or str(logtype) == '18005'):
+                                logtype = 'TCP连接请求'
+                            elif str(logtype) == '12001':
+                                logtype = 'vnc连接'
+                            elif str(logtype) == '14001':
+                                logtype = 'windows远程登录'
+                            elif str(logtype) == '13001':
+                                logtype = 'snmp扫描'
+                            elif str(logtype) == '15001':
+                                logtype = 'sip请求'
                             content = "攻击主机：" + src_host + "--" + "被攻击主机：" + dst_host + "--" + "攻击时间：" + local_time
                             # 将发送邮件丢到任务队列
                             sched.add_job(
