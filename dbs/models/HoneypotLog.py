@@ -72,6 +72,9 @@ class OpencanaryLog(Base):
     headers_via = Column(String(150), nullable=True)
     community_string = Column(String(50), nullable=True)
     requests = Column(String(50), nullable=True)
+    urg = Column(String(50), nullable=True)
+    psh = Column(String(50), nullable=True)
+    fin = Column(String(50), nullable=True)
 
 
 def init_db():
@@ -141,6 +144,9 @@ CREATE TABLE `OpencanaryLog` (
 	headers_via VARCHAR(150),
 	community_string VARCHAR(50),
 	requests VARCHAR(50),
+	urg VARCHAR(50),
+	psh VARCHAR(50),
+	fin VARCHAR(50),
 	PRIMARY KEY (id),
 	CHECK (honeycred IN (0, 1))
 )

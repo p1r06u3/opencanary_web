@@ -269,6 +269,22 @@ def parserlog(jsonlog):
                 requests = jsonlog["logdata"]["REQUESTS"][0]
             else:
                 requests = '' 
+
+            if jsonlog["logdata"].has_key("URG"):
+                urg = jsonlog["logdata"]["URG"]
+            else:
+                urg = ''
+
+            if jsonlog["logdata"].has_key("PSH"):
+                psh = jsonlog["logdata"]["PSH"]
+            else:
+                psh = '' 
+
+            if jsonlog["logdata"].has_key("FIN"):
+                fin = jsonlog["logdata"]["FIN"]
+            else:
+                fin = '' 
+
         else:
             hostname = ''
             password = ''
@@ -309,6 +325,9 @@ def parserlog(jsonlog):
 
             community_string = ''
             requests = ''
+            urg = ''
+            psh = ''
+            fin = ''
 
         if jsonlog.has_key("logtype"):
             logtype = jsonlog["logtype"]
@@ -352,7 +371,7 @@ def parserlog(jsonlog):
                         # 扩表新增
                         repo, ntp_cmd, args, cmd, banner_id, data, function, vnc_client_response, vnc_password, \
                         vnc_server_challenge, inputs, domain, headers_call_id, headers_content_length,headers_cseq, \
-                        headers_from, headers_to, headers_via, community_string, requests)
+                        headers_from, headers_to, headers_via, community_string, requests, urg, psh, fin)
 
                     if logbool and white == 2:
                         # 发送邮件功能
@@ -372,7 +391,7 @@ def parserlog(jsonlog):
                             elif str(logtype) == '6001':
                                 logtype = 'telnet登录尝试'
                             elif str(logtype) == '5001':
-                                logtype = '端口扫描行为'
+                                logtype = '端口(SYN)扫描'
                             elif str(logtype) == '8001':
                                 logtype = 'mysql登录尝试'
                             # 扩表新增
@@ -393,6 +412,14 @@ def parserlog(jsonlog):
                                 logtype = 'snmp扫描'
                             elif str(logtype) == '15001':
                                 logtype = 'sip请求'
+                            elif str(logtype) == '5002':
+                                logtype = 'NMAP OS扫描'
+                            elif str(logtype) == '5003':
+                                logtype = 'NMAP NULL扫描'
+                            elif str(logtype) == '5004':
+                                logtype = 'NMAP XMAS扫描'
+                            elif str(logtype) == '5005':
+                                logtype = 'NMAP FIN扫描'
                             content = "攻击主机：" + src_host + "--" + "被攻击主机：" + dst_host + "--" + "攻击时间：" + local_time
                             # 将发送邮件丢到任务队列
                             sched.add_job(

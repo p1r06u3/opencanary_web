@@ -139,6 +139,15 @@
           <el-form-item v-if="props.row.requests" label="REQUESTS: ">
             <span>{{ props.row.requests }}</span>
           </el-form-item>
+          <el-form-item v-if="props.row.urg" label="URG: ">
+            <span>{{ props.row.urg }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.psh" label="PSH: ">
+            <span>{{ props.row.psh }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.fin" label="FIN: ">
+            <span>{{ props.row.fin }}</span>
+          </el-form-item>
         </el-form>
       </template>
     </el-table-column>

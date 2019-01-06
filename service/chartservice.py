@@ -138,7 +138,7 @@ def pie_num(piesoureData):
                 piesoureData[2]["count"] = piesoureData[2]["count"] + int(p[0])
             elif p[1] == '6001':
                 piesoureData[3]["count"] = int(p[0])
-            elif p[1] == '5001':
+            elif p[1] == '5001' or p[1] == '5002' or p[1] == '5003' or p[1] == '5004' or p[1] == '5005':
                 piesoureData[4]["count"] = int(p[0])
             elif p[1] == '8001':
                 piesoureData[5]["count"] = int(p[0])
