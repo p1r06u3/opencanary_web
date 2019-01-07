@@ -10,11 +10,11 @@
 打开终端，在 root 用户 Shell 下，输入以下命令：
 
 ```
-   $ curl -O https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install.sh
+   $ curl -O https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install.sh
 ```
 或者输入输入以下命令：
 ```
-   $ wget --no-check-certificate https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install.sh
+   $ wget --no-check-certificate https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install.sh
 ```
 下载后输入
 ```
@@ -62,11 +62,11 @@ systemctl status supervisord.service
 另外开一台服务器作为Agent.
 
 ```
-   $ curl -O https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install_opcanary_agent.sh
+   $ curl -O https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opcanary_agent.sh
 ```
 或者输入输入以下命令：
 ```
-   $ wget --no-check-certificate https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install_opcanary_agent.sh
+   $ wget --no-check-certificate https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opcanary_agent.sh
 ```
 下载后输入
 ```
