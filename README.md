@@ -1,10 +1,10 @@
-## web服务端介绍
+## 一、web服务端介绍
 tornado+supervisor+nginx+mysql
 
-## 自动化安装
+## 二、自动化安装
 * [Linux 一条命令安装](./docs/install/Linux_AutoInstall.md)
 
-## 手工安装
+## 三、手工安装
 
 Linux服务器我选择Centos7.1，选7的原因是系统自带的python环境为2.7.x，不用麻烦着去折腾python 2.6和其他一些依赖问题。
 
@@ -314,10 +314,11 @@ SELINUX=disabled
 
     访问主机ip的80端口，查看是否可以正常访问、正常登陆。
 
-## 客户端部署方法
+### 客户端部署方法
+当蜜罐管理后台部署完成之后，可以重新启用一台虚拟主机部署客户端。
 详情见：https://github.com/p1r06u3/opencanary
 
-## web后台的一些使用方法
+## 四、web后台的一些使用方法
 
 ### 配置告警邮件
 
@@ -377,8 +378,23 @@ tailf /usr/local/src/opencanary_web/logs/app.log
 5. ssh远程版本发送；
 6. ssh登录尝试；
 7. telnet登录尝试；
-8. mysql登录尝试；
-9. 全端口扫描
+8. 全端口(SYN)扫描识别;
+9. NMAP OS扫描识别；
+10. NMAP NULL扫描识别；
+11. NMAP XMAS扫描识别；
+12. NMAP FIN扫描识别；
+13. mysql登录尝试；
+14. git clone请求；
+15. ntp monlist请求（默认关闭）；
+16. redis命令请求；
+17. TCP连接请求；
+18. vnc连接请求；
+19. windows远程登录；
+20. snmp扫描；
+21. sip请求；
+22. mssql登录sql账户认证；
+23. mssql登录win身份认证；
+24. http代理登录尝试；
 
 ### 更新方法
 
