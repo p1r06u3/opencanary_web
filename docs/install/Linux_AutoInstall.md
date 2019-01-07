@@ -4,7 +4,7 @@
 * CentOS 7
 > 由于 Linux 发行版较多，无法一一适配，如果不在以上列表中，请自行手动安装
 
-## 安装
+## 安装蜜罐管理后台-Web
 
 > 在安装之前，请自行更换`yum`源
 打开终端，在 root 用户 Shell 下，输入以下命令：
@@ -58,7 +58,7 @@ systemctl status supervisord.service
 | 发件人邮件配置 | /usr/local/src/opencanary_web/application.py | - |
 | 收件人邮件配置(以及告警开关)| /usr/local/src/opencanary_web/util/conf/email.ini | - |
 
-### 安装服务端Agent
+### 安装蜜罐客户端-Agent
 另外开一台服务器作为Agent.
 
 ```

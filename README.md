@@ -398,7 +398,30 @@ tailf /usr/local/src/opencanary_web/logs/app.log
     ```
     pip install -r requirements.txt
     ```
-4. 启动实例
+    
+4. 删除旧数据库
+    ```
+    drop database honeypot;
+    ```
+
+5. 创建还原新数据库
+    ```
+    create database honeypot;
+    use honeypot;
+    source honeypot.sql;
+    ```
+
+6. 更改后台管理员密码
+    ```
+    UPDATE User SET password='900150983cd24fb0d6963f7d28e17f72' WHERE id=1;
+    ```
+
+7. 如需配置白名单ip
+    ```
+    insert into Whiteip values('192.168.1.3'),('192.168.1.8'),('192.168.1.9');
+    ```
+    
+8. 启动实例
     ```
     supervisorctl start tornadoes:
     ```
