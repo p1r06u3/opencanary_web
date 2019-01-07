@@ -411,7 +411,7 @@ tailf /usr/local/src/opencanary_web/logs/app.log
     source honeypot.sql;
     ```
 
-6. 更改后台管理员密码
+6. 更改管理后台管理员密码
     ```
     UPDATE User SET password='900150983cd24fb0d6963f7d28e17f72' WHERE id=1;
     ```
