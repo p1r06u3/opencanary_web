@@ -406,6 +406,7 @@ tailf /usr/local/src/opencanary_web/logs/app.log
     cd opencanary_web/
     ```
 2. 修改配置文件
+    
     重要的是修改数据库连接密码，修改正确：
 
     vi dbs/initdb.py
