@@ -58,8 +58,9 @@ class ChartHandler(BaseHandler):
                 { "item": 'vnc', "count": 0 },
                 { "item": 'rdp', "count": 0 },
                 { "item": 'snmp', "count": 0 },
-                { "item": 'sip', "count": 0 }
-
+                { "item": 'sip', "count": 0 },
+                { "item": 'mssql', "count": 0 },
+                { "item": 'httpproxy', "count": 0 }
             ]
             pie_res = pie_num(sourceData)
             self.write(json.dumps(pie_res))

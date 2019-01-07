@@ -30,7 +30,7 @@ def listpage(param):
             "data":i.data, "function":i.function, "vnc_client_response":i.vnc_client_response, "vnc_password":i.vnc_password, "vnc_server_challenge":i.vnc_server_challenge,\
             "inputs":i.inputs, "domain":i.domain, "headers_call_id":i.headers_call_id, "headers_content_length":i.headers_content_length, "headers_cseq":i.headers_cseq,\
             "headers_from":i.headers_from, "headers_to":i.headers_to, "headers_via":i.headers_via, "community_string":i.community_string, "requests":i.requests,\
-            "urg":i.urg, "psh":i.psh, "fin":i.fin}
+            "urg":i.urg, "psh":i.psh, "fin":i.fin, "appname":i.appname, "cltintname":i.cltintname, "database":i.database, "language":i.language, "servername":i.servername, "domainname":i.domainname}
             page_list.append(dict_param)
 
         for i in page_list:
@@ -77,6 +77,12 @@ def listpage(param):
                 i["logtype"] = 'nmap xmas扫描'
             elif i["logtype"] == '5005':
                 i["logtype"] = 'nmap fin扫描'
+            elif i["logtype"] == '9001':
+                i["logtype"] = 'mssql登录sql账户认证'
+            elif i["logtype"] == '9002':
+                i["logtype"] = 'mssql登录win身份认证'
+            elif i["logtype"] == '7001':
+                i["logtype"] = 'http代理登录尝试'
 
             second_dict_param = {"id":i["id"],"dst_host":i["dst_host"],"dst_port":i["dst_port"],"honeycred":i["honeycred"],"local_time":i["local_time"],"hostname":i["hostname"],\
             "password":i["password"],"path":i["path"],"skin":i["skin"],"useragent":i["useragent"],"username":i["username"],"session":i["session"],"localversion":i["localversion"],\
@@ -86,7 +92,8 @@ def listpage(param):
             "data":i["data"], "function":i["function"], "vnc_client_response":i["vnc_client_response"], "vnc_password":i["vnc_password"], "vnc_server_challenge":i["vnc_server_challenge"],\
             "inputs":i["inputs"], "domain":i["domain"], "headers_call_id":i["headers_call_id"], "headers_content_length":i["headers_content_length"], "headers_cseq":i["headers_cseq"],\
             "headers_from":i["headers_from"], "headers_to":i["headers_to"], "headers_via":i["headers_via"], "community_string":i["community_string"], "requests":i["requests"],\
-            "urg":i["urg"], "psh":i["psh"], "fin":i["fin"]}
+            "urg":i["urg"], "psh":i["psh"], "fin":i["fin"], "appname":i["appname"], "cltintname":i["cltintname"], "database":i["database"], "language":i["language"], \
+            "servername":i["servername"], "domainname":i["domainname"]}
 
             second_page_list.append(second_dict_param)
         page_res = {"list": second_page_list}
@@ -107,7 +114,7 @@ def listpage(param):
             "data":i.data, "function":i.function, "vnc_client_response":i.vnc_client_response, "vnc_password":i.vnc_password, "vnc_server_challenge":i.vnc_server_challenge,\
             "inputs":i.inputs, "domain":i.domain, "headers_call_id":i.headers_call_id, "headers_content_length":i.headers_content_length, "headers_cseq":i.headers_cseq,\
             "headers_from":i.headers_from, "headers_to":i.headers_to, "headers_via":i.headers_via, "community_string":i.community_string, "requests":i.requests,\
-            "urg":i.urg, "psh":i.psh, "fin":i.fin}
+            "urg":i.urg, "psh":i.psh, "fin":i.fin, "appname":i.appname, "cltintname":i.cltintname, "database":i.database, "language":i.language, "servername":i.servername, "domainname":i.domainname}
                 page_list.append(dict_param)
 
             for i in page_list:
@@ -154,7 +161,13 @@ def listpage(param):
                     i["logtype"] = 'nmap xmas扫描'
                 elif i["logtype"] == '5005':
                     i["logtype"] = 'nmap fin扫描'
-                
+                elif i["logtype"] == '9001':
+                    i["logtype"] = 'mssql登录sql账户认证'
+                elif i["logtype"] == '9002':
+                    i["logtype"] = 'mssql登录win身份认证'
+                elif i["logtype"] == '7001':
+                    i["logtype"] = 'http代理登录尝试'
+                    
                 second_dict_param = {"id":i["id"],"dst_host":i["dst_host"],"dst_port":i["dst_port"],"honeycred":i["honeycred"],"local_time":i["local_time"],"hostname":i["hostname"],\
             "password":i["password"],"path":i["path"],"skin":i["skin"],"useragent":i["useragent"],"username":i["username"],"session":i["session"],"localversion":i["localversion"],\
             "remoteversion":i["remoteversion"],"df":i["df"],"idid":i["idid"],"inin":i["inin"],"lenlen":i["lenlen"],"mac":i["mac"],"outout":i["outout"],"prec":i["prec"],\
@@ -163,7 +176,8 @@ def listpage(param):
             "data":i["data"], "function":i["function"], "vnc_client_response":i["vnc_client_response"], "vnc_password":i["vnc_password"], "vnc_server_challenge":i["vnc_server_challenge"],\
             "inputs":i["inputs"], "domain":i["domain"], "headers_call_id":i["headers_call_id"], "headers_content_length":i["headers_content_length"], "headers_cseq":i["headers_cseq"],\
             "headers_from":i["headers_from"], "headers_to":i["headers_to"], "headers_via":i["headers_via"], "community_string":i["community_string"], "requests":i["requests"],\
-            "urg":i["urg"], "psh":i["psh"], "fin":i["fin"]}
+            "urg":i["urg"], "psh":i["psh"], "fin":i["fin"], "appname":i["appname"], "cltintname":i["cltintname"], "database":i["database"], "language":i["language"], \
+            "servername":i["servername"], "domainname":i["domainname"]}
 
                 second_page_list.append(second_dict_param)
             page_res = {"list": second_page_list}

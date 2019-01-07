@@ -148,6 +148,24 @@
           <el-form-item v-if="props.row.fin" label="FIN: ">
             <span>{{ props.row.fin }}</span>
           </el-form-item>
+          <el-form-item v-if="props.row.appname" label="AppName: ">
+            <span>{{ props.row.appname }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.cltintname" label="CltIntName: ">
+            <span>{{ props.row.cltintname }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.database" label="Database: ">
+            <span>{{ props.row.database }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.language" label="Language: ">
+            <span>{{ props.row.language }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.servername" label="ServerName: ">
+            <span>{{ props.row.servername }}</span>
+          </el-form-item>
+          <el-form-item v-if="props.row.domainname" label="DOMAINNAME: ">
+            <span>{{ props.row.domainname }}</span>
+          </el-form-item>
         </el-form>
       </template>
     </el-table-column>

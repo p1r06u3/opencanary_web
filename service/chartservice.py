@@ -139,7 +139,7 @@ def pie_num(piesoureData):
             elif p[1] == '6001':
                 piesoureData[3]["count"] = int(p[0])
             elif p[1] == '5001' or p[1] == '5002' or p[1] == '5003' or p[1] == '5004' or p[1] == '5005':
-                piesoureData[4]["count"] = int(p[0])
+                piesoureData[4]["count"] = piesoureData[4]["count"] + int(p[0])
             elif p[1] == '8001':
                 piesoureData[5]["count"] = int(p[0])
             elif p[1] == '16001':
@@ -158,4 +158,8 @@ def pie_num(piesoureData):
                 piesoureData[12]["count"] = int(p[0])
             elif p[1] == '15001':
                 piesoureData[13]["count"] = int(p[0])
+            elif p[1] == '9001' or p[1] == '9002':
+                piesoureData[14]["count"] = piesoureData[14]["count"] + int(p[0])
+            elif p[1] == '7001':
+                piesoureData[15]["count"] = int(p[0])
     return piesoureData

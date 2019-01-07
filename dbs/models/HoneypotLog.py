@@ -75,6 +75,12 @@ class OpencanaryLog(Base):
     urg = Column(String(50), nullable=True)
     psh = Column(String(50), nullable=True)
     fin = Column(String(50), nullable=True)
+    appname = Column(String(150), nullable=True)
+    cltintname = Column(String(150), nullable=True)
+    database = Column(String(50), nullable=True)
+    language = Column(String(50), nullable=True)
+    servername = Column(String(50), nullable=True)
+    domainname = Column(String(50), nullable=True)
 
 
 def init_db():
@@ -147,9 +153,13 @@ CREATE TABLE `OpencanaryLog` (
 	urg VARCHAR(50),
 	psh VARCHAR(50),
 	fin VARCHAR(50),
+	appname VARCHAR(150),
+	cltintname VARCHAR(150),
+	`database` VARCHAR(50),
+	language VARCHAR(50),
+	servername VARCHAR(50),
+	domainname VARCHAR(50),
 	PRIMARY KEY (id),
 	CHECK (honeycred IN (0, 1))
 )
-
-
 """

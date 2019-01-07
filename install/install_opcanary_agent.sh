@@ -9,9 +9,9 @@
 #deploy single opencanary_web_server
 #
 # This script is meant for quick & easy install via:
-#   'curl -O https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install_opcanary_agent.sh'
+#   'curl -O https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opcanary_agent.sh'
 #    or
-#   'wget --no-check-certificate https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install_opcanary_agent.sh'
+#   'wget --no-check-certificate https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opcanary_agent.sh'
 #
 #    chmod o+x install_opcanary_agent.sh
 #    ./install_opcanary_agent.sh
@@ -102,15 +102,15 @@ opencanary_folder="/usr/local/src/opencanary"
 if [ ! -d $opencanary_folder ]; then
     git clone https://github.com/p1r06u3/opencanary.git /usr/local/src/opencanary
 	configure_agent_name=`sed -n "2p"  /usr/local/src/opencanary/opencanary/data/settings.json | awk -F '["]+' '{print $4}'`
-    configure_server_ip=`sed -n "69p"  /usr/local/src/opencanary/opencanary/data/settings.json | awk -F '["]+' '{print $4}'`
-	configure_ip=`sed -n "70p"  /usr/local/src/opencanary/opencanary/data/settings.json | awk -F '["]+' '{print $4}'`
+    configure_server_ip=`sed -n "3p"  /usr/local/src/opencanary/opencanary/data/settings.json | awk -F '["]+' '{print $4}'`
+	configure_ip=`sed -n "4p"  /usr/local/src/opencanary/opencanary/data/settings.json | awk -F '["]+' '{print $4}'`
 	sed -i "s/$configure_agent_name/$opencanary_agent_name/g" /usr/local/src/opencanary/opencanary/data/settings.json
     sed -i "s/$configure_server_ip/$opencanary_web_server_ip/g" /usr/local/src/opencanary/opencanary/data/settings.json
 	sed -i "s/$configure_ip/$ip/g" /usr/local/src/opencanary/opencanary/data/settings.json
     else
 	configure_agent_name=`sed -n "2p"  /usr/local/src/opencanary/opencanary/data/settings.json | awk -F '["]+' '{print $4}'`
-    configure_server_ip=`sed -n "69p"  /usr/local/src/opencanary/opencanary/data/settings.json | awk -F '["]+' '{print $4}'`
-	configure_ip=`sed -n "70p"  /usr/local/src/opencanary/opencanary/data/settings.json | awk -F '["]+' '{print $4}'`
+    configure_server_ip=`sed -n "3p"  /usr/local/src/opencanary/opencanary/data/settings.json | awk -F '["]+' '{print $4}'`
+	configure_ip=`sed -n "4p"  /usr/local/src/opencanary/opencanary/data/settings.json | awk -F '["]+' '{print $4}'`
 	sed -i "s/$configure_agent_name/$opencanary_agent_name/g" /usr/local/src/opencanary/opencanary/data/settings.json
     sed -i "s/$configure_server_ip/$opencanary_web_server_ip/g" /usr/local/src/opencanary/opencanary/data/settings.json
 	sed -i "s/$configure_ip/$ip/g" /usr/local/src/opencanary/opencanary/data/settings.json
@@ -120,7 +120,7 @@ echo "###########正在安装opencanary_agent#########"
     cd /usr/local/src/opencanary/
     python setup.py sdist
     cd /usr/local/src/opencanary/dist
-    pip install opencanary-0.3.2.tar.gz
+    pip install opencanary-0.4.tar.gz
 
 
 a=`cat /etc/redhat-release |awk '{print $4}'`

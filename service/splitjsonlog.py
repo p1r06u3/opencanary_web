@@ -8,7 +8,6 @@
 """
 
 from dbs.dal.LogOperate import LogOp
-import datetime
 from service.emailservice import send_mail, switches
 from service.whiteipservice import whiteips
 from service.whiteportservice import whiteports
@@ -43,16 +42,20 @@ def parserlog(jsonlog):
             local_time = jsonlog["local_time"]
             # print local_time
         else:
-            local_time = datetime.datetime.now()
+            local_time = datetime.now()
 
         if jsonlog.has_key("logdata"):
             if jsonlog["logdata"].has_key("HOSTNAME"):
                 hostname = jsonlog["logdata"]["HOSTNAME"]
+            elif jsonlog["logdata"].has_key("HostName"):
+                hostname = jsonlog["logdata"]["HostName"]
             else:
                 hostname = ''
 
             if jsonlog["logdata"].has_key("PASSWORD"):
                 password = jsonlog["logdata"]["PASSWORD"]
+            elif jsonlog["logdata"].has_key("Password"):
+                password = jsonlog["logdata"]["Password"]
             else:
                 password = ''
 
@@ -73,6 +76,8 @@ def parserlog(jsonlog):
 
             if jsonlog["logdata"].has_key("USERNAME"):
                 username = jsonlog["logdata"]["USERNAME"]
+            elif jsonlog["logdata"].has_key("UserName"):
+                username = jsonlog["logdata"]["UserName"]
             else:
                 username = ''
 
@@ -283,7 +288,37 @@ def parserlog(jsonlog):
             if jsonlog["logdata"].has_key("FIN"):
                 fin = jsonlog["logdata"]["FIN"]
             else:
-                fin = '' 
+                fin = ''
+
+            if jsonlog["logdata"].has_key("AppName"):
+                appname = jsonlog["logdata"]["AppName"]
+            else:
+                appname = ''
+
+            if jsonlog["logdata"].has_key("CltIntName"):
+                cltintname = jsonlog["logdata"]["CltIntName"]
+            else:
+                cltintname = ''
+
+            if jsonlog["logdata"].has_key("Database"):
+                database = jsonlog["logdata"]["Database"]
+            else:
+                database = ''
+
+            if jsonlog["logdata"].has_key("Language"):
+                language = jsonlog["logdata"]["Language"]
+            else:
+                language = ''
+
+            if jsonlog["logdata"].has_key("ServerName"):
+                servername = jsonlog["logdata"]["ServerName"]
+            else:
+                servername = ''
+
+            if jsonlog["logdata"].has_key("DOMAINNAME"):
+                domainname = jsonlog["logdata"]["DOMAINNAME"]
+            else:
+                domainname = ''
 
         else:
             hostname = ''
@@ -329,6 +364,13 @@ def parserlog(jsonlog):
             psh = ''
             fin = ''
 
+            appname = ''
+            cltintname = ''
+            database = ''
+            language = ''
+            servername = ''
+            domainname = ''
+
         if jsonlog.has_key("logtype"):
             logtype = jsonlog["logtype"]
         else:
@@ -371,7 +413,8 @@ def parserlog(jsonlog):
                         # 扩表新增
                         repo, ntp_cmd, args, cmd, banner_id, data, function, vnc_client_response, vnc_password, \
                         vnc_server_challenge, inputs, domain, headers_call_id, headers_content_length,headers_cseq, \
-                        headers_from, headers_to, headers_via, community_string, requests, urg, psh, fin)
+                        headers_from, headers_to, headers_via, community_string, requests, urg, psh, fin, \
+                        appname, cltintname, database, language, servername, domainname)
 
                     if logbool and white == 2:
                         # 发送邮件功能
@@ -420,6 +463,12 @@ def parserlog(jsonlog):
                                 logtype = 'NMAP XMAS扫描'
                             elif str(logtype) == '5005':
                                 logtype = 'NMAP FIN扫描'
+                            elif str(logtype) == '9001':
+                                logtype = 'mssql登录sql账户认证'
+                            elif str(logtype) == '9002':
+                                logtype = 'mssql登录win身份认证'
+                            elif str(logtype) == '7001':
+                                logtype = 'http代理登录尝试'
                             content = "攻击主机：" + src_host + "--" + "被攻击主机：" + dst_host + "--" + "攻击时间：" + local_time
                             # 将发送邮件丢到任务队列
                             sched.add_job(

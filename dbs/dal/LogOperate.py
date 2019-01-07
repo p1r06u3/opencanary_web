@@ -25,7 +25,8 @@ class LogOp:
              prec, proto, res, syn, tos, ttl, urgp, window, logtype, node_id, src_host, src_port, white, \
              repo, ntp_cmd, args, cmd, banner_id, data, function, vnc_client_response, vnc_password, \
              vnc_server_challenge, inputs, domain, headers_call_id, headers_content_length,headers_cseq, \
-             headers_from, headers_to, headers_via, community_string, requests, urg, psh, fin):
+             headers_from, headers_to, headers_via, community_string, requests, urg, psh, fin, \
+             appname, cltintname, database, language, servername, domainname):
 
         loginsert = OpencanaryLog(dst_host=dst_host, dst_port=dst_port, honeycred=honeycred, local_time=local_time,\
             hostname=hostname, password=password, path=path, skin=skin, useragent=useragent, username=username,\
@@ -37,7 +38,8 @@ class LogOp:
             vnc_client_response=vnc_client_response, vnc_password=vnc_password, vnc_server_challenge=vnc_server_challenge, \
             inputs=inputs, domain=domain, headers_call_id=headers_call_id, headers_content_length=headers_content_length, \
             headers_cseq=headers_cseq, headers_from=headers_from, headers_to=headers_to, headers_via=headers_via, \
-            community_string=community_string, requests=requests, urg=urg, psh=psh, fin=fin)
+            community_string=community_string, requests=requests, urg=urg, psh=psh, fin=fin, \
+            appname=appname, cltintname=cltintname, database=database, language=language, servername=servername, domainname=domainname)
 
         if loginsert:
             try:
