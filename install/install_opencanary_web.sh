@@ -9,12 +9,12 @@
 #deploy single opencanary_web_server
 #
 # This script is meant for quick & easy install via:
-#   'curl -O https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install.sh'
+#   'curl -O https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opencanary_web.sh'
 #    or
-#   'wget --no-check-certificate https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install.sh'
+#   'wget --no-check-certificate https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opencanary_web.sh'
 #
-#    chmod o+x install.sh
-#    ./install.sh
+#    chmod o+x install_opencanary_web.sh
+#    bash install_opencanary_web.sh
 #
 
 
@@ -77,7 +77,7 @@ fi
 
 opencanary_web_folder="/usr/local/src/opencanary_web"
 if [ ! -d $opencanary_web_folder ]; then
-    echo "############正在同步最新版本opencary_web,并且安装第三方依赖包##########"
+    echo "############正在同步最新版本opencanary_web,并且安装第三方依赖包##########"
     git clone https://github.com/p1r06u3/opencanary_web.git /usr/local/src/opencanary_web
     cd /usr/local/src/opencanary_web/
     pip install -r requirements.txt

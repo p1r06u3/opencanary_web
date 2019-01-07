@@ -1,8 +1,8 @@
-# Linux 自动安装
+# Linux下蜜罐管理后台和蜜罐agent自动安装方法
 
 ## 适配 64 位操作系统列表：
 * CentOS 7
-> 由于 Linux 发行版较多，无法一一适配，如果不在以上列表中，请自行手动安装
+> 由于 Linux 发行版较多，暂时无法一一适配，如果不在以上列表中，请自行手动安装。
 
 ## 安装蜜罐管理后台-Web
 
@@ -10,24 +10,23 @@
 打开终端，在 root 用户 Shell 下，输入以下命令：
 
 ```
-   $ curl -O https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install.sh
+curl -O https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opencanary_web.sh
 ```
 或者输入输入以下命令：
 ```
-   $ wget --no-check-certificate https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install.sh
+wget --no-check-certificate https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opencanary_web.sh
 ```
 下载后输入
 ```
-   $ chmod o+x install.sh
-   $ ./install.sh
+bash install_opencanary_web.sh
 ```
-## 安装完毕
+### 安装完毕
 
 本脚本安装完毕后会以系统服务形式启动supervisord/Nginx
 ### 启动服务
 
 ```
-$ systemctl start supervisord.service
+systemctl start supervisord.service
 ```
 
 ### 停止服务
@@ -41,12 +40,14 @@ systemctl stop supervisord.service
 ```
 systemctl restart supervisord.service
 ```
+
 ### 查看服务运行状态
 
 ```
 systemctl status supervisord.service
 ```
-### 安装后信息
+
+### 安装Web后信息
 访问URL:http://$ip<br />
 
 |类型 | 用户名 | 密码 |
@@ -58,20 +59,19 @@ systemctl status supervisord.service
 | 发件人邮件配置 | /usr/local/src/opencanary_web/application.py | - |
 | 收件人邮件配置(以及告警开关)| /usr/local/src/opencanary_web/util/conf/email.ini | - |
 
-### 安装蜜罐客户端-Agent
-另外开一台服务器作为Agent.
+## 安装蜜罐客户端-Agent
+另外开一台虚拟主机(VPS)安装蜜罐客户端.
 
 ```
-   $ curl -O https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opcanary_agent.sh
+curl -O https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opencanary_agent.sh
 ```
 或者输入输入以下命令：
 ```
-   $ wget --no-check-certificate https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opcanary_agent.sh
+wget --no-check-certificate https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opencanary_agent.sh
 ```
 下载后输入
 ```
-   $ chmod o+x install_opcanary_agent.sh
-   $ ./install_opcanary_agent.sh
+bash install_opencanary_agent.sh
 ```
 输入上面Web服务端的IP.等待脚本执行完毕,即可.
 

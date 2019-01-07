@@ -14,7 +14,7 @@
 #   'wget --no-check-certificate https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opcanary_agent.sh'
 #
 #    chmod o+x install_opcanary_agent.sh
-#    ./install_opcanary_agent.sh
+#    bash install_opcanary_agent.sh
 #
 #
 #ip=192.168.1.100
