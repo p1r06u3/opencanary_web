@@ -1,9 +1,10 @@
 ## web服务端介绍
 tornado+supervisor+nginx+mysql
 
+## 自动化安装
 * [Linux 一条命令安装](./docs/install/Linux_AutoInstall.md)
 
-## 部署步骤
+## 手工安装
 
 Linux服务器我选择Centos7.1，选7的原因是系统自带的python环境为2.7.x，不用麻烦着去折腾python 2.6和其他一些依赖问题。
 
