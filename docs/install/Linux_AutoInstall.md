@@ -23,29 +23,37 @@ bash install_opencanary_web.sh
 ```
 ### 安装完毕
 
-本脚本安装完毕后会以系统服务形式启动supervisord/Nginx
+本脚本安装完毕后会以系统服务形式启动Supervisord/Nginx/Mysql
 ### 启动服务
 
 ```
 systemctl start supervisord.service
+systemctl start nginx.service
+systemctl start mariadb.service
 ```
 
 ### 停止服务
 
 ```
 systemctl stop supervisord.service
+systemctl stop nginx.service
+systemctl stop mariadb.service
 ```
 
 ### 重启服务
 
 ```
 systemctl restart supervisord.service
+systemctl restart nginx.service
+systemctl restart mariadb.service
 ```
 
 ### 查看服务运行状态
 
 ```
 systemctl status supervisord.service
+systemctl status nginx.service
+systemctl status mariadb.service
 ```
 
 ### 安装Web后信息

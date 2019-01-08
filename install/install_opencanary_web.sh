@@ -201,6 +201,10 @@ systemctl restart supervisord.service
 
 echo "##############正在配置Nginx###############"
 mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
+ng_default=/etc/nginx/conf.d/default.conf
+if [ -s $ng_default ]; then
+    mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak
+fi
 cat > /etc/nginx/nginx.conf<<EOF
 user nginx;
 worker_processes 5;
@@ -212,9 +216,9 @@ events {
 http {
     include    /etc/nginx/mime.types;
     default_type application/octet-stream;
-    log_format main '$remote_addr - $remote_user [$time_local] "$request"'
-            '$status $body_bytes_sent "$http_referer" '
-            '"$http_user_agent" "$http_x_forwarded_for"';
+    log_format main '\$remote_addr - \$remote_user [\$time_local] "\$request"'
+            '\$status \$body_bytes_sent "\$http_referer" '
+            '"\$http_user_agent" "\$http_x_forwarded_for"';
     access_log /var/log/nginx/access.log main;
     sendfile    on;
     #tcp_nopush   on;

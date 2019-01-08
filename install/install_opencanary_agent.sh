@@ -9,9 +9,9 @@
 #deploy single opencanary_web_server
 #
 # This script is meant for quick & easy install via:
-#   'curl -O https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opcanary_agent.sh'
+#   'curl -O https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opencanary_agent.sh'
 #    or
-#   'wget --no-check-certificate https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opcanary_agent.sh'
+#   'wget --no-check-certificate https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opencanary_agent.sh'
 #
 #    chmod o+x install_opcanary_agent.sh
 #    bash install_opcanary_agent.sh
