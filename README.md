@@ -63,7 +63,7 @@ Tornado+Mysql+APScheduler+Nginx+Supervisor
 16. redis命令请求；
 17. TCP连接请求；
 18. vnc连接请求；
-19. windows远程登录；
+19. rdp协议windows远程登录；
 20. snmp扫描；
 21. sip请求；
 22. mssql登录sql账户认证；
