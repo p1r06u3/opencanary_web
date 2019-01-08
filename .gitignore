@@ -1,0 +1,4 @@
+*.log
+*.pyc
+*.DS_Store
+dbs/initdb.py
