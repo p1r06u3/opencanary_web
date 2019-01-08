@@ -445,4 +445,4 @@ tailf /usr/local/src/opencanary_web/logs/app.log
 
 
 ## 致谢
-@Pa5sw0rd @Weiho @冷白开 @kafka
+@Pa5sw0rd @Weiho @冷白开 @kafka @Cotton
