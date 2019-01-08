@@ -1,5 +1,5 @@
 ## 一、web服务端介绍
-Tornado++Mysql+APScheduler+Nginx+Supervisor
+Tornado+Mysql+APScheduler+Nginx+Supervisor
 
 ### 1. 架构图
 ![架构图](https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/docs/images/honeypot.png)
@@ -77,3 +77,7 @@ Tornado++Mysql+APScheduler+Nginx+Supervisor
 2. **天使用户群和开源贡献者**：
 
     @Weiho @kafka @Pa5sw0rd @Cotton @Aa.Kay @冷白开 @YongShao @Lemon
+
+## 五、报告问题
+
+安装脚本在使用过程当中出现任何问题，请点击[这里](https://github.com/p1r06u3/opencanary_web/issues/new)反馈
