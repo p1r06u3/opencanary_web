@@ -74,6 +74,6 @@ Tornado++Mysql+APScheduler+Nginx+Supervisor
 
 1. **Thinkst Applied Research**
 
-2. **天使用户群和开源贡献者**：
+2. **天使用户群和开源贡献者**：
 
     @Weiho @kafka @Pa5sw0rd @Cotton @Aa.Kay @冷白开 @YongShao @Lemon
