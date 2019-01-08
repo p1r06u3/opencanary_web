@@ -40,7 +40,7 @@ Tornado++Mysql+APScheduler+Nginx+Supervisor
 
 ### 3. 一些使用说明
 
-* [后台和客户端的一些使用说明](.docs/install/Document.md)
+* [后台和客户端的一些使用说明](.docs/install/Document.md)
 
 
 ## 三、后台可统计的信息
