@@ -156,4 +156,4 @@ bash install_opencanary_agent.sh
 
 ## 报告问题
 
-安装脚本在使用过程当中出现任何问题，请点击[这里](https://github.com/p1r06u3/opencanary_web/issues/new)反馈
+使用过程当中出现任何问题，请点击[这里](https://github.com/p1r06u3/opencanary_web/issues/new)反馈

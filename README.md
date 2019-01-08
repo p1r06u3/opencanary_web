@@ -80,4 +80,4 @@ Tornado+Mysql+APScheduler+Nginx+Supervisor
 
 ## 五、报告问题
 
-安装脚本在使用过程当中出现任何问题，请点击[这里](https://github.com/p1r06u3/opencanary_web/issues/new)反馈
+在使用过程当中出现任何问题，请点击[这里](https://github.com/p1r06u3/opencanary_web/issues/new)反馈
