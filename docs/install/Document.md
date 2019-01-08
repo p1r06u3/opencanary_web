@@ -134,6 +134,7 @@ delete from OpencanaryLog where white=2;
 开发模式运行: opencanaryd --dev
 
 opencanary日志: /var/tmp/opencanary.log
+
 配置文件位置: /root/.opencanary.conf
 
 ### 卸载和重新安装opencanary
