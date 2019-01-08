@@ -1,5 +1,5 @@
 ## 一、web服务端介绍
-Tornado+Mysql+APScheduler+Nginx+Supervisor
+Tornado+Vue+Mysql+APScheduler+Nginx+Supervisor
 
 ### 1. 架构图
 ![架构图](https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/docs/images/honeypot.png)
