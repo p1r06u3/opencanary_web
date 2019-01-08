@@ -32,15 +32,15 @@ Tornado++Mysql+APScheduler+Nginx+Supervisor
 
 ### 1. 自动化安装
 
-* [更省心省力的自动化安装方式](./docs/install/Linux_AutoInstall.md)
+* [更省心省力的自动化安装方式](/docs/install/Linux_AutoInstall.md)
 
 ### 2. 手工安装
 
-* [让你更了解蜜罐的手工安装方式](./docs/install/Manual_Installation.md)
+* [让你更了解蜜罐的手工安装方式](/docs/install/Manual_Installation.md)
 
 ### 3. 一些使用说明
 
-* [后台和客户端的一些使用说明](.docs/install/Document.md)
+* [后台和客户端的一些使用说明](docs/install/Document.md)
 
 
 ## 三、后台可统计的信息
