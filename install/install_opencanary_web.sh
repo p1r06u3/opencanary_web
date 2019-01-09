@@ -9,21 +9,18 @@
 #deploy single opencanary_web_server
 #
 # This script is meant for quick & easy install via:
-#   'curl -O https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install.sh'
+#   'curl -O https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opencanary_web.sh'
 #    or
-#   'wget --no-check-certificate https://raw.githubusercontent.com/zhaoweiho/opencanary_web/master/install/install.sh'
+#   'wget --no-check-certificate https://raw.githubusercontent.com/p1r06u3/opencanary_web/master/install/install_opencanary_web.sh'
 #
-#    chmod o+x install.sh
-#    ./install.sh
+#    chmod o+x install_opencanary_web.sh
+#    bash install_opencanary_web.sh
 #
+
 
 echo "###########正在初始化环境#########"
 #getip=192.168.1.100
 getip=`ip add | grep -w inet | grep -v "127.0.0.1"| awk -F '[ /]+' '{print $3}'`
-
-set_env() {
-    export LC_ALL="C.UTF-8"
-}
 
 #开启alias功能
 shopt -s expand_aliases
@@ -80,7 +77,7 @@ fi
 
 opencanary_web_folder="/usr/local/src/opencanary_web"
 if [ ! -d $opencanary_web_folder ]; then
-    echo "############正在同步最新版本opencary_web,并且安装第三方依赖包##########"
+    echo "############正在同步最新版本opencanary_web,并且安装第三方依赖包##########"
     git clone https://github.com/p1r06u3/opencanary_web.git /usr/local/src/opencanary_web
     cd /usr/local/src/opencanary_web/
     pip install -r requirements.txt
@@ -204,6 +201,10 @@ systemctl restart supervisord.service
 
 echo "##############正在配置Nginx###############"
 mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
+ng_default=/etc/nginx/conf.d/default.conf
+if [ -s $ng_default ]; then
+    mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak
+fi
 cat > /etc/nginx/nginx.conf<<EOF
 user nginx;
 worker_processes 5;
@@ -215,9 +216,9 @@ events {
 http {
     include    /etc/nginx/mime.types;
     default_type application/octet-stream;
-    log_format main '$remote_addr - $remote_user [$time_local] "$request"'
-            '$status $body_bytes_sent "$http_referer" '
-            '"$http_user_agent" "$http_x_forwarded_for"';
+    log_format main '\$remote_addr - \$remote_user [\$time_local] "\$request"'
+            '\$status \$body_bytes_sent "\$http_referer" '
+            '"\$http_user_agent" "\$http_x_forwarded_for"';
     access_log /var/log/nginx/access.log main;
     sendfile    on;
     #tcp_nopush   on;
