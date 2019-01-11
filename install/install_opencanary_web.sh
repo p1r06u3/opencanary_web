@@ -5,7 +5,7 @@
 #Github: https://github.com/zhaoweiho
 #Date  : 2019-01-11
 #Environment: CentOS7.2
-#Gratitude: k4n5ha0/p1r06u3/Sven/Null/c00lman/kafka/JK
+#Gratitude: k4n5ha0/p1r06u3/Sven/Null/c00lman/kafka/JK/Mayter
 #deploy single opencanary_web_server
 #
 # This script is meant for quick & easy install via:
