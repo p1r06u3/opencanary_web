@@ -3,7 +3,7 @@
 #Blog  : www.weiho.xyz 
 #Email : H4x0er@SecBug.Org 
 #Github: https://github.com/zhaoweiho
-#Date  : 2018-12-25
+#Date  : 2019-01-11
 #Environment: CentOS7.2
 #Gratitude: k4n5ha0/p1r06u3/Sven/Null/c00lman/kafka/JK
 #deploy single opencanary_web_server
@@ -38,10 +38,12 @@ if [ "$a" \< "7.0" ];then
 	echo "系统版本太低，无法使用"
 	exit 0
 fi
-wget -O /etc/yum.repos.d/CentOS-7.repo http://mirrors.aliyun.com/repo/Centos-7.repo &> /dev/null
+
+yum install -y curl wget
+wget -O /etc/yum.repos.d/CentOS-7.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 yum clean all
 yum makecache
-yum install -y -q ntpdate epel-release python-devel git 
+yum install -y ntpdate epel-release python-devel git net-tools
 
 echo "#############正在关闭SELINUX#########"
 setenforce 0
@@ -118,16 +120,15 @@ if [ "$opencanary_web_mysql_passwd" = "$huanchengzijidemima" ]; then
      source /usr/local/src/opencanary_web/honeypot.sql;
      SET password for 'root'@'localhost'=password('Weiho@2018');"
     sed -i "s/$opencanary_web_mysql_passwd/'Weiho@2018'/g" /usr/local/src/opencanary_web/dbs/initdb.py
-    echo “######## 已修改mysql root密码Weiho@2018 #########”
-    echo “######## 初始化导入数据库honeypot.sql #########”
+    echo "######## 已修改mysql root密码Weiho@2018 #########"
+    echo "######## 初始化导入数据库honeypot.sql #########"
 else
-    echo ”########已经修改并导入数据库honeypot.sql#########“
+    echo "########已经修改并导入数据库honeypot.sql#########"
     fi
 }
 Import_mysql
 
 function NGINX() {
-#rpm -qa|grep nginx > /dev/null
 netstat -anput | grep nginx > /dev/null
 if [ $? = '1' ]; then
 	echo "######install nginx########"
@@ -139,12 +140,34 @@ fi
 }
 NGINX
 
+SUPERVISOR_FILE=/usr/bin/supervisorctl
+SUPERVISOR_CONF=/etc/supervisord.conf
 function SUPERVISOR() {
-    rpm -qa|grep supervisor > /dev/null
-if [ $? = '1' ]; then
+if [ ! -s $SUPERVISOR_FILE ]; then
 	echo "######install supervisor########"
-    yum install -y -q supervisor
-else
+    pip install supervisor
+    echo_supervisord_conf > ${SUPERVISOR_CONF}
+    mkdir /etc/supervisord.d
+    echo "[include]" >> ${SUPERVISOR_CONF}
+    echo "files = supervisord.d/*.ini" >> ${SUPERVISOR_CONF}
+    cat > /usr/lib/systemd/system/supervisord.service<<EOF
+[Unit]
+Description=Supervisor daemon
+
+[Service]
+Type=forking
+PIDFile=/tmp/supervisord.pid
+ExecStart=/usr/bin/supervisord -c /etc/supervisord.conf
+ExecStop=/usr/bin/supervisorctl shutdown
+ExecReload=/usr/bin/supervisorctl reload
+KillMode=process
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
+EOF
+    else
 	echo "######supervisor is installed########"
 fi
 }
