@@ -114,7 +114,7 @@ function Import_mysql(){
 opencanary_web_mysql_username=`sed -n '18p' /usr/local/src/opencanary_web/dbs/initdb.py |awk '{print $3}'`
 opencanary_web_mysql_password=`sed -n '19p' /usr/local/src/opencanary_web/dbs/initdb.py |awk '{print $3}'`
 huanchengzijidemima="'huanchengzijidemima'"
-if [ "$opencanary_web_mysql_passwd" = "$huanchengzijidemima" ]; then    
+if [ "$opencanary_web_mysql_password" = "$huanchengzijidemima" ]; then    
     mysql -u root -e "
      create user 'honeypot'@'localhost' identified by 'Weiho@2019';
      create database honeypot;
