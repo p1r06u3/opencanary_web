@@ -111,18 +111,20 @@ else
 fi
 #Configure mysql PassWord:Weiho@2019,Import honeypot.sql
 function Import_mysql(){
-opencanary_web_mysql_passwd=`sed -n '19p' /usr/local/src/opencanary_web/dbs/initdb.py |awk '{print $3}'`
+opencanary_web_mysql_username=`sed -n '18p' /usr/local/src/opencanary_web/dbs/initdb.py |awk '{print $3}'`
+opencanary_web_mysql_password=`sed -n '19p' /usr/local/src/opencanary_web/dbs/initdb.py |awk '{print $3}'`
 huanchengzijidemima="'huanchengzijidemima'"
 if [ "$opencanary_web_mysql_passwd" = "$huanchengzijidemima" ]; then    
     mysql -u root -e "
      create user 'honeypot'@'localhost' identified by 'Weiho@2019';
      create database honeypot;
      grant all on honeypot.* to 'honeypot'@'localhost';
-     flush privileges;"
+     flush privileges;
      use honeypot;
      source /usr/local/src/opencanary_web/honeypot.sql;"
-sed -i "s/$opencanary_web_mysql_passwd/'Weiho@2019'/g" /usr/local/src/opencanary_web/dbs/initdb.py
-    echo "######## 已修改mysql root密码Weiho@2019 #########"
+sed -i "s/$opencanary_web_mysql_username/'honeypot'/g" /usr/local/src/opencanary_web/dbs/initdb.py
+sed -i "s/$opencanary_web_mysql_password/'Weiho@2019'/g" /usr/local/src/opencanary_web/dbs/initdb.py
+    echo "######## 已创建honeypot@localhost密码Weiho@2019 #########"
     echo "######## 初始化导入数据库honeypot.sql #########"
 else
     echo "########已经修改并导入数据库honeypot.sql#########"
@@ -380,7 +382,7 @@ echo "已成功安装opencanary_web,文件路径:/usr/local/src/opencanary_web"
 echo "可以打开http://$getip,输入账号admin密码admin进行访问操作"
 echo "如要修改opencanary_web管理密码,可以通过mysql进行更改,请执行sql语句password的值换成自己的32位md5."
 echo "UPDATE User SET password='900150983cd24fb0d6963f7d28e17f72' WHERE id=1;"
-echo "以及修改/usr/local/src/opencanary_web/dbs/initdb.py,DB_PWD字段"
+echo "以及修改/usr/local/src/opencanary_web/dbs/initdb.py,DB_USER/DB_PWD字段"
 echo "已经配置成功蜜罐告警邮件,具体配置浏览/usr/local/src/opencanary_web/application.py"
 echo "收件人邮件配置(以及告警开关):/usr/local/src/opencanary_web/util/conf/email.ini"
 echo "更多信息请参考https://github.com/p1r06u3/opencanary_web"
@@ -394,7 +396,7 @@ echo "已成功安装opencanary_web,文件路径:/usr/local/src/opencanary_web"
 echo "可以打开http://$getip,输入账号admin密码admin进行访问操作"
 echo "如要修改opencanary_web管理密码,可以通过mysql进行更改,请执行sql语句password的值换成自己的32位md5."
 echo "UPDATE User SET password='900150983cd24fb0d6963f7d28e17f72' WHERE id=1;"
-echo "以及修改/usr/local/src/opencanary_web/dbs/initdb.py,DB_PWD字段"
+echo "以及修改/usr/local/src/opencanary_web/dbs/initdb.py,DB_USER/DB_PWD字段"
 echo "蜜罐告警邮件没有配置成功,请自行决定是否需要配置."
 echo "蜜罐告警具体配置(发件人)浏览/usr/local/src/opencanary_web/application.py"
 echo "收件人邮件配置(以及告警开关):/usr/local/src/opencanary_web/util/conf/email.ini"
@@ -409,7 +411,7 @@ echo "已成功安装opencanary_web,文件路径:/usr/local/src/opencanary_web"
 echo "可以打开http://$getip,输入账号admin密码admin进行访问操作"
 echo "如要修改opencanary_web管理密码,可以通过mysql进行更改,请执行sql语句password的值换成自己的32位md5."
 echo "UPDATE User SET password='900150983cd24fb0d6963f7d28e17f72' WHERE id=1;"
-echo "以及修改/usr/local/src/opencanary_web/dbs/initdb.py,DB_PWD字段"
+echo "以及修改/usr/local/src/opencanary_web/dbs/initdb.py,DB_USER/DB_PWD字段"
 echo "蜜罐告警邮件没有配置成功,请自行决定是否需要配置."
 echo "蜜罐告警具体配置(发件人)浏览/usr/local/src/opencanary_web/application.py"
 echo "收件人邮件配置(以及告警开关):/usr/local/src/opencanary_web/util/conf/email.ini"
