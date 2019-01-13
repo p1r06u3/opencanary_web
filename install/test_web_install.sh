@@ -93,7 +93,7 @@ function MYSQL() {
 rpm -qa|grep mariadb-server > /dev/null
 if [ $? = '1' ]; then
 	echo "######install mysql########"
-    yum install -y -q mariadb-server
+    yum install -y mariadb-server
     systemctl enable mariadb
     systemctl daemon-reload
     else
@@ -137,7 +137,7 @@ netstat -anput | grep nginx > /dev/null
 if [ $? = '1' ]; then
 	echo "######install nginx########"
 	rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
-    yum install -y -q nginx
+    yum install -y nginx
 else
 	echo "######nginx is installed########"
 fi
