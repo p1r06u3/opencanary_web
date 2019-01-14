@@ -3,7 +3,11 @@
 #Blog  : www.weiho.xyz 
 #Email : H4x0er@SecBug.Org 
 #Github: https://github.com/zhaoweiho
+<<<<<<< HEAD
 #Date  : 2019-01-13
+=======
+#Date  : 2019-01-11
+>>>>>>> 06f54c1153e2b69633bbb55ff76aea0f4d713fcb
 #Environment: CentOS7.2
 #Gratitude: k4n5ha0/p1r06u3/Sven/Null/c00lman/kafka/JK/Mayter
 #deploy single opencanary_web_server
@@ -121,10 +125,17 @@ if [ "$opencanary_web_mysql_password" = "$huanchengzijidemima" ]; then
      grant all on honeypot.* to 'honeypot'@'localhost';
      flush privileges;
      use honeypot;
+<<<<<<< HEAD
      source /usr/local/src/opencanary_web/honeypot.sql;"
 sed -i "s/$opencanary_web_mysql_username/'honeypot'/g" /usr/local/src/opencanary_web/dbs/initdb.py
 sed -i "s/$opencanary_web_mysql_password/'Weiho@2019'/g" /usr/local/src/opencanary_web/dbs/initdb.py
     echo "######## 已创建honeypot@localhost密码Weiho@2019 #########"
+=======
+     source /usr/local/src/opencanary_web/honeypot.sql;
+     SET password for 'root'@'localhost'=password('Weiho@2018');"
+    sed -i "s/$opencanary_web_mysql_passwd/'Weiho@2018'/g" /usr/local/src/opencanary_web/dbs/initdb.py
+    echo "######## 已修改mysql root密码Weiho@2018 #########"
+>>>>>>> 06f54c1153e2b69633bbb55ff76aea0f4d713fcb
     echo "######## 初始化导入数据库honeypot.sql #########"
 else
     echo "########已经修改并导入数据库honeypot.sql#########"
