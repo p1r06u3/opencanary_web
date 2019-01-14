@@ -62,7 +62,7 @@ systemctl status mariadb.service
 |类型 | 用户名 | 密码 |
 |----- |----- |-----| 
 | Web账号 | admin | admin |
-| mysql 数据库 | root | Weiho@2018 |
+| mysql 数据库 | honeypot | Weiho@2019 |
 | mysql 端口 | 3306| - |
 | OpenCanary_Web物理路径 | /usr/src/local/opencanary_web | - |
 | 发件人邮件配置 | /usr/local/src/opencanary_web/application.py | - |
