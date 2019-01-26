@@ -7,7 +7,7 @@
   Created: 2018-08-08 15:20:49
 """
 
-
+from util.auth import jwtauth
 from base import BaseHandler
 import json
 from util.config import ini_info
