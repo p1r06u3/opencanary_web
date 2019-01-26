@@ -17,6 +17,7 @@ from application import emailfile
 
 ini = ini_info(emailfile)
 
+@jwtauth
 class EmailModifyHandler(BaseHandler):
     # 接收json 请求修改email配置文件
 
