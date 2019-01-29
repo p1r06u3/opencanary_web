@@ -10,6 +10,8 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from service.hostservice import hostonline
+import atexit
+import fcntl
 #jobstores = {
 #    'default': SQLAlchemyJobStore(url='sqlite:///jobs.sqlite')
 #}
@@ -20,14 +22,20 @@ sched = BackgroundScheduler()
 
 
 def check_scheduler():
+    f = open("scheduler.lock", "wb")
     try:
+        fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
         sched.start()
         if sched.get_job('check_host'):
             pass
         else:
             host_scheduler()
-    except (KeyboardInterrupt, SystemExit):
-        sched.remove_job()
+    except:
+            pass
+    def unlock():
+        fcntl.flock(f, fcntl.LOCK_UN)
+        f.close()
+    atexit.register(unlock)
 
 
 def host_scheduler():
