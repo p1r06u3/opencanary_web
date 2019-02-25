@@ -23,9 +23,9 @@ sched = BackgroundScheduler()
 
 def check_scheduler():
     f = open("scheduler.lock", "wb")
+    sched.start()
     try:
         fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        sched.start()
         if sched.get_job('check_host'):
             pass
         else:
