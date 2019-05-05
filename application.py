@@ -9,6 +9,9 @@
 
 import os
 import logging
+from base64 import b64encode
+from uuid import uuid4
+
 
 settings = dict(
     # 设置Debug开关
@@ -18,7 +21,7 @@ settings = dict(
     # 设置静态文件解析路径
     static_path=os.path.join(os.path.dirname(__file__), "dist/static"),
     # 设置cookie密钥
-    cookie_secret="1234567890qwertyuiopasdnghjklzxcvbnm1234567890qwrtyu",
+    cookie_secret=b64encode(uuid4().bytes + uuid4().bytes),
     login_url="/login",
 )
 
