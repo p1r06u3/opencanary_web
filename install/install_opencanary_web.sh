@@ -114,6 +114,7 @@ function Import_mysql(){
 opencanary_web_mysql_username=`sed -n '18p' /usr/local/src/opencanary_web/dbs/initdb.py |awk '{print $3}'`
 opencanary_web_mysql_password=`sed -n '19p' /usr/local/src/opencanary_web/dbs/initdb.py |awk '{print $3}'`
 huanchengzijidemima="'huanchengzijidemima'"
+
 if [ "$opencanary_web_mysql_password" = "$huanchengzijidemima" ]; then    
     mysql -u root -e "
      create user 'honeypot'@'localhost' identified by 'Weiho@2019';
@@ -121,7 +122,10 @@ if [ "$opencanary_web_mysql_password" = "$huanchengzijidemima" ]; then
      grant all on honeypot.* to 'honeypot'@'localhost';
      flush privileges;
      use honeypot;
-     source /usr/local/src/opencanary_web/honeypot.sql;"
+     source /usr/local/src/opencanary_web/honeypot.sql;
+     use mysql;
+     UPDATE user SET password=password('Weiho@2019') WHERE user='root';
+     "
 sed -i "s/$opencanary_web_mysql_username/'honeypot'/g" /usr/local/src/opencanary_web/dbs/initdb.py
 sed -i "s/$opencanary_web_mysql_password/'Weiho@2019'/g" /usr/local/src/opencanary_web/dbs/initdb.py
     echo "######## 已创建honeypot@localhost密码Weiho@2019 #########"
