@@ -5,7 +5,7 @@
 #Github: https://github.com/zhaoweiho
 #Date  : 2019-01-13
 #Environment: CentOS7.2
-#Gratitude: k4n5ha0/p1r06u3/Sven/Null/c00lman/kafka/JK/Mayter
+#Gratitude: k4n5ha0/p1r06u3/Sven/Null/c00lman/kafka/JK/Mayter/xinghe
 #deploy single opencanary_web_server
 #
 # This script is meant for quick & easy install via:
@@ -40,10 +40,17 @@ if [ "$a" \< "7.0" ];then
 fi
 
 yum install -y curl wget
-wget -O /etc/yum.repos.d/CentOS-7.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+echo "timeout=120" >> /etc/yum.conf
+#wget -O /etc/yum.repos.d/CentOS-7.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.huaweicloud.com/repository/conf/CentOS-7-anon.repo
 yum clean all
 yum makecache
-yum install -y ntpdate epel-release python-devel git net-tools
+yum install -y ntpdate python-devel epel-release git net-tools 
+sed -i "s/#baseurl/baseurl/g" /etc/yum.repos.d/CentOS-Base.repo
+sed -i "s/mirrorlist=http/#mirrorlist=http/g" /etc/yum.repos.d/CentOS-Base.repo
+sed -i "s@http://mirror.centos.org@https://mirrors.huaweicloud.com@g" /etc/yum.repos.d/CentOS-Base.repo
+yum clean all
+yum makecache
 
 echo "#############正在关闭SELINUX#########"
 setenforce 0
@@ -71,6 +78,13 @@ fi
 PIP_FILE=/usr/bin/pip
 if [ ! -s $PIP_FILE ]; then
     curl https://bootstrap.pypa.io/get-pip.py | python
+    mkdir ~/.pip/
+    cat > ~/.pip/pip.conf <<EOF
+[global]
+index-url = https://mirrors.huaweicloud.com/repository/pypi/simple
+trusted-host = mirrors.huaweicloud.com
+timeout = 120
+EOF
     python -m pip install --upgrade pip
     echo "################pip is installed############"
     else
@@ -140,7 +154,7 @@ function NGINX() {
 netstat -anput | grep nginx > /dev/null
 if [ $? = '1' ]; then
 	echo "######install nginx########"
-	rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+	rpm -ivh http://mirrors.ustc.edu.cn/nginx/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
     yum install -y nginx
 else
 	echo "######nginx is installed########"
