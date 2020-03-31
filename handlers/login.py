@@ -13,12 +13,13 @@ import tornado.web
 import jwt
 import datetime
 from util.auth import jwtauth
+from util.auth import secret_key
 import json
 from base import BaseHandler
 from dbs.initdb import Base, engine, DBSession
 from dbs.models.Users import User
 
-SECRET = 'opencanary123456789zdsfjoqfjladfs'
+# SECRET = 'opencanary123456789zdsfjoqfjladfs'
 
 
 # @jwtauth
@@ -63,7 +64,7 @@ class AuthHandler(BaseHandler):
 
                     if result is not None and result.id is not None:
                         dataToken = {"id": result.id, "role": result.username, "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=3600)}
-                        token = jwt.encode(dataToken,  SECRET, algorithm='HS256')
+                        token = jwt.encode(dataToken,  secret_key, algorithm='HS256')
                         status = True
                         role = result.username
                     else:

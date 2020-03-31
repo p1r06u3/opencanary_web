@@ -8,8 +8,12 @@
 """
 
 import jwt
+import random
+import string
 
-secret_key = "opencanary123456789zdsfjoqfjladfs"
+
+secret_key = ''.join(random.sample(string.ascii_letters + string.digits, 28))
+
 options = {
     'verify_signature': True,
     'verify_exp': True,
