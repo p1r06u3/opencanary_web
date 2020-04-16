@@ -125,34 +125,10 @@ SELINUX=disabled
 
     ```
     [group:tornadoes]
-    programs=tornado-8000,tornado-8001,tornado-8002,tornado-8003
+    programs=tornado-8000
 
     [program:tornado-8000]
     command=python /usr/local/src/opencanary_web/server.py --port=8000
-    directory=/usr/local/src/opencanary_web
-    autorestart=true
-    redirect_stderr=true
-    stdout_logfile=/var/log/tornado.log
-    loglevel=debug
-
-    [program:tornado-8001]
-    command=python /usr/local/src/opencanary_web/server.py --port=8001
-    directory=/usr/local/src/opencanary_web
-    autorestart=true
-    redirect_stderr=true
-    stdout_logfile=/var/log/tornado.log
-    loglevel=debug
-
-    [program:tornado-8002]
-    command=python /usr/local/src/opencanary_web/server.py --port=8002
-    directory=/usr/local/src/opencanary_web
-    autorestart=true
-    redirect_stderr=true
-    stdout_logfile=/var/log/tornado.log
-    loglevel=debug
-
-    [program:tornado-8003]
-    command=python /usr/local/src/opencanary_web/server.py --port=8003
     directory=/usr/local/src/opencanary_web
     autorestart=true
     redirect_stderr=true
