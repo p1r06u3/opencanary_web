@@ -31,7 +31,7 @@ def send_mail(sub, content):
     # mailto_list = maillists()  #收件人(列表)
     to_list = maillists()
     me = "opencanary" + "<" + mail_user + "@" + mail_postfix + ">"
-    msg = MIMEText(content, _subtype='html', _charset='gb2312')
+    msg = MIMEText(content, _subtype='html', _charset='utf-8')
     msg['Subject'] = sub
     msg['From'] = me
     msg['To'] = ";".join(to_list)  #将收件人列表以‘;’分隔

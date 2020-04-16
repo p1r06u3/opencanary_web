@@ -45,6 +45,14 @@ insert into Whiteip values('172.18.88.76'),('172.168.1.1');
 tailf /usr/local/src/opencanary_web/logs/app.log
 ```
 
+### 新增管理员
+将test换成自己想要设置的管理员账号
+
+将1bc29b36f623ba82aaf6724fd3b16718换成自己的密码的32位md5值
+```
+insert into User values(username, password, create_time) values("test","1bc29b36f623ba82aaf6724fd3b16718",now());
+```
+
 ### 清空数据库表内数据
 
 进入数据库方法：

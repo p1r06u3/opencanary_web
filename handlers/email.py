@@ -7,7 +7,7 @@
   Created: 2018-08-08 15:20:49
 """
 
-
+from util.auth import jwtauth
 from base import BaseHandler
 import json
 from util.config import ini_info
@@ -17,6 +17,7 @@ from application import emailfile
 
 ini = ini_info(emailfile)
 
+@jwtauth
 class EmailModifyHandler(BaseHandler):
     # 接收json 请求修改email配置文件
 

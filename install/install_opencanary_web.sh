@@ -3,9 +3,9 @@
 #Blog  : www.weiho.xyz 
 #Email : H4x0er@SecBug.Org 
 #Github: https://github.com/zhaoweiho
-#Date  : 2018-12-25
+#Date  : 2019-01-13
 #Environment: CentOS7.2
-#Gratitude: k4n5ha0/p1r06u3/Sven/Null/c00lman/kafka/JK
+#Gratitude: k4n5ha0/p1r06u3/Sven/Null/c00lman/kafka/JK/Mayter
 #deploy single opencanary_web_server
 #
 # This script is meant for quick & easy install via:
@@ -38,10 +38,12 @@ if [ "$a" \< "7.0" ];then
 	echo "系统版本太低，无法使用"
 	exit 0
 fi
-wget -O /etc/yum.repos.d/CentOS-7.repo http://mirrors.aliyun.com/repo/Centos-7.repo &> /dev/null
+
+yum install -y curl wget
+wget -O /etc/yum.repos.d/CentOS-7.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 yum clean all
 yum makecache
-yum install -y -q ntpdate epel-release python-devel git 
+yum install -y ntpdate epel-release python-devel git net-tools
 
 echo "#############正在关闭SELINUX#########"
 setenforce 0
@@ -91,7 +93,7 @@ function MYSQL() {
 rpm -qa|grep mariadb-server > /dev/null
 if [ $? = '1' ]; then
 	echo "######install mysql########"
-    yum install -y -q mariadb-server
+    yum install -y mariadb-server
     systemctl enable mariadb
     systemctl daemon-reload
     else
@@ -107,44 +109,73 @@ else
         echo "#######mysqld start fail#############"
         exit 0
 fi
-#Configure mysql PassWord:Weiho@2018,Import honeypot.sql
+#Configure mysql PassWord:Weiho@2019,Import honeypot.sql
 function Import_mysql(){
-opencanary_web_mysql_passwd=`sed -n '19p' /usr/local/src/opencanary_web/dbs/initdb.py |awk '{print $3}'`
+opencanary_web_mysql_username=`sed -n '18p' /usr/local/src/opencanary_web/dbs/initdb.py |awk '{print $3}'`
+opencanary_web_mysql_password=`sed -n '19p' /usr/local/src/opencanary_web/dbs/initdb.py |awk '{print $3}'`
 huanchengzijidemima="'huanchengzijidemima'"
-if [ "$opencanary_web_mysql_passwd" = "$huanchengzijidemima" ]; then
+
+if [ "$opencanary_web_mysql_password" = "$huanchengzijidemima" ]; then    
     mysql -u root -e "
+     create user 'honeypot'@'localhost' identified by 'Weiho@2019';
      create database honeypot;
+     grant all on honeypot.* to 'honeypot'@'localhost';
+     flush privileges;
      use honeypot;
      source /usr/local/src/opencanary_web/honeypot.sql;
-     SET password for 'root'@'localhost'=password('Weiho@2018');"
-    sed -i "s/$opencanary_web_mysql_passwd/'Weiho@2018'/g" /usr/local/src/opencanary_web/dbs/initdb.py
-    echo “######## 已修改mysql root密码Weiho@2018 #########”
-    echo “######## 初始化导入数据库honeypot.sql #########”
+     use mysql;
+     UPDATE user SET password=password('Weiho@2019') WHERE user='root';
+     "
+sed -i "s/$opencanary_web_mysql_username/'honeypot'/g" /usr/local/src/opencanary_web/dbs/initdb.py
+sed -i "s/$opencanary_web_mysql_password/'Weiho@2019'/g" /usr/local/src/opencanary_web/dbs/initdb.py
+    echo "######## 已创建honeypot@localhost密码Weiho@2019 #########"
+    echo "######## 初始化导入数据库honeypot.sql #########"
 else
-    echo ”########已经修改并导入数据库honeypot.sql#########“
+    echo "########已经修改并导入数据库honeypot.sql#########"
     fi
 }
 Import_mysql
 
 function NGINX() {
-#rpm -qa|grep nginx > /dev/null
 netstat -anput | grep nginx > /dev/null
 if [ $? = '1' ]; then
 	echo "######install nginx########"
 	rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
-    yum install -y -q nginx
+    yum install -y nginx
 else
 	echo "######nginx is installed########"
 fi
 }
 NGINX
 
+SUPERVISOR_FILE=/usr/bin/supervisorctl
+SUPERVISOR_CONF=/etc/supervisord.conf
 function SUPERVISOR() {
-    rpm -qa|grep supervisor > /dev/null
-if [ $? = '1' ]; then
+if [ ! -s $SUPERVISOR_FILE ]; then
 	echo "######install supervisor########"
-    yum install -y -q supervisor
-else
+    pip install supervisor
+    echo_supervisord_conf > ${SUPERVISOR_CONF}
+    mkdir /etc/supervisord.d
+    echo "[include]" >> ${SUPERVISOR_CONF}
+    echo "files = supervisord.d/*.ini" >> ${SUPERVISOR_CONF}
+    cat > /usr/lib/systemd/system/supervisord.service<<EOF
+[Unit]
+Description=Supervisor daemon
+
+[Service]
+Type=forking
+PIDFile=/tmp/supervisord.pid
+ExecStart=/usr/bin/supervisord -c /etc/supervisord.conf
+ExecStop=/usr/bin/supervisorctl shutdown
+ExecReload=/usr/bin/supervisorctl reload
+KillMode=process
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
+EOF
+    else
 	echo "######supervisor is installed########"
 fi
 }
@@ -349,13 +380,13 @@ systemctl restart nginx.service
 #回显已完成
 echo "已同步cn.pool.ntp.org时间,已关闭SELINUX和防火墙"
 echo "已安装pip,及安装并配置supervisor"
-echo "已安装mysql,并配置Root密码Weiho@2018,可以通过mysql -u root -pWeiho@2018 进行管理"
+echo "已安装mysql,并配置普通用户honeypot密码Weiho@2019,可以通过mysql -u honeypot@'localhost' -pWeiho@2019 进行管理"
 echo "已经安装并配置nginx并把原nginx配置文件备份到/etc/nginx/nginx.conf.bak"
 echo "已成功安装opencanary_web,文件路径:/usr/local/src/opencanary_web"
 echo "可以打开http://$getip,输入账号admin密码admin进行访问操作"
 echo "如要修改opencanary_web管理密码,可以通过mysql进行更改,请执行sql语句password的值换成自己的32位md5."
 echo "UPDATE User SET password='900150983cd24fb0d6963f7d28e17f72' WHERE id=1;"
-echo "以及修改/usr/local/src/opencanary_web/dbs/initdb.py,DB_PWD字段"
+echo "以及修改/usr/local/src/opencanary_web/dbs/initdb.py,DB_USER/DB_PWD字段"
 echo "已经配置成功蜜罐告警邮件,具体配置浏览/usr/local/src/opencanary_web/application.py"
 echo "收件人邮件配置(以及告警开关):/usr/local/src/opencanary_web/util/conf/email.ini"
 echo "更多信息请参考https://github.com/p1r06u3/opencanary_web"
@@ -363,13 +394,13 @@ echo "更多信息请参考https://github.com/p1r06u3/opencanary_web"
 n*)
 echo "已同步cn.pool.ntp.org时间,已关闭SELINUX和防火墙"
 echo "已安装pip以及安装并配置supervisor"
-echo "已安装mysql,并配置Root密码Weiho@2018,可以通过mysql -u root -pWeiho@2018 进行管理"
+echo "已安装mysql,并配置普通用户honeypot密码Weiho@2019,可以通过mysql -u honeypot@'localhost' -pWeiho@2019 进行管理"
 echo "已经安装并配置nginx并把原nginx配置文件备份到/etc/nginx/nginx.conf.bak"
 echo "已成功安装opencanary_web,文件路径:/usr/local/src/opencanary_web"
 echo "可以打开http://$getip,输入账号admin密码admin进行访问操作"
 echo "如要修改opencanary_web管理密码,可以通过mysql进行更改,请执行sql语句password的值换成自己的32位md5."
 echo "UPDATE User SET password='900150983cd24fb0d6963f7d28e17f72' WHERE id=1;"
-echo "以及修改/usr/local/src/opencanary_web/dbs/initdb.py,DB_PWD字段"
+echo "以及修改/usr/local/src/opencanary_web/dbs/initdb.py,DB_USER/DB_PWD字段"
 echo "蜜罐告警邮件没有配置成功,请自行决定是否需要配置."
 echo "蜜罐告警具体配置(发件人)浏览/usr/local/src/opencanary_web/application.py"
 echo "收件人邮件配置(以及告警开关):/usr/local/src/opencanary_web/util/conf/email.ini"
@@ -378,13 +409,13 @@ echo "更多信息请参考https://github.com/p1r06u3/opencanary_web"
 *)
 echo "已同步cn.pool.ntp.org时间,已关闭SELINUX和防火墙"
 echo "已安装pip以及安装并配置supervisor"
-echo "已安装mysql,并配置Root密码Weiho@2018,可以通过mysql -u root -pWeiho@2018 进行管理"
+echo "已安装mysql,并配置普通用户honeypot密码Weiho@2019,可以通过mysql -u honeypot@'localhost' -pWeiho@2019 进行管理"
 echo "已经安装并配置nginx并把原nginx配置文件备份到/etc/nginx/nginx.conf.bak"
 echo "已成功安装opencanary_web,文件路径:/usr/local/src/opencanary_web"
 echo "可以打开http://$getip,输入账号admin密码admin进行访问操作"
 echo "如要修改opencanary_web管理密码,可以通过mysql进行更改,请执行sql语句password的值换成自己的32位md5."
 echo "UPDATE User SET password='900150983cd24fb0d6963f7d28e17f72' WHERE id=1;"
-echo "以及修改/usr/local/src/opencanary_web/dbs/initdb.py,DB_PWD字段"
+echo "以及修改/usr/local/src/opencanary_web/dbs/initdb.py,DB_USER/DB_PWD字段"
 echo "蜜罐告警邮件没有配置成功,请自行决定是否需要配置."
 echo "蜜罐告警具体配置(发件人)浏览/usr/local/src/opencanary_web/application.py"
 echo "收件人邮件配置(以及告警开关):/usr/local/src/opencanary_web/util/conf/email.ini"
