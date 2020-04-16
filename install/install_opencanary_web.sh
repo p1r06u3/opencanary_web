@@ -201,7 +201,7 @@ if [ ! -s $SUPERVISOR_CONFIGURE_DOTORNADO_FILE ]; then
     echo "################正在写入supervisord配置conf.dtornado.ini############"
     cat > /etc/supervisord.d/conf.dtornado.ini<<EOF
 [group:tornadoes]
-programs=tornado-8000,tornado-8001,tornado-8002,tornado-8003
+programs=tornado-8000
 
 [program:tornado-8000]
 command=python /usr/local/src/opencanary_web/server.py --port=8000
@@ -210,30 +210,6 @@ autorestart=true
 redirect_stderr=true
 stdout_logfile=/var/log/tornado.log
 loglevel=debug          
-
-[program:tornado-8001]
-command=python /usr/local/src/opencanary_web/server.py --port=8001
-directory=/usr/local/src/opencanary_web
-autorestart=true
-redirect_stderr=true
-stdout_logfile=/var/log/tornado.log
-loglevel=debug          
-
-[program:tornado-8002]
-command=python /usr/local/src/opencanary_web/server.py --port=8002
-directory=/usr/local/src/opencanary_web
-autorestart=true
-redirect_stderr=true
-stdout_logfile=/var/log/tornado.log
-loglevel=debug          
-
-[program:tornado-8003]
-command=python /usr/local/src/opencanary_web/server.py --port=8003
-directory=/usr/local/src/opencanary_web
-autorestart=true
-redirect_stderr=true
-stdout_logfile=/var/log/tornado.log
-loglevel=debug
 EOF
     else
     echo "################supervisord配置文件conf.dtornado.ini已存在.############"
