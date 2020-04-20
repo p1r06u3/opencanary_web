@@ -169,9 +169,6 @@ SELINUX=disabled
 
     ```
     root     30403  2.1  0.3 256192 30596 ?        S    16:08   0:00 python /usr/local/src/opencanary_web/server.py --port=8000
-    root     30404  1.8  0.3 256192 30592 ?        S    16:08   0:00 python /usr/local/src/opencanary_web/server.py --port=8001
-    root     30406  2.0  0.3 256192 30592 ?        S    16:08   0:00 python /usr/local/src/opencanary_web/server.py --port=8002
-    root     30407  2.0  0.3 256192 30592 ?        S    16:08   0:00 python /usr/local/src/opencanary_web/server.py --port=8003
     ```
 
 ### 安装nginx反向代理tornado
@@ -231,9 +228,6 @@ SELINUX=disabled
     ```
     upstream hp {
         server 127.0.0.1:8000;
-        server 127.0.0.1:8001;
-        server 127.0.0.1:8002;
-        server 127.0.0.1:8003;
     }
     server {
         listen  80;
