@@ -13,7 +13,6 @@ RUN yum install -y epel-release &&\
     yum install -y python-devel &&\
     yum install -y gcc &&\
     yum install -y gcc-c++ &&\
-    yum install -y python-pip &&\
     yum install -y ntpdate &&\
     yum install -y python-pip &&\
     yum install -y rsyslog

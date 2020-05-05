@@ -88,3 +88,10 @@ Loaded plugins: fastestmirror, ovl
 
 # 建议
 1. 作为web需要有数据库提供服务，这里强烈建议通过docker挂载数据库，而不是在容器中起数据库服务
+    1. 启动数据库建议通过` docker-compose`启动已经准备好了启动脚本，进入docker目录通过指令
+`docker-compose -f marridb.yml up -d`
+    2. 使用前需要修改密码，请直接在` maridba.yml`中的` MARIADB_ROOT_PASSWORD`的进行修改
+
+# 安装
+1. 关于` docker`、` docker-compose`的安装，可以看[官网指引](https://docs.docker.com/get-docker/)
+
