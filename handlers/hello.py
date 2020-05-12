@@ -15,7 +15,7 @@ from service.hostservice import hostonline
 # @jwtauth
 class HelloHandler(BaseHandler):
     def get(self):
-        print hostonline()
+        print(hostonline())
         # self.write(str(hostonline()))
         self.write("ok")
 

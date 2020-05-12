@@ -23,7 +23,7 @@ if __name__ == '__main__':
     tornado.options.parse_command_line()
     app = tornado.web.Application(handlers=url, **settings)
     http_server = tornado.httpserver.HTTPServer(app)
-    http_server.listen(options.port,address="127.0.0.1")
-    print('Development server is running at http://127.0.0.1:%s/' % options.port)
+    http_server.listen(options.port,address="0.0.0.0")
+    print('Development server is running at http://0.0.0.0:%s/' % options.port)
     tornado.ioloop.IOLoop.instance().start()
     # 启动方式python server.py 或者 python server.py --port=80

@@ -9,7 +9,7 @@
 
 
 import tornado
-from base import BaseHandler
+from handlers.base import BaseHandler
 from util.auth import jwtauth
 from service.chartservice import line_total_num, pie_num
 # from dbs.dal.LogOperate import LogOp
@@ -22,7 +22,10 @@ class ChartHandler(BaseHandler):
     """ 获取日志列表 """
 
     def get(self):
-        charts = self.request.arguments.has_key("line")
+        #print("test1")
+        #print("MARK: ")
+        charts = "line" in self.request.arguments
+        #print(charts)
         if charts:
             sourceDataz = [
             { "month": 'Jan', "attack": 0, "white": 0 },
@@ -42,7 +45,6 @@ class ChartHandler(BaseHandler):
             # print line_res
             # print json.dumps(line_res)
             self.write(json.dumps(line_res))
-
         else:
             sourceData = [
                 { "item": 'ftp', "count": 0 },
@@ -64,3 +66,4 @@ class ChartHandler(BaseHandler):
             ]
             pie_res = pie_num(sourceData)
             self.write(json.dumps(pie_res))
+        #self.finish()

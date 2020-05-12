@@ -10,8 +10,10 @@
 from dbs.dal.LogOperate import LogOp
 import datetime
 import sys
-reload(sys)
-sys.setdefaultencoding('utf8')
+from importlib import reload
+if sys.version[0] == '2':
+    reload(sys)
+    sys.setdefaultencoding('utf8')
 
 nums = LogOp()
 
@@ -37,7 +39,9 @@ def attack_num(sourceDataz):
     """ 每月攻击数量统计 """
     # 当前的年份
     now = datetime.datetime.now().year
+    #now=2019
     attack_res = nums.attack_select_num(now)
+    print("attack_res:"+str(attack_res))
     # [(5, 1), (7, 2), (8, 258), (9, 3)]
     if attack_res:
         for at in attack_res:
@@ -126,8 +130,9 @@ def pie_num(piesoureData):
     # 当前的年份
     now = datetime.datetime.now().year
     """ 饼图数据 """
+    #now=2019
     data_pie = nums.pie_select_num(now)
-    print data_pie
+    print(data_pie)
     if data_pie:
         for p in data_pie:
             if p[1] == '2000':

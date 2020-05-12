@@ -22,238 +22,238 @@ loginst = LogOp()
 def parserlog(jsonlog):
     # 接收客户端post过来的数据格式化
     if jsonlog:
-        if jsonlog.has_key("dst_host"):
+        if "dst_host" in jsonlog:
             dst_host = jsonlog["dst_host"]
             # print type(dst_host)
         else:
             dst_host = ''
 
-        if jsonlog.has_key("dst_port"):
+        if "dst_port" in jsonlog:
             dst_port = jsonlog["dst_port"]
         else:
             dst_port = 0
 
-        if jsonlog.has_key("honeycred"):
+        if "honeycred" in jsonlog:
             honeycred = jsonlog["honeycred"]
         else:
             honeycred = False
 
-        if jsonlog.has_key("local_time"):
+        if "local_time" in jsonlog:
             local_time = jsonlog["local_time"]
             # print local_time
         else:
             local_time = datetime.now()
 
-        if jsonlog.has_key("logdata"):
-            if jsonlog["logdata"].has_key("HOSTNAME"):
+        if "logdata" in jsonlog:
+            if "HOSTNAME" in jsonlog["logdata"]:
                 hostname = jsonlog["logdata"]["HOSTNAME"]
-            elif jsonlog["logdata"].has_key("HostName"):
+            elif "HostName" in jsonlog["logdata"]:
                 hostname = jsonlog["logdata"]["HostName"]
             else:
                 hostname = ''
 
-            if jsonlog["logdata"].has_key("PASSWORD"):
+            if "PASSWORD" in jsonlog["logdata"]:
                 password = jsonlog["logdata"]["PASSWORD"]
-            elif jsonlog["logdata"].has_key("Password"):
+            elif "Password" in jsonlog["logdata"]:
                 password = jsonlog["logdata"]["Password"]
             else:
                 password = ''
 
-            if jsonlog["logdata"].has_key("PATH"):
+            if "PATH" in jsonlog["logdata"]:
                 path = jsonlog["logdata"]["PATH"]
             else:
                 path = ''
 
-            if jsonlog["logdata"].has_key("SKIN"):
+            if "SKIN" in jsonlog["logdata"]:
                 skin = jsonlog["logdata"]["SKIN"]
             else:
                 skin = ''
 
-            if jsonlog["logdata"].has_key("USERAGENT"):
+            if "USERAGENT" in jsonlog["logdata"]:
                 useragent = jsonlog["logdata"]["USERAGENT"]
             else:
                 useragent = ''
 
-            if jsonlog["logdata"].has_key("USERNAME"):
+            if "USERNAME" in jsonlog["logdata"]:
                 username = jsonlog["logdata"]["USERNAME"]
-            elif jsonlog["logdata"].has_key("UserName"):
+            elif "UserName" in jsonlog["logdata"]:
                 username = jsonlog["logdata"]["UserName"]
             else:
                 username = ''
 
-            if jsonlog["logdata"].has_key("SESSION"):
+            if "SESSION" in jsonlog["logdata"]:
                 session = jsonlog["logdata"]["SESSION"]
             else:
                 session = ''
 
-            if jsonlog["logdata"].has_key("LOCALVERSION"):
+            if "LOCALVERSION" in jsonlog["logdata"]:
                 localversion = jsonlog["logdata"]["LOCALVERSION"]
             else:
                 localversion = ''
 
-            if jsonlog["logdata"].has_key("REMOTEVERSION"):
+            if "REMOTEVERSION" in jsonlog["logdata"]:
                 remoteversion = jsonlog["logdata"]["REMOTEVERSION"]
             else:
                 remoteversion = ''
 
-            if jsonlog["logdata"].has_key("DF"):
+            if "DF" in jsonlog["logdata"]:
                 df = jsonlog["logdata"]["DF"]
             else:
                 df = ''
 
-            if jsonlog["logdata"].has_key("ID"):
+            if "ID" in jsonlog["logdata"]:
                 idid = jsonlog["logdata"]["ID"]
             else:
                 idid = ''
 
-            if jsonlog["logdata"].has_key("IN"):
+            if "IN" in jsonlog["logdata"]:
                 inin = jsonlog["logdata"]["IN"]
             else:
                 inin = ''
 
-            if jsonlog["logdata"].has_key("LEN"):
+            if "LEN" in jsonlog["logdata"]:
                 lenlen = jsonlog["logdata"]["LEN"]
             else:
                 lenlen = ''
 
-            if jsonlog["logdata"].has_key("MAC"):
+            if "MAC" in jsonlog["logdata"]:
                 mac = jsonlog["logdata"]["MAC"]
             else:
                 mac = ''
 
-            if jsonlog["logdata"].has_key("OUT"):
+            if "OUT" in jsonlog["logdata"]:
                 outout = jsonlog["logdata"]["OUT"]
             else:
                 outout = ''
 
-            if jsonlog["logdata"].has_key("PREC"):
+            if "PREC" in jsonlog["logdata"]:
                 prec = jsonlog["logdata"]["PREC"]
             else:
                 prec = ''
 
-            if jsonlog["logdata"].has_key("PROTO"):
+            if "PROTO" in jsonlog["logdata"]:
                 proto = jsonlog["logdata"]["PROTO"]
             else:
                 proto = ''
 
-            if jsonlog["logdata"].has_key("RES"):
+            if "RES" in jsonlog["logdata"]:
                 res = jsonlog["logdata"]["RES"]
             else:
                 res = ''
 
-            if jsonlog["logdata"].has_key("SYN"):
+            if "SYN" in jsonlog["logdata"]:
                 syn = jsonlog["logdata"]["SYN"]
             else:
                 syn = ''
 
-            if jsonlog["logdata"].has_key("TOS"):
+            if "TOS" in jsonlog["logdata"]:
                 tos = jsonlog["logdata"]["TOS"]
             else:
                 tos = ''
 
-            if jsonlog["logdata"].has_key("TTL"):
+            if "TTL" in jsonlog["logdata"]:
                 ttl = jsonlog["logdata"]["TTL"]
             else:
                 ttl = ''
 
-            if jsonlog["logdata"].has_key("URGP"):
+            if "URGP" in jsonlog["logdata"]:
                 urgp = jsonlog["logdata"]["URGP"]
             else:
                 urgp = ''
 
-            if jsonlog["logdata"].has_key("WINDOW"):
+            if "WINDOW" in jsonlog["logdata"]:
                 window = jsonlog["logdata"]["WINDOW"]
             else:
                 window = ''
 
             # 扩表后的新加解析日志请求格式化
-            if jsonlog["logdata"].has_key("REPO"):
+            if "REPO" in jsonlog["logdata"]:
                 repo = jsonlog["logdata"]["REPO"]
             else:
                 repo = ''
             
-            if jsonlog["logdata"].has_key("NTP CMD"):
+            if "NTP CMD" in jsonlog["logdata"]:
                 ntp_cmd = jsonlog["logdata"]["NTP CMD"]
             else:
                 ntp_cmd = ''
 
-            if jsonlog["logdata"].has_key("ARGS"):
+            if "ARGS" in jsonlog["logdata"]:
                 args = jsonlog["logdata"]["ARGS"]
             else:
                 args = ''
 
-            if jsonlog["logdata"].has_key("CMD"):
+            if "CMD" in jsonlog["logdata"]:
                 cmd = jsonlog["logdata"]["CMD"]
             else:
                 cmd = ''
 
-            if jsonlog["logdata"].has_key("BANNER_ID"):
+            if "BANNER_ID" in jsonlog["logdata"]:
                 banner_id = jsonlog["logdata"]["BANNER_ID"]
             else:
                 banner_id = ''
 
-            if jsonlog["logdata"].has_key("DATA"):
+            if "DATA" in jsonlog["logdata"]:
                 data = jsonlog["logdata"]["DATA"]
             else:
                 data = ''      
 
-            if jsonlog["logdata"].has_key("FUNCTION"):
+            if "FUNCTION" in jsonlog["logdata"]:
                 function = jsonlog["logdata"]["FUNCTION"]
             else:
                 function = ''           
 
-            if jsonlog["logdata"].has_key("VNC Client Response"):
+            if "VNC Client Response" in jsonlog["logdata"]:
                 vnc_client_response = jsonlog["logdata"]["VNC Client Response"]
             else:
                 vnc_client_response = '' 
 
-            if jsonlog["logdata"].has_key("VNC Password"):
+            if "VNC Password" in jsonlog["logdata"]:
                 vnc_password = jsonlog["logdata"]["VNC Password"]
             else:
                 vnc_password = '' 
 
-            if jsonlog["logdata"].has_key("VNC Server Challenge"):
+            if "VNC Server Challenge" in jsonlog["logdata"]:
                 vnc_server_challenge = jsonlog["logdata"]["VNC Server Challenge"]
             else:
                 vnc_server_challenge = '' 
 
-            if jsonlog["logdata"].has_key("INPUT"):
+            if "INPUT" in jsonlog["logdata"]:
                 inputs = jsonlog["logdata"]["INPUT"]
             else:
                 inputs = '' 
 
-            if jsonlog["logdata"].has_key("DOMAIN"):
+            if "DOMAIN" in jsonlog["logdata"]:
                 domain = jsonlog["logdata"]["DOMAIN"]
             else:
                 domain = '' 
 
-            if jsonlog["logdata"].has_key("HEADERS"):
-                if jsonlog["logdata"]["HEADERS"].has_key("call-id"):
+            if "HEADERS" in jsonlog["logdata"]:
+                if "call-id" in jsonlog["logdata"]["HEADERS"]:
                     headers_call_id = jsonlog["logdata"]["HEADERS"]["call-id"][0]
                 else:
                     headers_call_id = ''
 
-                if jsonlog["logdata"]["HEADERS"].has_key("content_length"):
+                if "content_length" in jsonlog["logdata"]["HEADERS"]:
                     headers_content_length = jsonlog["logdata"]["HEADERS"]["content_length"][0]
                 else:
                     headers_content_length = ''
 
-                if jsonlog["logdata"]["HEADERS"].has_key("cseq"):
+                if "cseq" in jsonlog["logdata"]["HEADERS"]:
                     headers_cseq = jsonlog["logdata"]["HEADERS"]["cseq"][0]
                 else:
                     headers_cseq = ''
 
-                if jsonlog["logdata"]["HEADERS"].has_key("from"):
+                if "from" in jsonlog["logdata"]["HEADERS"]:
                     headers_from = jsonlog["logdata"]["HEADERS"]["from"][0]
                 else:
                     headers_from = ''
 
-                if jsonlog["logdata"]["HEADERS"].has_key("to"):
+                if "to" in jsonlog["logdata"]["HEADERS"]:
                     headers_to = jsonlog["logdata"]["HEADERS"]["to"][0]
                 else:
                     headers_to = ''
 
-                if jsonlog["logdata"]["HEADERS"].has_key("via"):
+                if "via" in jsonlog["logdata"]["HEADERS"]:
                     headers_via = jsonlog["logdata"]["HEADERS"]["via"][0]
                 else:
                     headers_via = ''
@@ -265,57 +265,57 @@ def parserlog(jsonlog):
                 headers_to = ''
                 headers_via = ''
 
-            if jsonlog["logdata"].has_key("COMMUNITY_STRING"):
+            if "COMMUNITY_STRING" in jsonlog["logdata"]:
                 community_string = jsonlog["logdata"]["COMMUNITY_STRING"]
             else:
                 community_string = '' 
 
-            if jsonlog["logdata"].has_key("REQUESTS"):
+            if "REQUESTS" in jsonlog["logdata"]:
                 requests = jsonlog["logdata"]["REQUESTS"][0]
             else:
                 requests = '' 
 
-            if jsonlog["logdata"].has_key("URG"):
+            if "URG" in jsonlog["logdata"]:
                 urg = jsonlog["logdata"]["URG"]
             else:
                 urg = ''
 
-            if jsonlog["logdata"].has_key("PSH"):
+            if "PSH" in jsonlog["logdata"]:
                 psh = jsonlog["logdata"]["PSH"]
             else:
                 psh = '' 
 
-            if jsonlog["logdata"].has_key("FIN"):
+            if "FIN" in jsonlog["logdata"]:
                 fin = jsonlog["logdata"]["FIN"]
             else:
                 fin = ''
 
-            if jsonlog["logdata"].has_key("AppName"):
+            if "AppName" in jsonlog["logdata"]:
                 appname = jsonlog["logdata"]["AppName"]
             else:
                 appname = ''
 
-            if jsonlog["logdata"].has_key("CltIntName"):
+            if "CltIntName" in jsonlog["logdata"]:
                 cltintname = jsonlog["logdata"]["CltIntName"]
             else:
                 cltintname = ''
 
-            if jsonlog["logdata"].has_key("Database"):
+            if "Database" in jsonlog["logdata"]:
                 database = jsonlog["logdata"]["Database"]
             else:
                 database = ''
 
-            if jsonlog["logdata"].has_key("Language"):
+            if "Language" in jsonlog["logdata"]:
                 language = jsonlog["logdata"]["Language"]
             else:
                 language = ''
 
-            if jsonlog["logdata"].has_key("ServerName"):
+            if "ServerName" in jsonlog["logdata"]:
                 servername = jsonlog["logdata"]["ServerName"]
             else:
                 servername = ''
 
-            if jsonlog["logdata"].has_key("DOMAINNAME"):
+            if "DOMAINNAME" in jsonlog["logdata"]:
                 domainname = jsonlog["logdata"]["DOMAINNAME"]
             else:
                 domainname = ''
@@ -371,22 +371,22 @@ def parserlog(jsonlog):
             servername = ''
             domainname = ''
 
-        if jsonlog.has_key("logtype"):
+        if "logtype" in jsonlog:
             logtype = jsonlog["logtype"]
         else:
             logtype = ''
 
-        if jsonlog.has_key("node_id"):
+        if "node_id" in jsonlog:
             node_id = jsonlog["node_id"]
         else:
             node_id = ''
 
-        if jsonlog.has_key("src_host"):
+        if "src_host" in jsonlog:
             src_host = jsonlog["src_host"]
         else:
             src_host = ''
 
-        if jsonlog.has_key("src_port"):
+        if "src_port" in jsonlog:
             src_port = jsonlog["src_port"]
         else:
             src_port = 0

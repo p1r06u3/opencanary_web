@@ -18,7 +18,7 @@ def hoststatus(lasttime, hostname, ip, status):
 
     # 计算host表主键id
     idmd5 = hashlib.md5()
-    idmd5.update(hostname + ip)
+    idmd5.update((hostname + ip).encode("utf-8"))
     id = idmd5.hexdigest()
     return hostop.insert_data(id, lasttime, hostname, ip, status)
 
@@ -26,12 +26,14 @@ def hoststatus(lasttime, hostname, ip, status):
 def hostonline():
     # 查询所有在线主机
     onlines = hostop.select_data()
+    print('Host detector \033[1;35m completed!!! \033[0m!')
     if onlines:
         for h in onlines:
             # 用当前时间减去主机最后在线时间
             time_value = datetime.datetime.now() - h.last_time
-            print datetime.datetime.now()
-            print h.last_time
+            print(datetime.datetime.now())
+            print (h.last_time)
+            # print(time_value.seconds)
             # 时间间隔大于20秒就认为机器离线，更新数据库主机状态
             if time_value.seconds > 50:
                 hoststatus(

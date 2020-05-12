@@ -35,7 +35,7 @@ class ini_info(object):
 
     def cfg_get(self, section, option):
         v = self.cfg.get(section, option)
-        print v
+        print(v)
         return v
 
     def delete_item(self, section, key):

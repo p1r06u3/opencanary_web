@@ -12,8 +12,10 @@ from email.mime.text import MIMEText
 from util.config import ini_info
 from application import emailfile, mail_host, mail_user, mail_pass, mail_postfix
 import sys
-reload(sys)
-sys.setdefaultencoding("utf-8")
+from importlib import reload
+if sys.version[0] == '2':
+    reload(sys)
+    sys.setdefaultencoding("utf-8")
 
 
 def maillists():
@@ -41,10 +43,10 @@ def send_mail(sub, content):
         server.login(mail_user, mail_pass)  #登录操作
         server.sendmail(me, to_list, msg.as_string())
         server.close()
-        print "email send success."
+        print("email send success.")
         return True
-    except Exception, e:
-        print "email send failed: " + str(e)
+    except Exception as e:
+        print("email send failed: " + str(e))
         return False
 
 

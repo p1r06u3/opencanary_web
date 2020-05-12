@@ -8,7 +8,7 @@
 """
 
 from util.auth import jwtauth
-from base import BaseHandler
+from handlers.base import BaseHandler
 import json
 from util.config import ini_info
 # import sys

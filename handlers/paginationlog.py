@@ -11,7 +11,7 @@
 import tornado
 import json
 from service.paginationlog import listpage, total_atk_page, total_wit_page
-from base import BaseHandler
+from handlers.base import BaseHandler
 from util.auth import jwtauth
 
 @jwtauth

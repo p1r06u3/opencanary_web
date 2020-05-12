@@ -12,7 +12,7 @@ import tornado
 import json
 from service.splitjsonlog import parserlog
 from service.paginationlog import listpage
-from base import BaseHandler
+from handlers.base import BaseHandler
 from util.auth import jwtauth
 from service.emailservice import send_mail
 

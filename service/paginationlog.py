@@ -9,14 +9,16 @@
 
 from dbs.dal.LogOperate import LogOp
 import sys
-reload(sys)
-sys.setdefaultencoding('utf8')
+from importlib import reload
+if sys.version[0] == '2':
+    reload(sys)
+    sys.setdefaultencoding('utf8')
 
 logselect = LogOp()
 
 
 def listpage(param):
-    if param.has_key("white") and param.has_key("page"):
+    if "white" in param and "page" in param:
         page = param["page"]
         # print page
         page_list = []
@@ -100,7 +102,7 @@ def listpage(param):
         # print page_res
         return page_res
     else:
-        if param.has_key("page"):
+        if "page" in param:
             page = param["page"]
             # print page
             page_list = []

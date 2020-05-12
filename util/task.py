@@ -40,4 +40,5 @@ def check_scheduler():
 
 def host_scheduler():
     sched.add_job(hostonline, 'interval', seconds=30, id='check_host')
+    print("It is \033[1;35m running \033[0m!")
     return True

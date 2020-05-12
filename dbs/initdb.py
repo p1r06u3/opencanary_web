@@ -16,7 +16,7 @@ from sqlalchemy.orm import sessionmaker
 # 数据库配置
 DB_HOST = '127.0.0.1'
 DB_USER = 'root'
-DB_PWD = 'huanchengzijidemima'
+DB_PWD = 'JDWP@jdwp'
 DB_NAME = 'honeypot'
 
 # 创建对象基类

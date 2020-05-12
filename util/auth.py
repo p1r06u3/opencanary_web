@@ -12,8 +12,8 @@ import random
 import string
 
 
-secret_key = ''.join(random.sample(string.ascii_letters + string.digits, 28))
-
+#secret_key = ''.join(random.sample(string.ascii_letters + string.digits, 28))
+secret_key="fdsafdasfdsafdsfsaffsadfsda"
 options = {
     'verify_signature': True,
     'verify_exp': True,
@@ -28,11 +28,10 @@ def jwtauth(handler_class):
 
     def wrap_execute(handler_execute):
         def require_auth(handler, kwargs):
-
             auth = handler.request.headers.get('Authorization')
+            #print(auth)
             if auth:
                 parts = auth.split()
-
                 if parts[0].lower() != 'opencanary':
                     handler._transforms = []
                     handler.set_status(401)
@@ -50,13 +49,15 @@ def jwtauth(handler_class):
                     handler.finish()
 
                 token = parts[1]
+                print(token)
                 try:
                     jwt.decode(token, secret_key, options=options)
-
-                except Exception, e:
+                    print("test")
+                except Exception as e:
+                    print(e)
                     handler._transforms = []
                     handler.set_status(401)
-                    handler.write(e.message)
+                    handler.write(e)
                     handler.finish()
             else:
                 handler._transforms = []
