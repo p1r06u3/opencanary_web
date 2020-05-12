@@ -12,8 +12,8 @@ import random
 import string
 
 
-#secret_key = ''.join(random.sample(string.ascii_letters + string.digits, 28))
-secret_key="fdsafdasfdsafdsfsaffsadfsda"
+secret_key = ''.join(random.sample(string.ascii_letters + string.digits, 28))
+#secret_key="fdsafdasfdsafdsfsaffsadfsda"
 options = {
     'verify_signature': True,
     'verify_exp': True,

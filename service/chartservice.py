@@ -39,7 +39,7 @@ def attack_num(sourceDataz):
     """ 每月攻击数量统计 """
     # 当前的年份
     now = datetime.datetime.now().year
-    #now=2019
+    now=2019
     attack_res = nums.attack_select_num(now)
     print("attack_res:"+str(attack_res))
     # [(5, 1), (7, 2), (8, 258), (9, 3)]
@@ -130,7 +130,7 @@ def pie_num(piesoureData):
     # 当前的年份
     now = datetime.datetime.now().year
     """ 饼图数据 """
-    #now=2019
+    now=2019
     data_pie = nums.pie_select_num(now)
     print(data_pie)
     if data_pie:

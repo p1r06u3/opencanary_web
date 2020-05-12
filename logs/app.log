@@ -18965,3 +18965,405 @@ Scheduler started
 Looking for jobs to run
 No jobs; waiting until a job is added
 Added job "hostonline" to job store "default"
+Scheduler started
+Looking for jobs to run
+No jobs; waiting until a job is added
+Added job "hostonline" to job store "default"
+Looking for jobs to run
+Next wakeup is due at 2020-05-12 17:01:34.270583+08:00 (in 29.998284 seconds)
+Running job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:01:34 CST)" (scheduled at 2020-05-12 17:01:34.270583+08:00)
+SHOW VARIABLES LIKE 'sql_mode'
+{}
+SHOW VARIABLES LIKE 'lower_case_table_names'
+{}
+SELECT DATABASE()
+{}
+show collation where `Charset` = 'utf8mb4' and `Collation` = 'utf8mb4_bin'
+{}
+SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+{}
+SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+{}
+SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_bin AS anon_1
+{}
+BEGIN (implicit)
+SELECT `Host`.id AS `Host_id`, `Host`.last_time AS `Host_last_time`, `Host`.hostname AS `Host_hostname`, `Host`.ip AS `Host_ip`, `Host`.status AS `Host_status` 
+FROM `Host` 
+WHERE `Host`.status = %(status_1)s ORDER BY `Host`.last_time DESC
+{'status_1': 'online'}
+ROLLBACK
+Job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:02:04 CST)" executed successfully
+Scheduler started
+Looking for jobs to run
+No jobs; waiting until a job is added
+Added job "hostonline" to job store "default"
+304 GET / (192.168.109.1) 5.38ms
+304 GET /v1/static/img/favicon.ico (192.168.109.1) 1.28ms
+SHOW VARIABLES LIKE 'sql_mode'
+{}
+SHOW VARIABLES LIKE 'lower_case_table_names'
+{}
+SELECT DATABASE()
+{}
+show collation where `Charset` = 'utf8mb4' and `Collation` = 'utf8mb4_bin'
+{}
+SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+{}
+SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+{}
+SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_bin AS anon_1
+{}
+BEGIN (implicit)
+SELECT `User`.id AS `User_id`, `User`.username AS `User_username`, `User`.password AS `User_password`, `User`.create_time AS `User_create_time` 
+FROM `User` 
+WHERE `User`.username = %(username_1)s AND `User`.password = %(password_1)s
+{'username_1': 'admin', 'password_1': '21232f297a57a5a743894a0e4a801fc3'}
+ROLLBACK
+200 POST /auth/ (192.168.109.1) 45.10ms
+304 GET /static/js/3.698f09cb0a45aa89451f.js (192.168.109.1) 3.00ms
+304 GET /static/img/img.jpg (192.168.109.1) 1.57ms
+BEGIN (implicit)
+SELECT EXTRACT(month FROM `OpencanaryLog`.local_time) AS month, count(%(count_1)s) AS count 
+FROM `OpencanaryLog` 
+WHERE EXTRACT(year FROM `OpencanaryLog`.local_time) = %(param_1)s AND `OpencanaryLog`.white = %(white_1)s GROUP BY month
+{'count_1': '*', 'param_1': 2020, 'white_1': 2}
+ROLLBACK
+BEGIN (implicit)
+SELECT EXTRACT(month FROM `OpencanaryLog`.local_time) AS month, count(%(count_1)s) AS count 
+FROM `OpencanaryLog` 
+WHERE EXTRACT(year FROM `OpencanaryLog`.local_time) = %(param_1)s AND `OpencanaryLog`.white = %(white_1)s GROUP BY month
+{'count_1': '*', 'param_1': 2020, 'white_1': 1}
+ROLLBACK
+200 GET /chart?line (192.168.109.1) 17.80ms
+BEGIN (implicit)
+SELECT count(`OpencanaryLog`.logtype) AS count_1, `OpencanaryLog`.logtype AS `OpencanaryLog_logtype` 
+FROM `OpencanaryLog` 
+WHERE EXTRACT(year FROM `OpencanaryLog`.local_time) = %(param_1)s AND `OpencanaryLog`.white = %(white_1)s GROUP BY `OpencanaryLog`.logtype
+{'param_1': 2020, 'white_1': 2}
+ROLLBACK
+200 GET /chart/ (192.168.109.1) 6.48ms
+304 GET /v1/static/img/favicon.ico (192.168.109.1) 1.42ms
+304 GET /static/js/15.e5a998d7b6acda13aae0.js (192.168.109.1) 0.88ms
+304 GET /v1/static/img/favicon.ico (192.168.109.1) 1.62ms
+Running job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:02:13 CST)" (scheduled at 2020-05-12 17:02:13.699651+08:00)
+BEGIN (implicit)
+SELECT `Host`.id AS `Host_id`, `Host`.last_time AS `Host_last_time`, `Host`.hostname AS `Host_hostname`, `Host`.ip AS `Host_ip`, `Host`.status AS `Host_status` 
+FROM `Host` 
+WHERE `Host`.status = %(status_1)s ORDER BY `Host`.last_time DESC
+{'status_1': 'online'}
+ROLLBACK
+Job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:02:43 CST)" executed successfully
+BEGIN (implicit)
+SELECT `Host`.id AS `Host_id`, `Host`.last_time AS `Host_last_time`, `Host`.hostname AS `Host_hostname`, `Host`.ip AS `Host_ip`, `Host`.status AS `Host_status` 
+FROM `Host` ORDER BY `Host`.last_time DESC
+{}
+ROLLBACK
+304 GET /gethost/ (192.168.109.1) 8.39ms
+304 GET /v1/static/img/favicon.ico (192.168.109.1) 1.83ms
+BEGIN (implicit)
+SELECT `OpencanaryLog`.id AS `OpencanaryLog_id`, `OpencanaryLog`.dst_host AS `OpencanaryLog_dst_host`, `OpencanaryLog`.dst_port AS `OpencanaryLog_dst_port`, `OpencanaryLog`.honeycred AS `OpencanaryLog_honeycred`, `OpencanaryLog`.local_time AS `OpencanaryLog_local_time`, `OpencanaryLog`.hostname AS `OpencanaryLog_hostname`, `OpencanaryLog`.password AS `OpencanaryLog_password`, `OpencanaryLog`.path AS `OpencanaryLog_path`, `OpencanaryLog`.skin AS `OpencanaryLog_skin`, `OpencanaryLog`.useragent AS `OpencanaryLog_useragent`, `OpencanaryLog`.username AS `OpencanaryLog_username`, `OpencanaryLog`.session AS `OpencanaryLog_session`, `OpencanaryLog`.localversion AS `OpencanaryLog_localversion`, `OpencanaryLog`.remoteversion AS `OpencanaryLog_remoteversion`, `OpencanaryLog`.df AS `OpencanaryLog_df`, `OpencanaryLog`.idid AS `OpencanaryLog_idid`, `OpencanaryLog`.inin AS `OpencanaryLog_inin`, `OpencanaryLog`.lenlen AS `OpencanaryLog_lenlen`, `OpencanaryLog`.mac AS `OpencanaryLog_mac`, `OpencanaryLog`.outout AS `OpencanaryLog_outout`, `OpencanaryLog`.prec AS `OpencanaryLog_prec`, `OpencanaryLog`.proto AS `OpencanaryLog_proto`, `OpencanaryLog`.res AS `OpencanaryLog_res`, `OpencanaryLog`.syn AS `OpencanaryLog_syn`, `OpencanaryLog`.tos AS `OpencanaryLog_tos`, `OpencanaryLog`.ttl AS `OpencanaryLog_ttl`, `OpencanaryLog`.urgp AS `OpencanaryLog_urgp`, `OpencanaryLog`.`window` AS `OpencanaryLog_window`, `OpencanaryLog`.logtype AS `OpencanaryLog_logtype`, `OpencanaryLog`.node_id AS `OpencanaryLog_node_id`, `OpencanaryLog`.src_host AS `OpencanaryLog_src_host`, `OpencanaryLog`.src_port AS `OpencanaryLog_src_port`, `OpencanaryLog`.white AS `OpencanaryLog_white`, `OpencanaryLog`.repo AS `OpencanaryLog_repo`, `OpencanaryLog`.ntp_cmd AS `OpencanaryLog_ntp_cmd`, `OpencanaryLog`.args AS `OpencanaryLog_args`, `OpencanaryLog`.cmd AS `OpencanaryLog_cmd`, `OpencanaryLog`.banner_id AS `OpencanaryLog_banner_id`, `OpencanaryLog`.data AS `OpencanaryLog_data`, `OpencanaryLog`.`function` AS `OpencanaryLog_function`, `OpencanaryLog`.vnc_client_response AS `OpencanaryLog_vnc_client_response`, `OpencanaryLog`.vnc_password AS `OpencanaryLog_vnc_password`, `OpencanaryLog`.vnc_server_challenge AS `OpencanaryLog_vnc_server_challenge`, `OpencanaryLog`.inputs AS `OpencanaryLog_inputs`, `OpencanaryLog`.domain AS `OpencanaryLog_domain`, `OpencanaryLog`.headers_call_id AS `OpencanaryLog_headers_call_id`, `OpencanaryLog`.headers_content_length AS `OpencanaryLog_headers_content_length`, `OpencanaryLog`.headers_cseq AS `OpencanaryLog_headers_cseq`, `OpencanaryLog`.headers_from AS `OpencanaryLog_headers_from`, `OpencanaryLog`.headers_to AS `OpencanaryLog_headers_to`, `OpencanaryLog`.headers_via AS `OpencanaryLog_headers_via`, `OpencanaryLog`.community_string AS `OpencanaryLog_community_string`, `OpencanaryLog`.requests AS `OpencanaryLog_requests`, `OpencanaryLog`.urg AS `OpencanaryLog_urg`, `OpencanaryLog`.psh AS `OpencanaryLog_psh`, `OpencanaryLog`.fin AS `OpencanaryLog_fin`, `OpencanaryLog`.appname AS `OpencanaryLog_appname`, `OpencanaryLog`.cltintname AS `OpencanaryLog_cltintname`, `OpencanaryLog`.`database` AS `OpencanaryLog_database`, `OpencanaryLog`.language AS `OpencanaryLog_language`, `OpencanaryLog`.servername AS `OpencanaryLog_servername`, `OpencanaryLog`.domainname AS `OpencanaryLog_domainname` 
+FROM `OpencanaryLog` 
+WHERE `OpencanaryLog`.white = %(white_1)s ORDER BY `OpencanaryLog`.local_time DESC, `OpencanaryLog`.id 
+ LIMIT %(param_1)s, %(param_2)s
+{'white_1': 2, 'param_1': 0, 'param_2': 10}
+200 POST /log/list/ (192.168.109.1) 13.39ms
+SELECT count(`OpencanaryLog`.id) AS count_1 
+FROM `OpencanaryLog` 
+WHERE `OpencanaryLog`.white = %(white_1)s
+{'white_1': 2}
+ROLLBACK
+304 GET /log/list?type=2 (192.168.109.1) 8.07ms
+304 GET /v1/static/img/favicon.ico (192.168.109.1) 1.27ms
+BEGIN (implicit)
+SELECT `OpencanaryLog`.id AS `OpencanaryLog_id`, `OpencanaryLog`.dst_host AS `OpencanaryLog_dst_host`, `OpencanaryLog`.dst_port AS `OpencanaryLog_dst_port`, `OpencanaryLog`.honeycred AS `OpencanaryLog_honeycred`, `OpencanaryLog`.local_time AS `OpencanaryLog_local_time`, `OpencanaryLog`.hostname AS `OpencanaryLog_hostname`, `OpencanaryLog`.password AS `OpencanaryLog_password`, `OpencanaryLog`.path AS `OpencanaryLog_path`, `OpencanaryLog`.skin AS `OpencanaryLog_skin`, `OpencanaryLog`.useragent AS `OpencanaryLog_useragent`, `OpencanaryLog`.username AS `OpencanaryLog_username`, `OpencanaryLog`.session AS `OpencanaryLog_session`, `OpencanaryLog`.localversion AS `OpencanaryLog_localversion`, `OpencanaryLog`.remoteversion AS `OpencanaryLog_remoteversion`, `OpencanaryLog`.df AS `OpencanaryLog_df`, `OpencanaryLog`.idid AS `OpencanaryLog_idid`, `OpencanaryLog`.inin AS `OpencanaryLog_inin`, `OpencanaryLog`.lenlen AS `OpencanaryLog_lenlen`, `OpencanaryLog`.mac AS `OpencanaryLog_mac`, `OpencanaryLog`.outout AS `OpencanaryLog_outout`, `OpencanaryLog`.prec AS `OpencanaryLog_prec`, `OpencanaryLog`.proto AS `OpencanaryLog_proto`, `OpencanaryLog`.res AS `OpencanaryLog_res`, `OpencanaryLog`.syn AS `OpencanaryLog_syn`, `OpencanaryLog`.tos AS `OpencanaryLog_tos`, `OpencanaryLog`.ttl AS `OpencanaryLog_ttl`, `OpencanaryLog`.urgp AS `OpencanaryLog_urgp`, `OpencanaryLog`.`window` AS `OpencanaryLog_window`, `OpencanaryLog`.logtype AS `OpencanaryLog_logtype`, `OpencanaryLog`.node_id AS `OpencanaryLog_node_id`, `OpencanaryLog`.src_host AS `OpencanaryLog_src_host`, `OpencanaryLog`.src_port AS `OpencanaryLog_src_port`, `OpencanaryLog`.white AS `OpencanaryLog_white`, `OpencanaryLog`.repo AS `OpencanaryLog_repo`, `OpencanaryLog`.ntp_cmd AS `OpencanaryLog_ntp_cmd`, `OpencanaryLog`.args AS `OpencanaryLog_args`, `OpencanaryLog`.cmd AS `OpencanaryLog_cmd`, `OpencanaryLog`.banner_id AS `OpencanaryLog_banner_id`, `OpencanaryLog`.data AS `OpencanaryLog_data`, `OpencanaryLog`.`function` AS `OpencanaryLog_function`, `OpencanaryLog`.vnc_client_response AS `OpencanaryLog_vnc_client_response`, `OpencanaryLog`.vnc_password AS `OpencanaryLog_vnc_password`, `OpencanaryLog`.vnc_server_challenge AS `OpencanaryLog_vnc_server_challenge`, `OpencanaryLog`.inputs AS `OpencanaryLog_inputs`, `OpencanaryLog`.domain AS `OpencanaryLog_domain`, `OpencanaryLog`.headers_call_id AS `OpencanaryLog_headers_call_id`, `OpencanaryLog`.headers_content_length AS `OpencanaryLog_headers_content_length`, `OpencanaryLog`.headers_cseq AS `OpencanaryLog_headers_cseq`, `OpencanaryLog`.headers_from AS `OpencanaryLog_headers_from`, `OpencanaryLog`.headers_to AS `OpencanaryLog_headers_to`, `OpencanaryLog`.headers_via AS `OpencanaryLog_headers_via`, `OpencanaryLog`.community_string AS `OpencanaryLog_community_string`, `OpencanaryLog`.requests AS `OpencanaryLog_requests`, `OpencanaryLog`.urg AS `OpencanaryLog_urg`, `OpencanaryLog`.psh AS `OpencanaryLog_psh`, `OpencanaryLog`.fin AS `OpencanaryLog_fin`, `OpencanaryLog`.appname AS `OpencanaryLog_appname`, `OpencanaryLog`.cltintname AS `OpencanaryLog_cltintname`, `OpencanaryLog`.`database` AS `OpencanaryLog_database`, `OpencanaryLog`.language AS `OpencanaryLog_language`, `OpencanaryLog`.servername AS `OpencanaryLog_servername`, `OpencanaryLog`.domainname AS `OpencanaryLog_domainname` 
+FROM `OpencanaryLog` 
+WHERE `OpencanaryLog`.white = %(white_1)s ORDER BY `OpencanaryLog`.local_time DESC, `OpencanaryLog`.id 
+ LIMIT %(param_1)s, %(param_2)s
+{'white_1': 1, 'param_1': 0, 'param_2': 10}
+200 POST /log/list/ (192.168.109.1) 16.41ms
+SELECT count(`OpencanaryLog`.id) AS count_1 
+FROM `OpencanaryLog` 
+WHERE `OpencanaryLog`.white = %(white_1)s
+{'white_1': 1}
+ROLLBACK
+304 GET /log/list?type=1 (192.168.109.1) 8.52ms
+/root/Desktop/opencanary_web/service/chartservice.py modified; restarting server
+Scheduler started
+Looking for jobs to run
+No jobs; waiting until a job is added
+Added job "hostonline" to job store "default"
+Looking for jobs to run
+Next wakeup is due at 2020-05-12 17:03:05.803654+08:00 (in 29.999437 seconds)
+304 GET /v1/filterlist (192.168.109.1) 1.80ms
+200 GET /v1/static/img/favicon.ico (192.168.109.1) 2.51ms
+304 GET /v1/static/img/favicon.ico (192.168.109.1) 1.92ms
+304 GET /v1/static/img/favicon.ico (192.168.109.1) 1.50ms
+304 GET / (192.168.109.1) 1.49ms
+304 GET /v1/static/img/favicon.ico (192.168.109.1) 1.58ms
+304 GET /v1/static/img/favicon.ico (192.168.109.1) 2.37ms
+SHOW VARIABLES LIKE 'sql_mode'
+{}
+SHOW VARIABLES LIKE 'lower_case_table_names'
+{}
+SELECT DATABASE()
+{}
+show collation where `Charset` = 'utf8mb4' and `Collation` = 'utf8mb4_bin'
+{}
+SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+{}
+SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+{}
+SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_bin AS anon_1
+{}
+BEGIN (implicit)
+SELECT `User`.id AS `User_id`, `User`.username AS `User_username`, `User`.password AS `User_password`, `User`.create_time AS `User_create_time` 
+FROM `User` 
+WHERE `User`.username = %(username_1)s AND `User`.password = %(password_1)s
+{'username_1': 'admin', 'password_1': '21232f297a57a5a743894a0e4a801fc3'}
+ROLLBACK
+200 POST /auth/ (192.168.109.1) 25.90ms
+304 GET /v1/static/img/favicon.ico (192.168.109.1) 1.62ms
+Running job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:03:05 CST)" (scheduled at 2020-05-12 17:03:05.803654+08:00)
+BEGIN (implicit)
+SELECT `Host`.id AS `Host_id`, `Host`.last_time AS `Host_last_time`, `Host`.hostname AS `Host_hostname`, `Host`.ip AS `Host_ip`, `Host`.status AS `Host_status` 
+FROM `Host` 
+WHERE `Host`.status = %(status_1)s ORDER BY `Host`.last_time DESC
+{'status_1': 'online'}
+ROLLBACK
+Job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:03:35 CST)" executed successfully
+BEGIN (implicit)
+SELECT count(`OpencanaryLog`.logtype) AS count_1, `OpencanaryLog`.logtype AS `OpencanaryLog_logtype` 
+FROM `OpencanaryLog` 
+WHERE EXTRACT(year FROM `OpencanaryLog`.local_time) = %(param_1)s AND `OpencanaryLog`.white = %(white_1)s GROUP BY `OpencanaryLog`.logtype
+{'param_1': 2019, 'white_1': 2}
+ROLLBACK
+200 GET /chart/ (192.168.109.1) 8.67ms
+BEGIN (implicit)
+SELECT EXTRACT(month FROM `OpencanaryLog`.local_time) AS month, count(%(count_1)s) AS count 
+FROM `OpencanaryLog` 
+WHERE EXTRACT(year FROM `OpencanaryLog`.local_time) = %(param_1)s AND `OpencanaryLog`.white = %(white_1)s GROUP BY month
+{'count_1': '*', 'param_1': 2019, 'white_1': 2}
+ROLLBACK
+BEGIN (implicit)
+SELECT EXTRACT(month FROM `OpencanaryLog`.local_time) AS month, count(%(count_1)s) AS count 
+FROM `OpencanaryLog` 
+WHERE EXTRACT(year FROM `OpencanaryLog`.local_time) = %(param_1)s AND `OpencanaryLog`.white = %(white_1)s GROUP BY month
+{'count_1': '*', 'param_1': 2020, 'white_1': 1}
+ROLLBACK
+200 GET /chart?line (192.168.109.1) 14.72ms
+/root/Desktop/opencanary_web/util/auth.py modified; restarting server
+Scheduler started
+Looking for jobs to run
+No jobs; waiting until a job is added
+Added job "hostonline" to job store "default"
+Looking for jobs to run
+Next wakeup is due at 2020-05-12 17:03:49.887028+08:00 (in 29.998756 seconds)
+304 GET /v1/static/img/favicon.ico (192.168.109.1) 3.52ms
+SHOW VARIABLES LIKE 'sql_mode'
+{}
+SHOW VARIABLES LIKE 'lower_case_table_names'
+{}
+SELECT DATABASE()
+{}
+show collation where `Charset` = 'utf8mb4' and `Collation` = 'utf8mb4_bin'
+{}
+SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+{}
+SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+{}
+SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_bin AS anon_1
+{}
+BEGIN (implicit)
+SELECT `User`.id AS `User_id`, `User`.username AS `User_username`, `User`.password AS `User_password`, `User`.create_time AS `User_create_time` 
+FROM `User` 
+WHERE `User`.username = %(username_1)s AND `User`.password = %(password_1)s
+{'username_1': 'admin', 'password_1': '21232f297a57a5a743894a0e4a801fc3'}
+ROLLBACK
+200 POST /auth/ (192.168.109.1) 31.05ms
+BEGIN (implicit)
+SELECT EXTRACT(month FROM `OpencanaryLog`.local_time) AS month, count(%(count_1)s) AS count 
+FROM `OpencanaryLog` 
+WHERE EXTRACT(year FROM `OpencanaryLog`.local_time) = %(param_1)s AND `OpencanaryLog`.white = %(white_1)s GROUP BY month
+{'count_1': '*', 'param_1': 2019, 'white_1': 2}
+ROLLBACK
+BEGIN (implicit)
+SELECT EXTRACT(month FROM `OpencanaryLog`.local_time) AS month, count(%(count_1)s) AS count 
+FROM `OpencanaryLog` 
+WHERE EXTRACT(year FROM `OpencanaryLog`.local_time) = %(param_1)s AND `OpencanaryLog`.white = %(white_1)s GROUP BY month
+{'count_1': '*', 'param_1': 2020, 'white_1': 1}
+ROLLBACK
+200 GET /chart?line (192.168.109.1) 33.48ms
+BEGIN (implicit)
+SELECT count(`OpencanaryLog`.logtype) AS count_1, `OpencanaryLog`.logtype AS `OpencanaryLog_logtype` 
+FROM `OpencanaryLog` 
+WHERE EXTRACT(year FROM `OpencanaryLog`.local_time) = %(param_1)s AND `OpencanaryLog`.white = %(white_1)s GROUP BY `OpencanaryLog`.logtype
+{'param_1': 2019, 'white_1': 2}
+ROLLBACK
+200 GET /chart/ (192.168.109.1) 30.10ms
+304 GET /v1/static/img/favicon.ico (192.168.109.1) 4.34ms
+/root/Desktop/opencanary_web/util/auth.py modified; restarting server
+Scheduler started
+Looking for jobs to run
+No jobs; waiting until a job is added
+Added job "hostonline" to job store "default"
+Looking for jobs to run
+Next wakeup is due at 2020-05-12 17:04:14.186454+08:00 (in 29.997761 seconds)
+/root/Desktop/opencanary_web/util/auth.py modified; restarting server
+Scheduler started
+Looking for jobs to run
+No jobs; waiting until a job is added
+Added job "hostonline" to job store "default"
+Looking for jobs to run
+Next wakeup is due at 2020-05-12 17:04:16.316124+08:00 (in 29.998917 seconds)
+304 GET /v1/static/img/favicon.ico (192.168.109.1) 2.10ms
+SHOW VARIABLES LIKE 'sql_mode'
+{}
+SHOW VARIABLES LIKE 'lower_case_table_names'
+{}
+SELECT DATABASE()
+{}
+show collation where `Charset` = 'utf8mb4' and `Collation` = 'utf8mb4_bin'
+{}
+SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+{}
+SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+{}
+SELECT CAST('test collated returns' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_bin AS anon_1
+{}
+BEGIN (implicit)
+SELECT `User`.id AS `User_id`, `User`.username AS `User_username`, `User`.password AS `User_password`, `User`.create_time AS `User_create_time` 
+FROM `User` 
+WHERE `User`.username = %(username_1)s AND `User`.password = %(password_1)s
+{'username_1': 'admin', 'password_1': '21232f297a57a5a743894a0e4a801fc3'}
+ROLLBACK
+200 POST /auth/ (192.168.109.1) 32.71ms
+BEGIN (implicit)
+SELECT count(`OpencanaryLog`.logtype) AS count_1, `OpencanaryLog`.logtype AS `OpencanaryLog_logtype` 
+FROM `OpencanaryLog` 
+WHERE EXTRACT(year FROM `OpencanaryLog`.local_time) = %(param_1)s AND `OpencanaryLog`.white = %(white_1)s GROUP BY `OpencanaryLog`.logtype
+{'param_1': 2019, 'white_1': 2}
+ROLLBACK
+304 GET /chart/ (192.168.109.1) 28.65ms
+304 GET /v1/static/img/favicon.ico (192.168.109.1) 1.49ms
+BEGIN (implicit)
+SELECT EXTRACT(month FROM `OpencanaryLog`.local_time) AS month, count(%(count_1)s) AS count 
+FROM `OpencanaryLog` 
+WHERE EXTRACT(year FROM `OpencanaryLog`.local_time) = %(param_1)s AND `OpencanaryLog`.white = %(white_1)s GROUP BY month
+{'count_1': '*', 'param_1': 2019, 'white_1': 2}
+ROLLBACK
+BEGIN (implicit)
+SELECT EXTRACT(month FROM `OpencanaryLog`.local_time) AS month, count(%(count_1)s) AS count 
+FROM `OpencanaryLog` 
+WHERE EXTRACT(year FROM `OpencanaryLog`.local_time) = %(param_1)s AND `OpencanaryLog`.white = %(white_1)s GROUP BY month
+{'count_1': '*', 'param_1': 2020, 'white_1': 1}
+ROLLBACK
+304 GET /chart?line (192.168.109.1) 11.13ms
+304 GET /v1/dashboard (192.168.109.1) 1.39ms
+BEGIN (implicit)
+SELECT EXTRACT(month FROM `OpencanaryLog`.local_time) AS month, count(%(count_1)s) AS count 
+FROM `OpencanaryLog` 
+WHERE EXTRACT(year FROM `OpencanaryLog`.local_time) = %(param_1)s AND `OpencanaryLog`.white = %(white_1)s GROUP BY month
+{'count_1': '*', 'param_1': 2019, 'white_1': 2}
+ROLLBACK
+BEGIN (implicit)
+SELECT EXTRACT(month FROM `OpencanaryLog`.local_time) AS month, count(%(count_1)s) AS count 
+FROM `OpencanaryLog` 
+WHERE EXTRACT(year FROM `OpencanaryLog`.local_time) = %(param_1)s AND `OpencanaryLog`.white = %(white_1)s GROUP BY month
+{'count_1': '*', 'param_1': 2020, 'white_1': 1}
+ROLLBACK
+304 GET /chart?line (192.168.109.1) 16.47ms
+BEGIN (implicit)
+SELECT count(`OpencanaryLog`.logtype) AS count_1, `OpencanaryLog`.logtype AS `OpencanaryLog_logtype` 
+FROM `OpencanaryLog` 
+WHERE EXTRACT(year FROM `OpencanaryLog`.local_time) = %(param_1)s AND `OpencanaryLog`.white = %(white_1)s GROUP BY `OpencanaryLog`.logtype
+{'param_1': 2019, 'white_1': 2}
+ROLLBACK
+304 GET /chart/ (192.168.109.1) 8.83ms
+200 GET /v1/static/img/favicon.ico (192.168.109.1) 2.13ms
+Running job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:04:16 CST)" (scheduled at 2020-05-12 17:04:16.316124+08:00)
+BEGIN (implicit)
+SELECT `Host`.id AS `Host_id`, `Host`.last_time AS `Host_last_time`, `Host`.hostname AS `Host_hostname`, `Host`.ip AS `Host_ip`, `Host`.status AS `Host_status` 
+FROM `Host` 
+WHERE `Host`.status = %(status_1)s ORDER BY `Host`.last_time DESC
+{'status_1': 'online'}
+ROLLBACK
+Job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:04:46 CST)" executed successfully
+Running job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:05:16 CST)" (scheduled at 2020-05-12 17:04:46.316124+08:00)
+BEGIN (implicit)
+SELECT `Host`.id AS `Host_id`, `Host`.last_time AS `Host_last_time`, `Host`.hostname AS `Host_hostname`, `Host`.ip AS `Host_ip`, `Host`.status AS `Host_status` 
+FROM `Host` 
+WHERE `Host`.status = %(status_1)s ORDER BY `Host`.last_time DESC
+{'status_1': 'online'}
+ROLLBACK
+Job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:05:16 CST)" executed successfully
+Running job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:05:46 CST)" (scheduled at 2020-05-12 17:05:16.316124+08:00)
+BEGIN (implicit)
+SELECT `Host`.id AS `Host_id`, `Host`.last_time AS `Host_last_time`, `Host`.hostname AS `Host_hostname`, `Host`.ip AS `Host_ip`, `Host`.status AS `Host_status` 
+FROM `Host` 
+WHERE `Host`.status = %(status_1)s ORDER BY `Host`.last_time DESC
+{'status_1': 'online'}
+ROLLBACK
+Job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:05:46 CST)" executed successfully
+Running job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:06:16 CST)" (scheduled at 2020-05-12 17:05:46.316124+08:00)
+BEGIN (implicit)
+SELECT `Host`.id AS `Host_id`, `Host`.last_time AS `Host_last_time`, `Host`.hostname AS `Host_hostname`, `Host`.ip AS `Host_ip`, `Host`.status AS `Host_status` 
+FROM `Host` 
+WHERE `Host`.status = %(status_1)s ORDER BY `Host`.last_time DESC
+{'status_1': 'online'}
+ROLLBACK
+Job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:06:16 CST)" executed successfully
+Running job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:06:46 CST)" (scheduled at 2020-05-12 17:06:16.316124+08:00)
+BEGIN (implicit)
+SELECT `Host`.id AS `Host_id`, `Host`.last_time AS `Host_last_time`, `Host`.hostname AS `Host_hostname`, `Host`.ip AS `Host_ip`, `Host`.status AS `Host_status` 
+FROM `Host` 
+WHERE `Host`.status = %(status_1)s ORDER BY `Host`.last_time DESC
+{'status_1': 'online'}
+ROLLBACK
+Job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:06:46 CST)" executed successfully
+Running job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:07:16 CST)" (scheduled at 2020-05-12 17:06:46.316124+08:00)
+BEGIN (implicit)
+SELECT `Host`.id AS `Host_id`, `Host`.last_time AS `Host_last_time`, `Host`.hostname AS `Host_hostname`, `Host`.ip AS `Host_ip`, `Host`.status AS `Host_status` 
+FROM `Host` 
+WHERE `Host`.status = %(status_1)s ORDER BY `Host`.last_time DESC
+{'status_1': 'online'}
+ROLLBACK
+Job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:07:16 CST)" executed successfully
+Running job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:07:46 CST)" (scheduled at 2020-05-12 17:07:16.316124+08:00)
+BEGIN (implicit)
+SELECT `Host`.id AS `Host_id`, `Host`.last_time AS `Host_last_time`, `Host`.hostname AS `Host_hostname`, `Host`.ip AS `Host_ip`, `Host`.status AS `Host_status` 
+FROM `Host` 
+WHERE `Host`.status = %(status_1)s ORDER BY `Host`.last_time DESC
+{'status_1': 'online'}
+ROLLBACK
+Job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:07:46 CST)" executed successfully
+Running job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:08:16 CST)" (scheduled at 2020-05-12 17:07:46.316124+08:00)
+BEGIN (implicit)
+SELECT `Host`.id AS `Host_id`, `Host`.last_time AS `Host_last_time`, `Host`.hostname AS `Host_hostname`, `Host`.ip AS `Host_ip`, `Host`.status AS `Host_status` 
+FROM `Host` 
+WHERE `Host`.status = %(status_1)s ORDER BY `Host`.last_time DESC
+{'status_1': 'online'}
+ROLLBACK
+Job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:08:16 CST)" executed successfully
+Running job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:08:46 CST)" (scheduled at 2020-05-12 17:08:16.316124+08:00)
+BEGIN (implicit)
+SELECT `Host`.id AS `Host_id`, `Host`.last_time AS `Host_last_time`, `Host`.hostname AS `Host_hostname`, `Host`.ip AS `Host_ip`, `Host`.status AS `Host_status` 
+FROM `Host` 
+WHERE `Host`.status = %(status_1)s ORDER BY `Host`.last_time DESC
+{'status_1': 'online'}
+ROLLBACK
+Job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:08:46 CST)" executed successfully
+Running job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:09:16 CST)" (scheduled at 2020-05-12 17:08:46.316124+08:00)
+BEGIN (implicit)
+SELECT `Host`.id AS `Host_id`, `Host`.last_time AS `Host_last_time`, `Host`.hostname AS `Host_hostname`, `Host`.ip AS `Host_ip`, `Host`.status AS `Host_status` 
+FROM `Host` 
+WHERE `Host`.status = %(status_1)s ORDER BY `Host`.last_time DESC
+{'status_1': 'online'}
+ROLLBACK
+Job "hostonline (trigger: interval[0:00:30], next run at: 2020-05-12 17:09:16 CST)" executed successfully
+/root/Desktop/opencanary_web/util/auth.py modified; restarting server
+Scheduler started
+Looking for jobs to run
+No jobs; waiting until a job is added
+Added job "hostonline" to job store "default"
+Looking for jobs to run
+Next wakeup is due at 2020-05-12 17:09:21.872952+08:00 (in 29.999451 seconds)
