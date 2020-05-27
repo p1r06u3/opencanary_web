@@ -1,3 +1,6 @@
+# 使用之前
+确认一下本机的防火墙是不是已经关了，如果关了需要打开防火墙，因为docker的网络管理是基于防火墙，关闭防火墙会导致打包失败、docker容器不能上网等问题
+
 # 使用说明
 1. 使用agent的话，就用./buildDocker.sh进行打包
 2. 使用master的话，就用./buildMasterDocker.sh进行打包
@@ -23,6 +26,7 @@ $ docker ps | grep honeypot
 ```
 
 ## honeypot-master
+使用命令`./buildWebDocker.sh`进行docker打包
 使用命令`docker run -tdi -p 12321:80 --privileged honeypot-master:1.0 bash`
 由于是通过特权模式创建的容器所以需要通过`docker exec`的方式进入容器
 ```

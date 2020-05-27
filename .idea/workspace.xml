@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8fcf639f-fd52-4aca-b0a6-0ebc4dda1b34" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/DockerBasefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/Dockerfile-master" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile-master" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/buildDocker.sh" beforeDir="false" afterPath="$PROJECT_DIR$/buildDocker.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/buildMasterDocker.sh" beforeDir="false" afterPath="$PROJECT_DIR$/buildMasterDocker.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/docker_readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/docker_readme.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,9 +16,10 @@
         <counts>
           <entry key="project.closed" value="3" />
           <entry key="project.open.time.0" value="2" />
+          <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.33" value="1" />
-          <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.open.time.5" value="2" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -32,7 +27,7 @@
           <entry key="DockerBasefile" value="1" />
           <entry key="Dockerfile" value="1" />
           <entry key="Dockerfile-master" value="1" />
-          <entry key="md" value="1" />
+          <entry key="md" value="2" />
           <entry key="sh" value="4" />
           <entry key="yml" value="1" />
         </counts>
@@ -41,7 +36,7 @@
         <counts>
           <entry key="Bash" value="4" />
           <entry key="Dockerfile" value="3" />
-          <entry key="Markdown" value="1" />
+          <entry key="Markdown" value="2" />
           <entry key="YAML" value="1" />
         </counts>
       </usages-collector>
@@ -50,11 +45,13 @@
           <entry key="Dockerfile" value="1" />
           <entry key="Dockerfile-master" value="1" />
           <entry key="md" value="23" />
+          <entry key="sh" value="29" />
           <entry key="yml" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+          <entry key="Bash" value="29" />
           <entry key="Dockerfile" value="2" />
           <entry key="Markdown" value="23" />
           <entry key="YAML" value="13" />
@@ -96,13 +93,32 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docker_readme.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="200">
+              <first_editor relative-caret-position="550">
                 <caret line="25" column="70" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="70" />
               </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/install/install_opencanary_agent.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1826">
+              <caret line="83" column="54" selection-start-line="83" selection-start-column="54" selection-end-line="83" selection-end-column="54" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor />
               <second_editor />
             </state>
           </provider>
@@ -147,6 +163,7 @@
         <option value="$PROJECT_DIR$/docker/Dockerfile" />
         <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/Dockerfile-master" />
+        <option value="$PROJECT_DIR$/install/install_opencanary_agent.sh" />
       </list>
     </option>
   </component>
@@ -162,9 +179,9 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1920" />
-    <option name="width" value="2554" />
-    <option name="height" value="1407" />
+    <option name="x" value="1919" />
+    <option name="width" value="2562" />
+    <option name="height" value="1408" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -174,13 +191,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="pull" type="b2602c69:ProjectViewProjectNode" />
               <item name="pull" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pull" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pull" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pull" type="b2602c69:ProjectViewProjectNode" />
@@ -196,11 +217,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../opencanary_web" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -243,7 +265,7 @@
     <frame x="1919" y="0" width="2562" height="1408" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25815433" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26213205" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -276,18 +298,23 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/docker/maridba.yml">
+    <entry file="file://$PROJECT_DIR$/docker/install/install_opencanary_web.sh" />
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" column="29" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="29" />
+        <state relative-caret-position="132">
+          <caret line="6" selection-start-line="6" selection-start-column="1" selection-end-line="17" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docker/install/install_opencanary_web.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/install/install_opencanary_web.sh">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/buildMasterDocker.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/buildDocker.sh">
       <provider selected="true" editor-type-id="text-editor">
@@ -296,20 +323,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" selection-start-line="6" selection-start-column="1" selection-end-line="17" selection-end-column="27" />
+    <entry file="file://$PROJECT_DIR$/docker_readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="550">
+            <caret line="25" column="70" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="70" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DockerBasefile">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/buildMasterDocker.sh">
+    <entry file="file://$PROJECT_DIR$/install/install_opencanary_agent.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="1826">
+          <caret line="83" column="54" selection-start-line="83" selection-start-column="54" selection-end-line="83" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker/maridba.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="29" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -320,12 +354,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docker_readme.md">
+    <entry file="file://$PROJECT_DIR$/DockerBasefile">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="200">
-            <caret line="25" column="70" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="70" />
-          </first_editor>
+          <first_editor />
           <second_editor />
         </state>
       </provider>
