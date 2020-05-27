@@ -1,6 +1,13 @@
 # 使用之前
 确认一下本机的防火墙是不是已经关了，如果关了需要打开防火墙，因为docker的网络管理是基于防火墙，关闭防火墙会导致打包失败、docker容器不能上网等问题
 
+## 已经打包并发布在腾讯云的docker仓库
+不想自己打包的可以通过以下命令来获取最新镜像
+```
+docker pull ccr.ccs.tencentyun.com/otherproject/honeypot-web
+docker pull ccr.ccs.tencentyun.com/otherproject/honeypot-agent
+```
+
 # 使用说明
 1. 使用agent的话，就用./buildDocker.sh进行打包
 2. 使用master的话，就用./buildWebDocker.sh进行打包
