@@ -3,7 +3,7 @@
 
 # 使用说明
 1. 使用agent的话，就用./buildDocker.sh进行打包
-2. 使用master的话，就用./buildMasterDocker.sh进行打包
+2. 使用master的话，就用./buildWebDocker.sh进行打包
 3. 这些镜像打包之后需要在特权模式下运行docker container
 由于蜜罐的部署需要使用iptable这个需要有root权限，因此需要使用以下命令使用特权模式访问。此外还需要注意的是在创建容器的时候要进行端口映射（由于是容器化进行操作，需要考虑在容器的端口映射）
 `docker run -tdi -p {hostport:containerport} --privileged {image:version} bash`
@@ -25,7 +25,7 @@ $ docker ps | grep honeypot
 
 ```
 
-## honeypot-master
+## honeypot-web
 使用命令`./buildWebDocker.sh`进行docker打包
 使用命令`docker run -tdi -p 12321:80 --privileged honeypot-master:1.0 bash`
 由于是通过特权模式创建的容器所以需要通过`docker exec`的方式进入容器
