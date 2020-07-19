@@ -81,7 +81,7 @@ echo 本机IP地址:$ip
 echo 本机节点名称:$opencanary_agent_name
 
 echo "###########正在安装系统依赖#########"
-a=`cat /etc/redhat-release |awk '{print $4}'`
+a=`cat /etc/redhat-release | grep -oP '[[:digit:]]\S*'`
 if [ "$a" \< "7.0" ];then
     wget -O /etc/yum.repos.d/CentOS-6.repo http://mirrors.aliyun.com/repo/Centos-6.repo &> /dev/null
     yum clean all
