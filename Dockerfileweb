@@ -1,0 +1,9 @@
+FROM centos:7
+MAINTAINER yerikyu "yerik_shu@139.com"
+COPY install/install_opencanary_web.sh /usr/local/src
+WORKDIR /usr/local/src
+RUN yum install -y ntpdate epel-release python-devel git net-tools &&\
+    yum install -y sudo &&\
+    yum install -y iproute iproute-doc
+
+
