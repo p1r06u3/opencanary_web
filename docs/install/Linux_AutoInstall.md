@@ -64,7 +64,7 @@ systemctl status mariadb.service
 | Web账号 | admin | admin |
 | mysql 数据库 | honeypot | Weiho@2019 |
 | mysql 端口 | 3306| - |
-| OpenCanary_Web物理路径 | /usr/src/local/opencanary_web | - |
+| OpenCanary_Web物理路径 | /usr/local/src/opencanary_web | - |
 | 发件人邮件配置 | /usr/local/src/opencanary_web/application.py | - |
 | 收件人邮件配置(以及告警开关)| /usr/local/src/opencanary_web/util/conf/email.ini | - |
 
